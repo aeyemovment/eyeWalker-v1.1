@@ -1,0 +1,35 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0004.jpg",
+  "condition": "night",
+  "twin_id": 2,
+  "modulators": {
+    "lighting": "night",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "crack",
+      "distance_m": 0.9,
+      "bearing_deg": -19,
+      "urgency": "MEDIUM",
+      "source": "dt_night_t2"
+    },
+    {
+      "class": "manhole",
+      "distance_m": 1.6,
+      "bearing_deg": -15,
+      "urgency": "HIGH",
+      "source": "dt_night_t2"
+    }
+  ],
+  "guidance": "CRACK 0.9m ahead \u2014 DT night. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

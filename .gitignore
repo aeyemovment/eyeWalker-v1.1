@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+.DS_Store
+node_modules/
+mobile/dist/
+mobile/.expo/
+_site/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# HazyEyes private strategy — never publish
+docs/product_suite/
+**/HazyEyes_PRIVATE/

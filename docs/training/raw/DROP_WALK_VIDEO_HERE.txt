@@ -1,0 +1,8 @@
+Drop your 30-min harbor walk video here as:
+  walk_YYYY-MM-DD.mp4  (or .mov / .webm)
+
+Then run:
+  ./scripts/v11/train_from_video.sh docs/training/raw/walk_YYYY-MM-DD.mp4
+
+v1.0 PWA only showed live camera — it did NOT MediaRecorder-save.
+v1.1 PWA records WebM + GPS JSONL automatically when REC is on.

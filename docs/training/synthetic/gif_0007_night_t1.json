@@ -1,0 +1,28 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0007.jpg",
+  "condition": "night",
+  "twin_id": 1,
+  "modulators": {
+    "lighting": "night",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "manhole",
+      "distance_m": 1.1,
+      "bearing_deg": -19,
+      "urgency": "HIGH",
+      "source": "dt_night_t1"
+    }
+  ],
+  "guidance": "MANHOLE 1.1m ahead \u2014 DT night. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

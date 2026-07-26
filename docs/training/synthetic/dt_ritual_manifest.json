@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-07-26T16:24:08Z",
+  "version": "v1.1.0-ground",
+  "ritual": "grok_dt_all_at_once",
+  "conditions": [
+    "day",
+    "dusk",
+    "night",
+    "rain"
+  ],
+  "seed_count": 30,
+  "synthetic_rows": 360,
+  "note": "Synthetic DT labels for research; not clinical training data.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true
+  }
+}

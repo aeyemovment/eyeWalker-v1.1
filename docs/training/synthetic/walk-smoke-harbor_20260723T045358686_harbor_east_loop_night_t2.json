@@ -1,0 +1,28 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/raw/walk-smoke-harbor_20260723T045358686_harbor_east_loop.jpg",
+  "condition": "night",
+  "twin_id": 2,
+  "modulators": {
+    "lighting": "night",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "crack",
+      "distance_m": 0.8,
+      "bearing_deg": -23,
+      "urgency": "MEDIUM",
+      "source": "dt_night_t2"
+    }
+  ],
+  "guidance": "CRACK 0.8m ahead \u2014 DT night. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

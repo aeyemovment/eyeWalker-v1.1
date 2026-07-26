@@ -1,0 +1,42 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0009.jpg",
+  "condition": "night",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "night",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "wet_reflect",
+      "distance_m": 1.7,
+      "bearing_deg": -20,
+      "urgency": "MEDIUM",
+      "source": "dt_night_t0"
+    },
+    {
+      "class": "curb",
+      "distance_m": 1.5,
+      "bearing_deg": -20,
+      "urgency": "MEDIUM",
+      "source": "dt_night_t0"
+    },
+    {
+      "class": "crack",
+      "distance_m": 1.5,
+      "bearing_deg": -16,
+      "urgency": "MEDIUM",
+      "source": "dt_night_t0"
+    }
+  ],
+  "guidance": "WET REFLECT 1.7m ahead \u2014 DT night. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

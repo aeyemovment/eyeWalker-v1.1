@@ -1,0 +1,28 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0020.jpg",
+  "condition": "night",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "night",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "curb",
+      "distance_m": 1.6,
+      "bearing_deg": -25,
+      "urgency": "MEDIUM",
+      "source": "dt_night_t0"
+    }
+  ],
+  "guidance": "CURB 1.6m ahead \u2014 DT night. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

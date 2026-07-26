@@ -1,0 +1,42 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0019.jpg",
+  "condition": "dusk",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "dusk",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "curb",
+      "distance_m": 1.4,
+      "bearing_deg": -26,
+      "urgency": "MEDIUM",
+      "source": "dt_dusk_t0"
+    },
+    {
+      "class": "manhole",
+      "distance_m": 0.9,
+      "bearing_deg": -18,
+      "urgency": "HIGH",
+      "source": "dt_dusk_t0"
+    },
+    {
+      "class": "shadow_trap",
+      "distance_m": 1.7,
+      "bearing_deg": -25,
+      "urgency": "MEDIUM",
+      "source": "dt_dusk_t0"
+    }
+  ],
+  "guidance": "CURB 1.4m ahead \u2014 DT dusk. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

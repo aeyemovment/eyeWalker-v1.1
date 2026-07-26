@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>eyeWalker v1.1 — From NeuroAgent AI</title>
+<meta name="description" content="Assistive navigation research prototype for vision impairment. Harbor walks inspired. Not a medical device.">
+<meta name="theme-color" content="#0a0f1a">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+  body{margin:0;background:#0a0f1a;color:#f8fafc;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .safety{background:#ffcc00;color:#000;padding:12px 14px;text-align:center;font-weight:800;font-size:13px;line-height:1.4}
+  .safety .extra{display:block;margin-top:4px;font-size:12px;font-weight:700}
+  .hero{max-width:920px;margin:0 auto;padding:28px 20px 40px}
+  .logo{width:72px;height:72px;border-radius:14px;background:#fff;object-fit:contain}
+  h1{font-size:1.75rem;margin:16px 0 8px}
+  .sub{color:#facc15;font-weight:700}
+  .from{color:#9ca3af;font-size:0.95rem;margin:8px 0 16px}
+  .cta{display:inline-block;background:#facc15;color:#000;font-weight:800;padding:16px 22px;border-radius:14px;text-decoration:none;min-height:56px;line-height:24px}
+  .cta:focus-visible{outline:3px solid #60a5fa}
+  .grid{display:grid;gap:16px;margin-top:24px}
+  @media(min-width:700px){.grid{grid-template-columns:1.2fr 1fr}}
+  .card{background:#111a2c;border:1px solid #1f2a3e;border-radius:16px;padding:16px}
+  iframe{width:100%;height:70vh;min-height:420px;border:0;border-radius:16px;background:#000}
+  img.demo{width:100%;border-radius:12px;border:1px solid #1f2a3e}
+  ol{margin:8px 0 0 1.2rem;color:#cbd5e1;line-height:1.5}
+  footer{margin-top:28px;padding-top:16px;border-top:1px solid #1f2a3e;font-size:0.75rem;color:#9ca3af;line-height:1.5}
+  a{color:#93c5fd}
+</style>
+</head>
+<body>
+  <div class="safety" role="alert">
+    This is assistive, not replacement for cane/guide dog. Always keep traditional mobility aid. This is alpha. It is a research prototype for users and developers to improve upon.
+    <span class="extra">Not a medical device. Research prototype, no FDA clearance, not intended to diagnose, treat, cure.</span>
+  </div>
+
+  <div class="hero">
+    <img class="logo" src="neuroagent_eye_logo.png" alt="NeuroAgent AI">
+    <h1>eyeWalker v1.1 👓🦮</h1>
+    <div class="sub">Inspired by daily post-lunch harbor walks — Baltimore 3.66 mi</div>
+    <p class="from">From NeuroAgent AI — for patients with rare neurologic diseases affecting vision and all other neurologic and ophthalmologic causes of visual impairment.</p>
+    <p>WHO: <strong>2.2 billion</strong> people with vision impairment globally · at least <strong>1 billion</strong> preventable or unaddressed · ~<strong>US$411B</strong> productivity loss. <a href="https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment" rel="noopener">WHO fact sheet</a>.</p>
+    <p style="margin:18px 0">
+      <a class="cta" href="pwa.html">Open one-tap walk app →</a>
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <iframe src="pwa.html" title="eyeWalker one-tap PWA" allow="camera; geolocation; microphone"></iframe>
+      </div>
+      <div class="card">
+        <img class="demo" src="demo.gif" alt="Harbor walk demo GIF">
+        <h2 style="font-size:1rem;margin:14px 0 8px">Install (non-technical, 3 steps)</h2>
+        <ol>
+          <li>Open the <a href="pwa.html">PWA</a> on your phone</li>
+          <li>Browser menu → <strong>Add to Home Screen</strong></li>
+          <li>Tap <strong>Start</strong> — keep your cane / traditional aid</li>
+        </ol>
+        <p style="margin-top:14px;font-size:0.85rem;color:#9ca3af">
+          Code: <a href="https://github.com/aeyemovment/eyeWalker">github.com/aeyemovment/eyeWalker</a><br>
+          (note the full spelling: eyeWalker — ends with <strong>r</strong>)
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      eyeWalker v1.1 — assistive navigation research prototype (not a medical device). © 2026 NeuroAgent AI. Open except commercialization.
+      · <a href="https://github.com/aeyemovment/eyeWalker/blob/main/SAFETY.md">Safety</a>
+      · <a href="https://github.com/aeyemovment/eyeWalker/blob/main/PRIVACY.md">Privacy</a>
+      · <a href="https://github.com/aeyemovment/eyeWalker/blob/main/CONTRIBUTING.md">Report missed obstacles</a>
+    </footer>
+  </div>
+</body>
+</html>

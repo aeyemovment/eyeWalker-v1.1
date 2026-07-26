@@ -1,0 +1,35 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0004.jpg",
+  "condition": "dusk",
+  "twin_id": 2,
+  "modulators": {
+    "lighting": "dusk",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "shadow_trap",
+      "distance_m": 0.9,
+      "bearing_deg": -30,
+      "urgency": "MEDIUM",
+      "source": "dt_dusk_t2"
+    },
+    {
+      "class": "manhole",
+      "distance_m": 0.5,
+      "bearing_deg": -23,
+      "urgency": "HIGH",
+      "source": "dt_dusk_t2"
+    }
+  ],
+  "guidance": "SHADOW TRAP 0.9m ahead \u2014 DT dusk. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

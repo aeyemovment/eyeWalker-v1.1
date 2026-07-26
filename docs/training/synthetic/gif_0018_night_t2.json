@@ -1,0 +1,28 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0018.jpg",
+  "condition": "night",
+  "twin_id": 2,
+  "modulators": {
+    "lighting": "night",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "shadow_trap",
+      "distance_m": 1.8,
+      "bearing_deg": -28,
+      "urgency": "MEDIUM",
+      "source": "dt_night_t2"
+    }
+  ],
+  "guidance": "SHADOW TRAP 1.8m ahead \u2014 DT night. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

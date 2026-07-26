@@ -1,0 +1,35 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0015.jpg",
+  "condition": "day",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "day",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "curb",
+      "distance_m": 1.4,
+      "bearing_deg": -20,
+      "urgency": "MEDIUM",
+      "source": "dt_day_t0"
+    },
+    {
+      "class": "manhole",
+      "distance_m": 1.5,
+      "bearing_deg": -15,
+      "urgency": "HIGH",
+      "source": "dt_day_t0"
+    }
+  ],
+  "guidance": "CURB 1.4m ahead \u2014 DT day. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

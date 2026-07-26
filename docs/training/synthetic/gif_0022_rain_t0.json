@@ -1,0 +1,35 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0022.jpg",
+  "condition": "rain",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "rain",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "curb",
+      "distance_m": 1.3,
+      "bearing_deg": -26,
+      "urgency": "MEDIUM",
+      "source": "dt_rain_t0"
+    },
+    {
+      "class": "wet_reflect",
+      "distance_m": 0.9,
+      "bearing_deg": -26,
+      "urgency": "MEDIUM",
+      "source": "dt_rain_t0"
+    }
+  ],
+  "guidance": "CURB 1.3m ahead \u2014 DT rain. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "eyeWalker v1.1 — NeuroAgent AI",
+  "short_name": "eyeWalker",
+  "description": "Assistive walk research prototype with REC + hybrid VLM. Not a medical device.",
+  "start_url": "./pwa.html",
+  "display": "standalone",
+  "background_color": "#0a0f1a",
+  "theme_color": "#0a0f1a",
+  "orientation": "portrait-primary",
+  "icons": []
+}

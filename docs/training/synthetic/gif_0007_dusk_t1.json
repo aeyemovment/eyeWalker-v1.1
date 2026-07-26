@@ -1,0 +1,35 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0007.jpg",
+  "condition": "dusk",
+  "twin_id": 1,
+  "modulators": {
+    "lighting": "dusk",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "wet_reflect",
+      "distance_m": 1.7,
+      "bearing_deg": -30,
+      "urgency": "MEDIUM",
+      "source": "dt_dusk_t1"
+    },
+    {
+      "class": "curb",
+      "distance_m": 0.5,
+      "bearing_deg": -22,
+      "urgency": "MEDIUM",
+      "source": "dt_dusk_t1"
+    }
+  ],
+  "guidance": "WET REFLECT 1.7m ahead \u2014 DT dusk. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

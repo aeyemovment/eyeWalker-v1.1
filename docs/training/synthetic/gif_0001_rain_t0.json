@@ -1,0 +1,28 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0001.jpg",
+  "condition": "rain",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "rain",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "manhole",
+      "distance_m": 1.0,
+      "bearing_deg": -15,
+      "urgency": "HIGH",
+      "source": "dt_rain_t0"
+    }
+  ],
+  "guidance": "MANHOLE 1.0m ahead \u2014 DT rain. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "name": "eyeWalker",
+  "version": "1.0.0",
+  "type": "perception.navigation",
+  "display_name": "eyeWalker — Real-time Navigation for Visually Impaired",
+  "description": "Real-time world vision for visually impaired using Muse Spark 1.1 VLM. Detects obstacles (benches, pier edges, people, low branches) and guides via spatial audio: 'trash bin 2.1m ahead, step left 0.5m'. From NeuroAgent AI for rare neurologic diseases affecting vision.",
+  "author": "NeuroAgent AI",
+  "author_url": "https://neuroagent.ai",
+  "repository": "https://github.com/aeyemovment/eyeWalker",
+  "license": "PolyForm Noncommercial 1.0.0 (core) + MIT (mobile)",
+  "tags": [
+    "accessibility",
+    "vision-impairment",
+    "vlm",
+    "obstacle-detection",
+    "navigation",
+    "spatial-audio",
+    "ray-ban",
+    "rare-disease",
+    "neuro-ophthalmology",
+    "nmosd",
+    "mogad",
+    "lhon",
+    "who",
+    "nemoclaw"
+  ],
+  "inputs": {
+    "rgb_frame": {
+      "type": "image",
+      "description": "Real-time RGB frame from Ray-Ban or smartphone camera"
+    },
+    "gps_lat": {
+      "type": "float",
+      "description": "Current GPS latitude"
+    },
+    "gps_lon": {
+      "type": "float",
+      "description": "Current GPS longitude"
+    },
+    "imu_accel": {
+      "type": "array",
+      "description": "Accelerometer [x, y, z] in m/s²"
+    },
+    "imu_gyro": {
+      "type": "array",
+      "description": "Gyroscope [roll, pitch, yaw] in rad/s"
+    },
+    "user_speed_mps": {
+      "type": "float",
+      "description": "User walking speed in m/s (e.g., 1.3 for 20'07 pace)"
+    }
+  },
+  "outputs": {
+    "obstacles": {
+      "type": "array",
+      "description": "Detected obstacles with [class, distance_m, direction_degrees, urgency, description]"
+    },
+    "safe_path": {
+      "type": "object",
+      "description": "Recommended bypass: {direction, distance_m, duration_sec}"
+    },
+    "guidance_audio": {
+      "type": "string",
+      "description": "Spatial audio guidance: 'Trash bin 2.1m ahead, center. Step left 0.5m.'"
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH"],
+      "description": "Overall scene risk based on obstacle urgency + user speed"
+    }
+  },
+  "examples": {
+    "input": {
+      "rgb_frame": "(1080x1920 RGB image from Ray-Ban)",
+      "gps_lat": 39.2813,
+      "gps_lon": -76.6110,
+      "imu_accel": "[0.1, 0.05, 9.81]",
+      "imu_gyro": "[0.02, 0.01, 0.0]",
+      "user_speed_mps": 1.3
+    },
+    "output": {
+      "obstacles": [
+        ["trash_bin", 2.1, 0, "HIGH", "Trash bin 2.1m ahead, center"],
+        ["bench", 4.5, 45, "MEDIUM", "Bench at 11 o'clock, 4.5m"],
+        ["pier_edge", 0.8, 270, "HIGH", "Pier edge 0.8m left, unguarded"]
+      ],
+      "safe_path": {
+        "direction": "LEFT",
+        "distance_m": 0.5,
+        "duration_sec": 2
+      },
+      "guidance_audio": "Trash bin 2.1 meters ahead, center. Step left half meter, then straight.",
+      "risk_level": "HIGH"
+    }
+  },
+  "architecture": {
+    "perception_pipeline": [
+      "VIO (Visual-Inertial Odometry) for 6DoF head pose",
+      "Depth Anything V2 for dense depth estimation",
+      "Muse Spark 1.1 VLM for open-vocab obstacle detection",
+      "SAM (Segment Anything) for walkable vs. non-walkable segmentation"
+    ],
+    "fusion": "GPS coarse + VIO fine + OSM ground truth snap for accurate localization",
+    "obstacle_taxonomy": [
+      "static_ground: benches, trash cans, bollards, cones",
+      "ground_hazard: uneven pavement, curbs, puddles, pier drops",
+      "dynamic: people, cyclists, scooters",
+      "overhead: low branches, signs"
+    ],
+    "avoidance": "Real-time path planner: compute bypass direction + distance + time-to-collision",
+    "output_modality": "Binaural spatial audio rendered at 3D obstacle position"
+  },
+  "ground_truth_layer": {
+    "map_source": "OpenStreetMap (Overpass API) with custom filter for footway, path, pier, marina",
+    "satellite": "Esri World Imagery (<3yr freshness, free tier) for structural reference",
+    "bbox_baltimore_harbor": "39.27,-76.61,39.29,-76.56",
+    "offline_ready": "Vector tiles + buildings cached locally"
+  },
+  "safety": "This is assistive, not replacement for cane/guide dog. Always keep traditional mobility aid. This is alpha. It is a research prototype for users and developers to improve upon.",
+  "use_cases": [
+    "Real-time navigation on unfamiliar routes (harbor walks, city streets, piers, boardwalks)",
+    "Obstacle avoidance for blind/low-vision users walking with smartphone or Ray-Bans",
+    "Research baseline for accessible navigation systems",
+    "City-scale deployment (extend beyond Baltimore harbor to any OSM coverage area)"
+  ],
+  "performance": {
+    "latency": "300ms obstacle detection + guidance render",
+    "accuracy": "Tuned for 20'07\"/mi walking pace (~1.3 m/s); TTC reaction window 0.8 sec",
+    "device": "Ray-Ban Meta or smartphone (iOS/Android via Expo React Native)"
+  },
+  "privacy": {
+    "local_first": true,
+    "inference_engine": "Ollama Qwen2-VL (fallback if offline)",
+    "nemoclaw_harness": "Allowlist: *.openstreetmap.org, overpass-api.de, server.arcgisonline.com, integrate.api.nvidia.com; deny *",
+    "no_raw_gps_rgb_exfil": true
+  },
+  "impact": {
+    "global_burden": "WHO: 2.2B people with vision impairment; 1B preventable; 2/3 without glasses in low-income countries; $411B annual productivity loss",
+    "target_patients": "NMOSD, MOGAD, optic neuritis, LHON, OPA1, Wolfram, IIH, CVI + all glaucoma, diabetic retinopathy, AMD, RP, hemianopia, TBI",
+    "origin": "Inspired by daily post-lunch harbor walks — 3.66mi loop around Baltimore's Fells Point, Frederick Douglass-Isaac Myers Maritime Park, Harbor Point, marinas where standard maps fail"
+  },
+  "links": {
+    "github": "https://github.com/aeyemovment/eyeWalker",
+    "demo": "https://aeyemovment.github.io/eyeWalker/",
+    "one_tap_pwa": "https://aeyemovment.github.io/eyeWalker/ (big buttons, voice guidance, non-technical)",
+    "who_fact_sheet": "https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment",
+    "architecture_docs": "https://github.com/aeyemovment/eyeWalker/blob/main/docs/ARCHITECTURE.md",
+    "safety": "https://github.com/aeyemovment/eyeWalker/blob/main/SAFETY.md"
+  }
+}

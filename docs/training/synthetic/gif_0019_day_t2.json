@@ -1,0 +1,35 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0019.jpg",
+  "condition": "day",
+  "twin_id": 2,
+  "modulators": {
+    "lighting": "day",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "shadow_trap",
+      "distance_m": 1.0,
+      "bearing_deg": -21,
+      "urgency": "MEDIUM",
+      "source": "dt_day_t2"
+    },
+    {
+      "class": "shadow_trap",
+      "distance_m": 1.4,
+      "bearing_deg": -21,
+      "urgency": "MEDIUM",
+      "source": "dt_day_t2"
+    }
+  ],
+  "guidance": "SHADOW TRAP 1.0m ahead \u2014 DT day. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

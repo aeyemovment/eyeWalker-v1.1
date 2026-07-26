@@ -1,0 +1,42 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/raw/walk-smoke-harbor_20260723T045357430_harbor_east_loop.jpg",
+  "condition": "rain",
+  "twin_id": 1,
+  "modulators": {
+    "lighting": "rain",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "crack",
+      "distance_m": 1.3,
+      "bearing_deg": -17,
+      "urgency": "MEDIUM",
+      "source": "dt_rain_t1"
+    },
+    {
+      "class": "wet_reflect",
+      "distance_m": 1.8,
+      "bearing_deg": -23,
+      "urgency": "MEDIUM",
+      "source": "dt_rain_t1"
+    },
+    {
+      "class": "manhole",
+      "distance_m": 1.2,
+      "bearing_deg": -24,
+      "urgency": "HIGH",
+      "source": "dt_rain_t1"
+    }
+  ],
+  "guidance": "CRACK 1.3m ahead \u2014 DT rain. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

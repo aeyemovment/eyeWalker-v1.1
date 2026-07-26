@@ -1,0 +1,42 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/raw/walk-smoke-harbor_20260723T045358686_harbor_east_loop.jpg",
+  "condition": "dusk",
+  "twin_id": 1,
+  "modulators": {
+    "lighting": "dusk",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "manhole",
+      "distance_m": 0.9,
+      "bearing_deg": -17,
+      "urgency": "HIGH",
+      "source": "dt_dusk_t1"
+    },
+    {
+      "class": "manhole",
+      "distance_m": 1.8,
+      "bearing_deg": -16,
+      "urgency": "HIGH",
+      "source": "dt_dusk_t1"
+    },
+    {
+      "class": "manhole",
+      "distance_m": 1.9,
+      "bearing_deg": -21,
+      "urgency": "HIGH",
+      "source": "dt_dusk_t1"
+    }
+  ],
+  "guidance": "MANHOLE 0.9m ahead \u2014 DT dusk. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0008.jpg",
+  "condition": "rain",
+  "twin_id": 1,
+  "modulators": {
+    "lighting": "rain",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "crack",
+      "distance_m": 0.5,
+      "bearing_deg": -29,
+      "urgency": "MEDIUM",
+      "source": "dt_rain_t1"
+    },
+    {
+      "class": "shadow_trap",
+      "distance_m": 0.6,
+      "bearing_deg": -17,
+      "urgency": "MEDIUM",
+      "source": "dt_rain_t1"
+    }
+  ],
+  "guidance": "CRACK 0.5m ahead \u2014 DT rain. Keep your cane.",
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once"
+  }
+}
