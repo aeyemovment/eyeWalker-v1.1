@@ -23,12 +23,15 @@ jobs:
         run: PYTHONPATH=. pytest -q
       - name: Rebuild synthetic
         run: python scripts/v11/rebuild_synthetic_dataset.py
-      - name: Version surfaces aligned to 1.1.2
+      - name: Version surfaces aligned
         run: |
-          grep -q '1.1.2' VERSION
-          grep -q 'version = "1.1.2"' pyproject.toml
-          grep -q 'eyewalker-v1.1.2' docs/service-worker.js
-          grep -q '1.1.2' docs/pwa.html
+          V=$(tr -d '[:space:]' < VERSION)
+          test -n "$V"
+          grep -q "$V" VERSION
+          grep -q "version = \"$V\"" pyproject.toml
+          grep -q "eyewalker-v$V" docs/service-worker.js
+          grep -q "$V" docs/pwa.html
+          echo "version OK $V"
       - name: No root pwa.html duplicate
         run: test ! -f pwa.html
       - name: No unsafe ship scripts
