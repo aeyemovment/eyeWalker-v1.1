@@ -6,11 +6,11 @@
 |----------|--------|
 | **Visibility** | **Public** — view, clone, fork without login |
 | **Project** | **eyeWalker v1.1** — medical assistive navigation research (NeuroAgent AI) |
-| **GitHub** | https://github.com/aeyemovment/eyeWalker |
-| **Clone** | `git clone https://github.com/aeyemovment/eyeWalker.git` |
+| **GitHub** | https://github.com/aeyemovment/eyeWalker-v1.1 |
+| **Clone** | `git clone https://github.com/aeyemovment/eyeWalker-v1.1.git` |
 | **Live PWA** | https://aeyemovment.github.io/eyeWalker/pwa.html |
-| **Issues** | https://github.com/aeyemovment/eyeWalker/issues |
-| **Releases** | https://github.com/aeyemovment/eyeWalker/releases |
+| **Issues** | https://github.com/aeyemovment/eyeWalker-v1.1/issues |
+| **Releases** | https://github.com/aeyemovment/eyeWalker-v1.1/releases |
 
 ## Dual license (source is public)
 
@@ -31,15 +31,15 @@ See [DUAL_LICENSE.md](DUAL_LICENSE.md).
 
 | Repo | Visibility | License |
 |------|------------|---------|
-| [aeyemovment/eyeWalker](https://github.com/aeyemovment/eyeWalker) | Public | Dual (PolyForm NC + MIT) |
+| [aeyemovment/eyeWalker-v1.1](https://github.com/aeyemovment/eyeWalker-v1.1) | Public | Dual (PolyForm NC + MIT) — **this medical OSS release** |
 | [aeyemovment/ogx-provider-eyewalker](https://github.com/aeyemovment/ogx-provider-eyewalker) | Public | MIT |
 | HF Space [NeuroAgentAI/eyeWalker](https://huggingface.co/spaces/NeuroAgentAI/eyeWalker) | Public | static demo |
 
 ## Verify yourself (no account)
 
 ```bash
-curl -sI https://github.com/aeyemovment/eyeWalker | head -5
-git clone https://github.com/aeyemovment/eyeWalker.git
+curl -sI https://github.com/aeyemovment/eyeWalker-v1.1 | head -5
+git clone https://github.com/aeyemovment/eyeWalker-v1.1.git
 ```
 
 ## Copyright

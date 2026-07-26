@@ -31,10 +31,10 @@ audio = ["sounddevice", "numpy"]
 dev = ["pytest", "black"]
 
 [project.urls]
-Homepage = "https://github.com/aeyemovment/eyeWalker"
-Documentation = "https://github.com/aeyemovment/eyeWalker#readme"
-Repository = "https://github.com/aeyemovment/eyeWalker"
-Issues = "https://github.com/aeyemovment/eyeWalker/issues"
+Homepage = "https://github.com/aeyemovment/eyeWalker-v1.1"
+Documentation = "https://github.com/aeyemovment/eyeWalker-v1.1#readme"
+Repository = "https://github.com/aeyemovment/eyeWalker-v1.1"
+Issues = "https://github.com/aeyemovment/eyeWalker-v1.1/issues"
 
 [build-system]
 requires = ["setuptools"]

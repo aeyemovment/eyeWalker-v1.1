@@ -20,10 +20,10 @@
 
 | | |
 |--|--|
-| **Code** | https://github.com/aeyemovment/eyeWalker |
-| **Clone** | `git clone https://github.com/aeyemovment/eyeWalker.git` |
+| **Code (this repo)** | https://github.com/aeyemovment/eyeWalker-v1.1 |
+| **Clone** | `git clone https://github.com/aeyemovment/eyeWalker-v1.1.git` |
 | **Live PWA** | https://aeyemovment.github.io/eyeWalker/pwa.html |
-| **Releases** | https://github.com/aeyemovment/eyeWalker/releases |
+| **Releases** | https://github.com/aeyemovment/eyeWalker-v1.1/releases |
 | **OGX provider** | https://github.com/aeyemovment/ogx-provider-eyewalker |
 | **HF Space** | https://huggingface.co/spaces/NeuroAgentAI/eyeWalker |
 | **Open status** | [OPEN_SOURCE.md](OPEN_SOURCE.md) · [DUAL_LICENSE.md](DUAL_LICENSE.md) |
@@ -57,8 +57,8 @@ See [docs/CHANGELOG_v1.1.md](docs/CHANGELOG_v1.1.md).
 ## Quickstart
 
 ```bash
-git clone https://github.com/aeyemovment/eyeWalker.git
-cd eyeWalker
+git clone https://github.com/aeyemovment/eyeWalker-v1.1.git
+cd eyeWalker-v1.1
 pip install -e .
 
 # Local PWA
