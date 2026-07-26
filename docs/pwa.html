@@ -420,7 +420,7 @@
     const vlmKey = `eyewalker_vlm_${sessionId}`;
     const simOn = document.getElementById("simMode")?.checked !== false;
     const payload = {
-      version: "1.1.5",
+      version: "1.1.6",
       sessionId,
       gpsTrail: consented ? gpsTrail : [],
       gps_included: consented,
@@ -605,7 +605,7 @@
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./service-worker.js").catch(() => {});
   }
-  log("v1.1.5 ready — SIM cues default; REC requires consent; pause resumes");
+  log("v1.1.6 ready — SIM cues default; REC requires consent; pause resumes");
 })();
 </script>
 </body>
