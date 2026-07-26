@@ -30,9 +30,10 @@ Still frames:
 
 | | |
 |--|--|
-| Multimodal (drone · phone · glasses) | ![Multimodal concept](inspiration/multimodal_drone_phone_glasses.jpg) |
-| Flag + drone motif (civic / open-research framing) | ![Flag drone concept](inspiration/concept_flag_drone.jpg) |
-| Clean drone avatar | ![Drone avatar](inspiration/concept_drone_avatar.jpg) |
+| Multimodal (drone · phone · glasses) | ![Multimodal concept](inspiration/multimodal_drone_phone_glasses.png) |
+| Flag + drone motif (civic / open-research framing) | ![Flag drone concept](inspiration/concept_flag_drone.png) |
+| Clean drone avatar | ![Drone avatar](inspiration/concept_drone_avatar.png) |
+| Collage strip | ![Collage](inspiration/multimodal_collage.png) |
 
 **What these images are:** synthetic / generative **concept art** for storytelling and README education.  
 **What they are not:** screenshots of a deployed surveillance stack, a military product, a medical device UI, or a guarantee of on-device privacy.

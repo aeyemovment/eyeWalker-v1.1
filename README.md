@@ -51,7 +51,7 @@ The long-range research story is **multimodal** — phone, glasses-class wearabl
 
 | Multimodal concept (drone · phone · glasses) | Flag + drone motif | Clean drone avatar |
 |:--:|:--:|:--:|
-| ![multimodal](docs/inspiration/multimodal_drone_phone_glasses.jpg) | ![flag drone](docs/inspiration/concept_flag_drone.jpg) | ![drone](docs/inspiration/concept_drone_avatar.jpg) |
+| ![multimodal](docs/inspiration/multimodal_drone_phone_glasses.png) | ![flag drone](docs/inspiration/concept_flag_drone.png) | ![drone](docs/inspiration/concept_drone_avatar.png) |
 
 **Concept art only** — not a medical device UI, not an operational dual-use system, not a privacy or national-security product claim. Full write-up: **[docs/INSPIRATION.md](docs/INSPIRATION.md)**.
 

@@ -38,6 +38,26 @@ FIXED_PNG_SHA256 = {
     "meta_submission/docs/neuroagent_eye_logo.png": (
         "f612bd94451e9f0daf62ff4955b4fd32aee8af8c4dc7ae41ce95dfa2e6ecfe2c"
     ),
+    # Inspiration concept art (medical OSS storytelling — not dual-use product claims)
+    "docs/inspiration/concept_drone_avatar.png": (
+        "b0a7503b77de4e1d155553e743f80e19a3b116c03794f87cc0b968d9f8d393ef"
+    ),
+    "docs/inspiration/concept_flag_drone.png": (
+        "2aa237d9c3819cdcdab006a9e1a1a9e5ec7c1915bc2031646070de3bab39d47f"
+    ),
+    "docs/inspiration/multimodal_drone_phone_glasses.png": (
+        "7641f5f33836303820d8a4358502c36c8d7a34c6a153969b01a2dc4bf833efe5"
+    ),
+    "docs/inspiration/multimodal_collage.png": (
+        "02f8f5dd63f07730c90ed4e69430865bf834e51356459365d847c0904af8d205"
+    ),
+}
+# Exact-path GIF allowlist (deny-by-default otherwise)
+GIF_SIGNATURE = b"GIF8"
+FIXED_GIF_SHA256 = {
+    "docs/inspiration/multimodal_concept.gif": (
+        "20a6be4c345dc8c7eea4c12e1ac8f24fa89155dfc89087fac259ff0790957364"
+    ),
 }
 CANONICAL_FIXTURE_PATHS = frozenset(
     f"docs/training/frames/fixture_{index:04d}.png" for index in range(1, 27)
@@ -302,6 +322,7 @@ def binary_media_findings(
 
     display = relative.as_posix()
     fixed_digest = FIXED_PNG_SHA256.get(display)
+    fixed_gif_digest = FIXED_GIF_SHA256.get(display)
     fixture_digest = CANONICAL_FIXTURE_SHA256.get(display)
     canonical_fixture = fixture_digest is not None
     allowed_png = fixed_digest is not None or canonical_fixture
@@ -320,6 +341,16 @@ def binary_media_findings(
             actual_digest = hashlib.sha256(payload).hexdigest()
             if actual_digest != fixture_digest:
                 findings.add("canonical synthetic fixture hash mismatch")
+        return findings
+
+    if fixed_gif_digest is not None:
+        if is_symlink:
+            findings.add("allowed GIF must be a regular non-symlink file")
+        if not payload.startswith(GIF_SIGNATURE):
+            findings.add("allowed GIF has invalid GIF magic")
+        actual_digest = hashlib.sha256(payload).hexdigest()
+        if actual_digest != fixed_gif_digest:
+            findings.add("fixed public GIF hash mismatch")
         return findings
 
     suffix = relative.suffix.casefold()
