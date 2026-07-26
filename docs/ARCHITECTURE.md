@@ -54,7 +54,7 @@ Those belong outside this open medical tree if pursued at all.
 ## Related public links
 
 - https://github.com/aeyemovment/eyeWalker-v1.1  
-- https://aeyemovment.github.io/eyeWalker/pwa.html  
+- https://aeyemovment.github.io/eyeWalker-v1.1/pwa.html  
 - https://github.com/aeyemovment/ogx-provider-eyewalker  
 - https://huggingface.co/spaces/NeuroAgentAI/eyeWalker  
 

@@ -3,13 +3,6 @@ name: Deploy eyeWalker PWA to GitHub Pages
 on:
   push:
     branches: [main]
-    paths:
-      - 'docs/**'
-      - 'mobile/**'
-      - '.github/workflows/deploy-pwa.yml'
-      - 'README.md'
-      - 'DUAL_LICENSE.md'
-      - 'SAFETY.md'
   workflow_dispatch:
 
 permissions:
@@ -31,45 +24,25 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Build PWA site (docs-first)
+      - name: Build PWA site from docs/
         run: |
-          set -e
+          set -euo pipefail
           mkdir -p _site
-          cp docs/neuroagent_eye_logo.png _site/ 2>/dev/null || true
-          cp docs/demo.gif _site/ 2>/dev/null || true
-          cp docs/demo_preview.jpg _site/ 2>/dev/null || true
-          cp docs/eye_walker_github_banner.webp _site/ 2>/dev/null || true
-          cp DUAL_LICENSE.md _site/ 2>/dev/null || true
-          cp SAFETY.md _site/ 2>/dev/null || true
-          cp README.md _site/README.md 2>/dev/null || true
-
-          if [ -f docs/pwa.html ]; then
-            cp docs/pwa.html _site/pwa.html
-          else
-            echo "<!doctype html><html><body><h1>eyeWalker v1.0</h1></body></html>" > _site/pwa.html
-          fi
-
-          if [ -f docs/index.html ]; then
-            cp docs/index.html _site/index.html
-          else
-            cat > _site/index.html <<'HTML'
-          <!doctype html>
-          <html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-          <title>eyeWalker v1.0</title>
-          <style>body{margin:0;background:#0a0f1a;color:#fff;font-family:system-ui}
-          .safety{background:#ffcc00;color:#000;padding:12px;text-align:center;font-weight:800}
-          .hero{padding:24px;max-width:900px;margin:0 auto}
-          iframe{width:100%;height:85vh;border:0;border-radius:16px;margin-top:24px}</style>
-          </head><body>
-          <div class="safety">Assistive only — not cane/guide dog replacement. Research prototype. Not a medical device.</div>
-          <div class="hero"><h1>eyeWalker v1.0</h1>
-          <p>From NeuroAgent AI</p>
-          <iframe src="pwa.html" allow="camera; geolocation"></iframe></div>
-          </body></html>
-          HTML
-          fi
+          # Full docs tree = PWA surface (manifest, SW, icons, pwa.html, index.html)
+          rsync -a --exclude 'training/' docs/ _site/
+          # Root safety/license for site footer readers
+          cp -f SAFETY.md _site/SAFETY.md 2>/dev/null || true
+          cp -f PRIVACY.md _site/PRIVACY.md 2>/dev/null || true
+          cp -f DUAL_LICENSE.md _site/DUAL_LICENSE.md 2>/dev/null || true
+          cp -f OPEN_SOURCE.md _site/OPEN_SOURCE.md 2>/dev/null || true
+          # Ensure critical files
+          test -f _site/index.html
+          test -f _site/pwa.html
+          test -f _site/manifest.json
+          test -f _site/service-worker.js
+          test -f _site/.nojekyll
           ls -la _site
-          test -f _site/index.html && test -f _site/pwa.html
+          ls -la _site/icons || true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -1,11 +1,32 @@
 {
   "name": "eyeWalker v1.1 — NeuroAgent AI",
   "short_name": "eyeWalker",
-  "description": "Assistive walk research prototype with REC + hybrid VLM. Not a medical device.",
+  "description": "Assistive navigation research prototype for visual impairment. Not a medical device. Keep cane/guide dog.",
   "start_url": "./pwa.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#0a0f1a",
   "theme_color": "#0a0f1a",
   "orientation": "portrait-primary",
-  "icons": []
+  "lang": "en",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }

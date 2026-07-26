@@ -7,7 +7,7 @@
 [![Version](https://img.shields.io/badge/version-v1.1.0-blue)](https://github.com/aeyemovment/eyeWalker-v1.1)
 [![Research prototype](https://img.shields.io/badge/status-research%20prototype-yellow)](SAFETY.md)
 [![Built by](https://img.shields.io/badge/Built%20by-NeuroAgent%20AI-blueviolet)](#about-neuroagent-ai)
-[![PWA](https://img.shields.io/badge/PWA-live-success)](https://aeyemovment.github.io/eyeWalker/pwa.html)
+[![PWA](https://img.shields.io/badge/PWA-live-success)](https://aeyemovment.github.io/eyeWalker-v1.1/pwa.html)
 
 **Assistive navigation research prototype** for people with visual impairment — including **rare neurologic diseases affecting vision** and other neurologic / ophthalmologic causes of vision loss.
 
@@ -22,7 +22,7 @@
 |--|--|
 | **Code (this repo)** | https://github.com/aeyemovment/eyeWalker-v1.1 |
 | **Clone** | `git clone https://github.com/aeyemovment/eyeWalker-v1.1.git` |
-| **Live PWA** | https://aeyemovment.github.io/eyeWalker/pwa.html |
+| **Live PWA** | https://aeyemovment.github.io/eyeWalker-v1.1/pwa.html |
 | **Releases** | https://github.com/aeyemovment/eyeWalker-v1.1/releases |
 | **OGX provider** | https://github.com/aeyemovment/ogx-provider-eyewalker |
 | **HF Space** | https://huggingface.co/spaces/NeuroAgentAI/eyeWalker |
@@ -66,7 +66,7 @@ python3 -m http.server -d docs 8080
 # open http://127.0.0.1:8080/pwa.html
 ```
 
-Or use the live PWA: https://aeyemovment.github.io/eyeWalker/pwa.html
+Or use the live PWA: https://aeyemovment.github.io/eyeWalker-v1.1/pwa.html
 
 Optional demo scripts (research / mock):
 

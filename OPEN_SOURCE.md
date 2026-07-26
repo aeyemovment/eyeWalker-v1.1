@@ -8,7 +8,7 @@
 | **Project** | **eyeWalker v1.1** — medical assistive navigation research (NeuroAgent AI) |
 | **GitHub** | https://github.com/aeyemovment/eyeWalker-v1.1 |
 | **Clone** | `git clone https://github.com/aeyemovment/eyeWalker-v1.1.git` |
-| **Live PWA** | https://aeyemovment.github.io/eyeWalker/pwa.html |
+| **Live PWA** | https://aeyemovment.github.io/eyeWalker-v1.1/pwa.html |
 | **Issues** | https://github.com/aeyemovment/eyeWalker-v1.1/issues |
 | **Releases** | https://github.com/aeyemovment/eyeWalker-v1.1/releases |
 

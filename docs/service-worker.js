@@ -1,6 +1,6 @@
 /* eyeWalker v1.1 SW — offline shell only */
-const CACHE = "eyewalker-v1.1.0-ground";
-const ASSETS = ["./pwa.html", "./index.html", "./manifest.json"];
+const CACHE = "eyewalker-v1.1.0";
+const ASSETS = ["./pwa.html", "./index.html", "./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png", "./neuroagent_eye_logo.png"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
