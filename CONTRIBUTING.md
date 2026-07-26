@@ -7,7 +7,7 @@ Thank you for helping make assistive navigation research safer and more useful.
 If eyeWalker **missed** a real hazard (false negative) or gave **wrong** guidance:
 
 1. **Stop walking** and use your cane / traditional aid.  
-2. Open a GitHub Issue: https://github.com/aeyemovment/eyeWalker/issues/new  
+2. Open a GitHub Issue: https://github.com/aeyemovment/eyeWalker-v1.1/issues/new  
 3. Title: `MISSED_OBSTACLE: <short description>`  
 4. Include if possible:
    - Approximate location (city / pier / sidewalk type) — **optional**, no need for exact home address  
@@ -29,7 +29,7 @@ If eyeWalker **missed** a real hazard (false negative) or gave **wrong** guidanc
 ## Development
 
 ```bash
-git clone https://github.com/aeyemovment/eyeWalker.git
+git clone https://github.com/aeyemovment/eyeWalker-v1.1.git
 cd eyeWalker
 # PWA lives in docs/ — served via GitHub Pages from /docs
 # Open docs/pwa.html locally or use: python3 -m http.server -d docs 8080
