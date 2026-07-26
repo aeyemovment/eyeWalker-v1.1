@@ -1,26 +1,26 @@
 # Safety — eyeWalker v1.1
 
-**This is assistive, not replacement for cane/guide dog. Always keep traditional mobility aid. This is alpha. It is a research prototype for users and developers to improve upon.**
+**This is a simulated accessibility-interface research prototype, not a navigation or mobility aid. Evaluate it only while stationary or in a controlled interface test. Always keep your traditional mobility aid.**
 
 **Not a medical device. Research prototype, no FDA clearance, not intended to diagnose, treat, or cure.**
 
 ## Non-negotiable rules
 
-1. Always keep your **cane, guide dog, or other traditional mobility aid**.  
-2. Treat all spoken / on-screen guidance as **advisory**, never as guaranteed free path.  
-3. Expect **false positives and false negatives** (missed obstacles).  
-4. Test first in **safe, familiar** areas.  
-5. Stop immediately if guidance conflicts with your training or senses.  
-6. Report missed obstacles via GitHub Issues — see `CONTRIBUTING.md`.
+1. Always keep your **cane, guide dog, or other traditional mobility aid**.
+2. Do not act on spoken or on-screen cue text; it is deterministic simulated output, not scene understanding.
+3. Camera pixels are not analyzed by a live obstacle detector in this build.
+4. Do not use the current simulated cues as a mobility or navigation aid; evaluate the interface stationary or in a controlled research environment.
+5. Stop immediately if guidance conflicts with your training or senses.
+6. Report stationary simulated-interface defects via GitHub Issues — see `CONTRIBUTING.md`.
 
 ## What this software is / is not
 
 | Is | Is not |
 |----|--------|
 | Research prototype for developers & accessibility experimentation | FDA-cleared or clinical device |
-| Assistive **complement** to mobility training | Replacement for O&M training |
-| Local-first demo with mock and research detection paths | Production safety certification |
-| Open medical assistive navigation OSS (v1.1) | Dual-use / law-enforcement product pack |
+| Stationary or controlled simulated-interface evaluation | Mobility or orientation-and-mobility guidance |
+| Local-first demo with mock and research interfaces | Production safety certification |
+| Public source repository with deterministic mock interfaces (v1.1) | Validated navigation or dual-use product pack |
 
 ## Built by NeuroAgent AI
 
@@ -28,4 +28,4 @@ For people with **rare neurologic diseases affecting vision** and **all other ne
 
 ## Version
 
-eyeWalker **v1.1.8** · © 2026 NeuroAgent AI · See `DUAL_LICENSE.md`.
+eyeWalker **v1.1.9** · © 2026 NeuroAgent AI · See `DUAL_LICENSE.md`.

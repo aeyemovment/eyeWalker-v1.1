@@ -13,8 +13,21 @@ _site/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+build/
+dist/
 
-# HazyEyes private strategy — never publish
+# Generic public/private lane guards.
 docs/product_suite/
-**/HazyEyes_PRIVATE/
-review_pass_2026-07-26/
+**/*_PRIVATE/
+review_pass_*/
+
+# Personal capture media must remain in an external workspace.
+docs/training/raw/
+*.HEIC
+*.heic
+*.mov
+*.mp4
+
+# Runtime research streams belong in an external state directory, never Git.
+vlm_stream_*.jsonl
+docs/training/exports/vlm_stream_*.jsonl

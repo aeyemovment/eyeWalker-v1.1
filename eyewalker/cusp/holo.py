@@ -1,7 +1,7 @@
 """
 Short-horizon track memory for research overlays (not clinical).
 
-eyeWalker v1.1 medical OSS. Synthetic / mock tracks only.
+eyeWalker v1.1 public research source. Synthetic / mock tracks only.
 Not a security product. Not a medical device.
 """
 

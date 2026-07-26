@@ -1,35 +1,20 @@
-
 {
   "expo": {
-    "name": "eyeWalker",
+    "name": "eyeWalker Research Mock",
     "slug": "eyewalker",
-    "version": "0.1.0",
+    "version": "1.1.9",
+    "description": "Deterministic simulated accessibility-interface research mock; no sensor or model executes",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "splash": {
       "backgroundColor": "#0a0f1a",
       "resizeMode": "contain"
     },
     "ios": {
-      "bundleIdentifier": "com.eyewalker.app",
-      "infoPlist": {
-        "NSCameraUsageDescription": "eyeWalker uses camera to detect obstacles for visually impaired navigation",
-        "NSLocationWhenInUseUsageDescription": "eyeWalker uses location to provide ground truth navigation"
-      }
+      "bundleIdentifier": "com.eyewalker.app"
     },
     "android": {
       "package": "com.eyewalker.app",
-      "permissions": ["CAMERA", "ACCESS_FINE_LOCATION", "RECORD_AUDIO"],
-      "adaptiveIcon": {
-        "backgroundColor": "#0a0f1a"
-      }
-    },
-    "web": {
-      "bundler": "metro"
-    },
-    "plugins": [
-      ["expo-camera", {"cameraPermission": "eyeWalker needs camera to see obstacles"}],
-      ["expo-location", {"locationWhenInUsePermission": "eyeWalker needs location for harbor ground truth"}]
-    ]
+      "permissions": []
+    }
   }
 }

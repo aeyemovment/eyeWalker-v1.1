@@ -1,30 +1,32 @@
 # Contributing to eyeWalker
 
-Thank you for helping make assistive navigation research safer and more useful.
+Thank you for helping make simulated accessibility-interface research safer and more useful.
 
-## Safety-critical: report missed obstacles
+## Report simulated-interface defects
 
-If eyeWalker **missed** a real hazard (false negative) or gave **wrong** guidance:
+The current build does not analyze camera pixels with a live detector and must
+not be used while walking or for real-hazard testing. If its deterministic mock
+interface displays a malformed, contradictory, unlabeled, or wrong-direction
+simulated cue during stationary or controlled evaluation:
 
-1. **Stop walking** and use your cane / traditional aid.  
-2. Open a GitHub Issue: https://github.com/aeyemovment/eyeWalker-v1.1/issues/new  
-3. Title: `MISSED_OBSTACLE: <short description>`  
+1. End the simulated session; do not act on the cue.
+2. Open a GitHub Issue: https://github.com/aeyemovment/eyeWalker-v1.1/issues/new
+3. Title: `SIMULATED_CUE_BUG: <short description>`
 4. Include if possible:
-   - Approximate location (city / pier / sidewalk type) — **optional**, no need for exact home address  
-   - What the obstacle was (e.g. bike, curb, overhanging branch)  
-   - What the app said (or that it said nothing)  
-   - Device + browser  
-   - Whether camera was on or demo mode  
-5. Label mentally as **safety** — maintainers prioritize these over features.
+   - The synthetic fixture or deterministic mock record used
+   - The exact simulated cue text
+   - Device + browser
+   - Whether simulation was on or off
+5. Do not include real location data, bystander media, or personal walk recordings.
 
 **Do not** upload videos that identify bystanders without consent.
 
 ## Other contributions
 
-- Bug fixes, accessibility improvements (ARIA, contrast, larger targets)  
-- Docs and translations  
-- Map/OSM walkable-graph improvements  
-- OGX provider improvements: https://github.com/aeyemovment/ogx-provider-eyewalker  
+- Bug fixes, accessibility improvements (ARIA, contrast, larger targets)
+- Docs and translations
+- Offline map-adapter truthfulness and test improvements
+- OGX provider improvements: https://github.com/aeyemovment/ogx-provider-eyewalker
 
 ## Development
 
@@ -37,10 +39,13 @@ cd eyeWalker-v1.1
 
 ## Code of conduct expectations
 
-- Claim-safe language only (research prototype; not a medical device).  
-- Never remove the safety banner from the PWA.  
-- Dual license: core PolyForm Noncommercial; mobile/PWA MIT — see `DUAL_LICENSE.md`.
+- Claim-safe language only (research prototype; not a medical device).
+- Never remove the safety banner from the PWA.
+- Path-scoped license: PolyForm Noncommercial by default; only exact files in
+  the `DUAL_LICENSE.md` allowlist use MIT.
 
 ## License on contributions
 
-By contributing, you agree your contributions are dual-licensed consistently with this repository’s dual-license model unless otherwise stated.
+`DUAL_LICENSE.md` controls the license assignment for each contributed path.
+New files default to PolyForm Noncommercial unless that exact path is added to
+the authoritative MIT allowlist through an explicit reviewed change.

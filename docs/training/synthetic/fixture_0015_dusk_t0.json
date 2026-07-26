@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0015.png",
+  "source_sha256": "1f25eeaf6517035e16017ea5b7fba4ac442f7b20fb7a81aff8dd49712821585d",
+  "condition": "dusk",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "dusk",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "curb",
+      "distance_m": 0.99,
+      "bearing_deg": -7.0,
+      "urgency": "LOW",
+      "source": "dt_dusk_t0",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: CURB 0.99m ahead (bearing -7.0\u00b0), centered or ambiguous bearing; HOLD and stop and verify. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "1f25eeaf6517035e16017ea5b7fba4ac442f7b20fb7a81aff8dd49712821585d"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

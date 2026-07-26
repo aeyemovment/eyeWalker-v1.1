@@ -1,31 +1,29 @@
-
-import { useState, useEffect } from 'react';
+// SPDX-License-Identifier: MIT
+import { MOCK_PROVENANCE, SAFETY_SUFFIX, simulatedResearchCue } from '../safety';
+import { calculateAvoidance } from '../utils/avoidance';
 
 const MOCK_OBSTACLES = [
-  { label: 'trash bin', distance_m: 2.1, bearing: 5, type: 'STATIC', confidence: 0.94, risk: 'HIGH', action: 'step LEFT 0.5m' },
-  { label: 'pier edge', distance_m: 0.8, bearing: -40, type: 'GROUND', confidence: 0.99, risk: 'HIGH', action: 'keep RIGHT' },
-  { label: 'person + dog', distance_m: 4.0, bearing: 20, type: 'DYNAMIC 1.2m/s', confidence: 0.88, risk: 'MED', action: 'hold LEFT' },
-  { label: 'bench blocking', distance_m: 3.0, bearing: 0, type: 'STATIC', confidence: 0.92, risk: 'HIGH', action: 'go RIGHT 1m' },
-];
+  { label: 'trash bin', distance_m: 2.1, bearing: -18, type: 'SYNTHETIC_FIXTURE', confidence: null, risk: 'HIGH' },
+].map((obstacle) => ({
+  ...obstacle,
+  simulated: true,
+  source: MOCK_PROVENANCE,
+  safety: SAFETY_SUFFIX,
+}));
 
-export const useObstacleDetection = (location: any) => {
-  const [idx, setIdx] = useState(0);
-  const [obstacles, setObstacles] = useState<any[]>([]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const next = (idx + 1) % MOCK_OBSTACLES.length;
-      setIdx(next);
-      // Simulate VLM detection cycle 0.66Hz
-      setObstacles([MOCK_OBSTACLES[next]]);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, [idx]);
-
+export const useObstacleDetection = (_location: any) => {
+  // One fixed record avoids auto-updating an assistive live region. No camera,
+  // sensor, timer, or model is executed.
+  const obstacles = [MOCK_OBSTACLES[0]];
   const current = obstacles[0];
   return {
     obstacles,
-    currentGuidance: current ? `Obstacle: ${current.label} ${current.distance_m}m ahead, ${current.action}` : 'Path clear, pier edge 1.2m left, keep right',
-    riskLevel: current?.risk || 'LOW'
+    currentGuidance: current
+      ? calculateAvoidance(current, 0, 0).instruction
+      : simulatedResearchCue('No mock obstacle generated; pause and verify.'),
+    riskLevel: current?.risk || 'UNKNOWN',
+    provenance: MOCK_PROVENANCE,
+    simulated: true,
+    safety: SAFETY_SUFFIX,
   };
 };

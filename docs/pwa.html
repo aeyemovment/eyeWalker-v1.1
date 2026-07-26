@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>eyeWalker v1.1 — Assistive research · NeuroAgent AI</title>
-<meta name="description" content="Assistive navigation research prototype with REC + hybrid VLM. From NeuroAgent AI. Not a medical device.">
+<title>eyeWalker v1.1.9 — Simulated accessibility research · NeuroAgent AI</title>
+<meta name="description" content="Deterministic simulated accessibility research interface with optional local recording. No live detector; not for navigation; not a medical device.">
 <meta name="theme-color" content="#0a0f1a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,39 +36,47 @@
   @media(max-width:820px){.side{border-left:0;border-top:1px solid var(--line)}}
   .panel{padding:10px 12px;display:flex;flex-direction:column;gap:8px;flex:1;overflow:auto}
   .row{display:flex;gap:8px;flex-wrap:wrap}
-  button,select{appearance:none;border:0;border-radius:12px;padding:12px 14px;font-weight:700;font-size:.9rem;cursor:pointer}
+  button,select{appearance:none;border:0;border-radius:12px;padding:12px 14px;min-height:44px;font-weight:700;font-size:.9rem;cursor:pointer}
+  button:focus-visible,select:focus-visible,input:focus-visible,label.toggle:focus-within{outline:3px solid #fff;outline-offset:3px}
   #startBtn{background:var(--yellow);color:#000;flex:1}
   #recBtn{background:#3f1d2a;color:#ffb4c0;border:1px solid #7f1d1d}
   #recBtn.on{background:var(--rec);color:#fff}
   #pauseBtn{background:#1e293b;color:var(--text)}
   #saveBtn{background:#14532d;color:#bbf7d0}
   #repeatBtn{background:#1e293b;color:var(--yellow)}
-  label.toggle{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted)}
+  #clearDataBtn{background:#3f1d2a;color:#fecaca;border:1px solid #7f1d1d}
+  label.toggle{display:flex;align-items:center;gap:8px;min-height:44px;font-size:.8rem;color:var(--muted)}
   .guidance{background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:12px;min-height:64px;font-size:.95rem;line-height:1.35}
+  .privacy-status{font-size:.72rem;color:var(--muted);line-height:1.35}
+  .privacy-status.warning{color:#fecaca;background:#450a0a;border:1px solid #7f1d1d;border-radius:8px;padding:8px}
+  .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
   .meta{font-size:.72rem;color:var(--muted);display:grid;grid-template-columns:1fr 1fr;gap:4px 10px}
   .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.68rem;font-weight:800}
   .badge-high{background:#7f1d1d;color:#fecaca}
   .badge-med{background:#7c2d12;color:#fed7aa}
   .badge-low{background:#14532d;color:#bbf7d0}
+  .badge-unknown{background:#334155;color:#e2e8f0}
   .log{font-size:.7rem;color:var(--muted);max-height:90px;overflow:auto;white-space:pre-wrap}
   footer{padding:8px 12px;border-top:1px solid var(--line);font-size:.65rem;color:var(--muted);text-align:center}
+  @media (prefers-reduced-motion:reduce){.dot{animation:none}}
 </style>
 </head>
 <body>
 <div class="safety" role="alert">
-  ⚠️ Assistive only — not a replacement for cane/guide dog. Always keep your traditional mobility aid.
-  <strong>Not a medical device.</strong> On-device cues are <strong>SIMULATED RESEARCH</strong> unless a real detector is connected.
-  Recording requires explicit consent below. Local-first; you control Save.
+  ⚠️ SIMULATED RESEARCH ONLY — NOT FOR NAVIGATION. Use only while stationary in controlled interface evaluation.
+  Always keep your cane or guide dog. <strong>Not a medical device.</strong> All cues in this build are <strong>SIMULATED RESEARCH</strong>; no live detector executes.
+  Camera access is preview/record-only; the cue generator does not inspect camera pixels.
+  Local video recording and precise GPS location/trail retention and export require explicit consent below. Local-first; you control Save.
 </div>
 <div id="simBanner" style="background:#7c2d12;color:#ffedd5;padding:8px 12px;text-align:center;font-weight:800;font-size:12px;">
   SIMULATION MODE ON — obstacle cues are generated for research, not live scene understanding.
 </div>
 <header class="app">
   <div>
-    <h1>eyeWalker v1.1 👓🦮</h1>
-    <div class="sub">NeuroAgent AI · medical assistive OSS · research prototype</div>
+    <h1>eyeWalker v1.1.9 👓🦮</h1>
+    <div class="sub">NeuroAgent AI · simulated accessibility-interface research prototype</div>
   </div>
-  <div class="status-pill">
+  <div class="status-pill" role="status" aria-live="polite" aria-atomic="true">
     <span class="dot" id="dot"></span>
     <div id="statusEl">idle</div>
     <div id="recInfo">REC off</div>
@@ -83,8 +91,8 @@
   <div class="side">
     <div class="panel">
       <div class="row">
-        <button id="startBtn" type="button">▶ Start walk</button>
-        <button id="recBtn" type="button">● REC</button>
+        <button id="startBtn" type="button">▶ Start simulated session</button>
+        <button id="recBtn" type="button" aria-pressed="false" aria-describedby="recInfo">● REC</button>
       </div>
       <div class="row">
         <button id="pauseBtn" type="button">⏸ Pause</button>
@@ -99,8 +107,12 @@
         <label class="toggle"><input type="checkbox" id="groundMode" checked> Ground hazard taxonomy (sim)</label>
       </div>
       <div class="row">
-        <label class="toggle"><input type="checkbox" id="recConsent"> I consent to local recording for research (REC/Save)</label>
+        <label class="toggle"><input type="checkbox" id="recConsent"> I consent to local video recording plus precise GPS location/trail retention and export (REC/Save)</label>
       </div>
+      <div class="row">
+        <button id="clearDataBtn" type="button" aria-describedby="privacyStatusEl">Clear retained session data</button>
+      </div>
+      <div id="privacyStatusEl" class="privacy-status" role="status" aria-live="polite" aria-atomic="true">Retained cue logs stay on this device until cleared.</div>
       <div class="row">
         <label class="toggle">Cue source
           <select id="vlmMode">
@@ -111,10 +123,11 @@
           </select>
         </label>
       </div>
-      <div class="guidance" id="guidanceEl">Tap Start. REC stores video+GPS for open-source training. Keep your cane.</div>
+      <div class="guidance" id="guidanceEl" aria-live="off">SIMULATED RESEARCH CUE: Tap Start; no live detector executes in this build. Keep your cane or guide dog. Not a medical device.</div>
+      <div id="cueAnnouncementEl" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="meta">
         <div>GPS: <span id="gpsEl">—</span></div>
-        <div>Risk: <span class="badge badge-low" id="riskEl">LOW</span></div>
+        <div>Risk: <span class="badge badge-unknown" id="riskEl">UNKNOWN</span></div>
         <div>Obstacles: <span id="obsCountEl">0</span></div>
         <div>Steps: <span id="stepCountEl">0</span></div>
         <div>Chunks: <span id="chunkEl">0</span></div>
@@ -127,6 +140,7 @@
 <footer>
   From NeuroAgent AI — rare neurologic diseases affecting vision + all neuro/ophtho causes.
   Research prototype · synthetic_only training labels · not clinical/diagnostic/regulatory.
+  <a href="LICENSE-MIT.txt">MIT notice for allowlisted PWA files</a>.
 </footer>
 <script>
 (() => {
@@ -142,7 +156,10 @@
   const stopBtn = document.getElementById("stopBtn");
   const saveBtn = document.getElementById("saveBtn");
   const repeatBtn = document.getElementById("repeatBtn");
+  const clearDataBtn = document.getElementById("clearDataBtn");
   const guidanceEl = document.getElementById("guidanceEl");
+  const cueAnnouncementEl = document.getElementById("cueAnnouncementEl");
+  const privacyStatusEl = document.getElementById("privacyStatusEl");
   const gpsEl = document.getElementById("gpsEl");
   const riskEl = document.getElementById("riskEl");
   const obsCountEl = document.getElementById("obsCountEl");
@@ -153,20 +170,233 @@
   const groundMode = document.getElementById("groundMode");
   const vlmMode = document.getElementById("vlmMode");
   const dot = document.getElementById("dot");
+  const recConsentEl = document.getElementById("recConsent");
 
   let stream = null, running = false, paused = false, recording = false;
   let mediaRecorder = null, recChunks = [], gpsTrail = [], watchId = null;
-  let step = 0, loopTimer = null, lastGuidance = "", gps = { lat: 39.2815, lon: -76.593 };
+  let recordingFinalizePromise = null, consentTransitionPromise = Promise.resolve();
+  let recorderStopObserved = true, recUiState = "off";
+  let step = 0, loopTimer = null, lastGuidance = "", gps = null;
+  let localLogEnabled = true, lastCueAnnouncementAt = -Infinity;
+  let cueAnnouncementCount = 0, lastCueAnnouncement = "";
+  let lastRecordingFinalization = { complete: true, reason: "no-recording", chunks: 0 };
   const sessionId = new Date().toISOString().replace(/[:.]/g, "-");
+  const VLM_KEY_PREFIX = "eyewalker_vlm_";
+  const vlmKey = `eyewalker_vlm_${sessionId}`;
+  const CUE_ANNOUNCEMENT_MIN_MS = 5000;
+  const REC_FINALIZE_TIMEOUT_MS = 3000;
+  const DOWNLOAD_URL_REVOKE_DELAY_MS = 30000;
+  const RISK_RANK = Object.freeze({ HIGH: 0, MEDIUM: 1, LOW: 2 });
+  const VALID_VLM_MODES = new Set(["mock", "hybrid", "spark_only", "grok_only"]);
+  const SAFE_OBSTACLE_CLASSES = new Set([
+    "manhole", "shadow_trap", "crack", "curb", "trash_bin", "bench",
+    "person", "bike", "pier_edge", "low_branch", "obstacle",
+  ]);
 
   function log(msg) {
     const line = `[${new Date().toLocaleTimeString()}] ${msg}`;
     logEl.textContent = (line + "\n" + logEl.textContent).slice(0, 2000);
   }
 
-  function speak(text) {
+  function hasRecordingConsent() {
+    return !!(recConsentEl && recConsentEl.checked);
+  }
+
+  function setRecordingUi(state) {
+    recUiState = state;
+    const active = state === "recording" || state === "paused" || state === "finalizing";
+    recBtn.setAttribute("aria-pressed", active ? "true" : "false");
+    recBtn.setAttribute("aria-busy", state === "finalizing" ? "true" : "false");
+    recBtn.disabled = state === "finalizing";
+    recBtn.classList.toggle("on", active);
+    recBadge.classList.toggle("on", active);
+    dot.classList.toggle("rec", active);
+    if (state === "recording") {
+      recBtn.textContent = "■ REC off";
+      recBadge.textContent = "● REC";
+      recInfo.textContent = "REC on · local video + precise GPS trail";
+    } else if (state === "paused") {
+      recBtn.textContent = "■ REC off";
+      recBadge.textContent = "Ⅱ REC paused";
+      recInfo.textContent = "REC and precise GPS paused · Resume continues capture";
+    } else if (state === "finalizing") {
+      recBtn.textContent = "… Finalizing REC";
+      recBadge.textContent = "● REC finalizing";
+      recInfo.textContent = "REC finalizing · waiting for final chunk · precise GPS collection off";
+    } else if (state === "ready") {
+      recBtn.textContent = "● REC";
+      recBadge.textContent = "● REC";
+      recInfo.textContent = `REC ready · precise GPS collection off · ${recChunks.length} chunks ready`;
+    } else if (state === "incomplete") {
+      recBtn.textContent = "● REC";
+      recBadge.textContent = "REC incomplete";
+      recInfo.textContent = `REC and precise GPS off · REC incomplete · ${recChunks.length} partial chunks · do not rely on final media`;
+    } else {
+      recBtn.textContent = "● REC";
+      recBadge.textContent = "● REC";
+      recInfo.textContent = "REC off";
+    }
+  }
+
+  function clearLiveGpsState(label = "—") {
+    gps = null;
+    gpsEl.textContent = label;
+  }
+
+  function readVlmLog(key = vlmKey) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || "[]");
+      return Array.isArray(value) ? value : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function setPrivacyStatus(message, warning = false) {
+    privacyStatusEl.textContent = message;
+    privacyStatusEl.classList.toggle("warning", warning);
+    privacyStatusEl.setAttribute("role", warning ? "alert" : "status");
+  }
+
+  function listRetainedVlmKeys() {
+    const keys = new Set([vlmKey]);
+    const errors = [];
+    try {
+      const count = localStorage.length;
+      for (let index = 0; index < count; index++) {
+        const key = localStorage.key(index);
+        if (typeof key === "string" && key.startsWith(VLM_KEY_PREFIX)) keys.add(key);
+      }
+    } catch (error) {
+      errors.push(error);
+      // Storage keys are normally enumerable, so make a best-effort fallback.
+      // The result remains unsafe because fallback enumeration cannot prove completeness.
+      try {
+        Object.keys(localStorage).forEach((key) => {
+          if (key.startsWith(VLM_KEY_PREFIX)) keys.add(key);
+        });
+      } catch (fallbackError) {
+        errors.push(fallbackError);
+      }
+    }
+    return { keys: [...keys], iterationFailed: errors.length > 0, errors };
+  }
+
+  function hasPreciseGps(value) {
+    if (!value || typeof value !== "object") return false;
+    if (Array.isArray(value)) return value.some(hasPreciseGps);
+    return Object.entries(value).some(([key, child]) =>
+      ["gps", "lat", "lon", "latitude", "longitude"].includes(key) || hasPreciseGps(child)
+    );
+  }
+
+  function redactGpsEntry(entry) {
+    if (!entry || typeof entry !== "object") return { value: entry, redacted: false };
+    let redacted = false;
+    const walk = (value) => {
+      if (Array.isArray(value)) return value.map(walk);
+      if (!value || typeof value !== "object") return value;
+      const safe = {};
+      Object.entries(value).forEach(([key, child]) => {
+        if (["gps", "lat", "lon", "latitude", "longitude"].includes(key)) {
+          redacted = true;
+          return;
+        }
+        safe[key] = walk(child);
+      });
+      return safe;
+    };
+    const safe = walk(entry);
+    if (redacted && safe && !Array.isArray(safe)) safe.gps_redacted = true;
+    return { value: safe, redacted };
+  }
+
+  function removeRetainedKey(key, result) {
+    try {
+      localStorage.removeItem(key);
+      if (localStorage.getItem(key) !== null) throw new Error(`removal not confirmed for ${key}`);
+      result.removedKeys += 1;
+      return true;
+    } catch (error) {
+      result.failures.push({ key, operation: "remove", error: String(error) });
+      return false;
+    }
+  }
+
+  function redactAllRetainedGps() {
+    const scan = listRetainedVlmKeys();
+    const result = {
+      keysFound: 0,
+      rewrittenKeys: 0,
+      removedKeys: 0,
+      redactedEntries: 0,
+      iterationFailed: scan.iterationFailed,
+      failures: [],
+      safe: !scan.iterationFailed,
+    };
+    scan.keys.forEach((key) => {
+      let raw;
+      try {
+        raw = localStorage.getItem(key);
+      } catch (error) {
+        result.failures.push({ key, operation: "read", error: String(error) });
+        if (!removeRetainedKey(key, result)) result.safe = false;
+        return;
+      }
+      if (raw === null) return;
+      result.keysFound += 1;
+      let entries;
+      try {
+        entries = JSON.parse(raw);
+        if (!Array.isArray(entries)) throw new Error("retained cue log is not an array");
+      } catch (error) {
+        result.failures.push({ key, operation: "parse", error: String(error) });
+        if (!removeRetainedKey(key, result)) result.safe = false;
+        return;
+      }
+      const safeEntries = entries.map((entry) => {
+        const safe = redactGpsEntry(entry);
+        if (safe.redacted) result.redactedEntries += 1;
+        return safe.value;
+      });
+      try {
+        localStorage.setItem(key, JSON.stringify(safeEntries));
+        const verified = JSON.parse(localStorage.getItem(key) || "[]");
+        if (hasPreciseGps(verified)) throw new Error("precise GPS remained after rewrite");
+        result.rewrittenKeys += 1;
+      } catch (error) {
+        result.failures.push({ key, operation: "rewrite", error: String(error) });
+        if (!removeRetainedKey(key, result)) result.safe = false;
+      }
+    });
+    if (result.failures.some((failure) => failure.operation === "remove")) result.safe = false;
+    return result;
+  }
+
+  function clearAllRetainedVlmData() {
+    const scan = listRetainedVlmKeys();
+    const result = {
+      removedKeys: 0,
+      iterationFailed: scan.iterationFailed,
+      failures: [],
+      safe: !scan.iterationFailed,
+    };
+    scan.keys.forEach((key) => {
+      let exists = true;
+      try { exists = localStorage.getItem(key) !== null; }
+      catch (error) { result.failures.push({ key, operation: "read", error: String(error) }); }
+      if (exists && !removeRetainedKey(key, result)) result.safe = false;
+    });
+    if (result.failures.some((failure) => failure.operation === "remove")) result.safe = false;
+    return result;
+  }
+
+  function renderGuidance(text) {
     lastGuidance = text;
     guidanceEl.textContent = text;
+  }
+
+  function speakAudio(text) {
     try {
       if (!window.speechSynthesis) return;
       window.speechSynthesis.cancel();
@@ -174,6 +404,21 @@
       u.rate = 1.05; u.pitch = 1;
       window.speechSynthesis.speak(u);
     } catch (_) {}
+  }
+
+  function speak(text) {
+    speakAudio(text);
+  }
+
+  function announceCue(text, now = Date.now()) {
+    renderGuidance(text);
+    if (now - lastCueAnnouncementAt < CUE_ANNOUNCEMENT_MIN_MS) return false;
+    lastCueAnnouncementAt = now;
+    lastCueAnnouncement = text;
+    cueAnnouncementCount += 1;
+    cueAnnouncementEl.textContent = text;
+    speakAudio(text);
+    return true;
   }
 
   function resize() {
@@ -211,52 +456,152 @@
         bearing_deg: -30 + ((stepN * 5 + i * 11) % 60),
         urgency: c.urgency,
         source: "simulated_spark",
-        confidence: 0.6,
+        confidence: null,
       });
     }
     return out;
   }
 
+  function safeObstacleClass(value) {
+    return typeof value === "string" && SAFE_OBSTACLE_CLASSES.has(value)
+      ? value
+      : "obstacle";
+  }
+
+  function validPlanningRecord(record) {
+    return !!record
+      && typeof record === "object"
+      && Object.prototype.hasOwnProperty.call(RISK_RANK, record.urgency)
+      && typeof record.distance_m === "number"
+      && Number.isFinite(record.distance_m)
+      && record.distance_m >= 0
+      && typeof record.bearing_deg === "number"
+      && Number.isFinite(record.bearing_deg)
+      && Math.abs(record.bearing_deg) <= 180;
+  }
+
+  function safeObstacleRecord(record, mode) {
+    const valid = validPlanningRecord(record);
+    return {
+      class: safeObstacleClass(record && record.class),
+      distance_m: valid ? record.distance_m : null,
+      bearing_deg: valid ? record.bearing_deg : null,
+      urgency: valid ? record.urgency : "UNKNOWN",
+      source: `simulated_${mode}`,
+      confidence: null,
+      simulated: true,
+      ...(valid ? {} : { invalid_record: true }),
+    };
+  }
+
   function planAvoid(obs) {
-    if (!obs.length) {
+    if (!Array.isArray(obs) || !obs.length) {
       return {
-        instruction: "SIMULATED: path clear cue. Walk straight. Keep your cane. Not a medical device.",
-        risk: "LOW",
+        instruction: "SIMULATED RESEARCH CUE: no simulated obstacle record is available; HOLD and stop and verify. Keep your cane or guide dog. Not a medical device.",
+        risk: "UNKNOWN",
+        action: "hold",
+        lateral_m: 0,
         simulated: true,
+        synthetic_only: true,
+        detector_executed: false,
       };
     }
-    const top = [...obs].sort((a, b) => (a.urgency === "HIGH" ? 0 : 1) - (b.urgency === "HIGH" ? 0 : 1) || a.distance_m - b.distance_m)[0];
+    if (obs.some((record) => !validPlanningRecord(record))) {
+      return {
+        instruction: "SIMULATED RESEARCH CUE: invalid simulated obstacle geometry or urgency; HOLD and stop and verify. Keep your cane or guide dog. Not a medical device.",
+        risk: "UNKNOWN",
+        action: "hold",
+        lateral_m: 0,
+        simulated: true,
+        synthetic_only: true,
+        detector_executed: false,
+        invalid_record: true,
+      };
+    }
+    const normalized = obs.map((record) => ({
+      ...record,
+      class: safeObstacleClass(record.class),
+      confidence: null,
+    }));
+    const top = [...normalized].sort((a, b) =>
+      RISK_RANK[a.urgency] - RISK_RANK[b.urgency] || a.distance_m - b.distance_m
+    )[0];
     // Convention: bearing < 0 = obstacle to user's LEFT → step RIGHT (away). bearing > 0 → step LEFT.
-    let side = "side-step";
-    if (top.bearing_deg < -8) side = "right";
-    else if (top.bearing_deg > 8) side = "left";
+    if (top.bearing_deg >= -8 && top.bearing_deg <= 8) {
+      const name = top.class.replace(/_/g, " ").toUpperCase();
+      return {
+        instruction: `SIMULATED RESEARCH CUE: ${name} ${top.distance_m.toFixed(1)}m ahead has centered or ambiguous bearing; HOLD and stop and verify. Keep your cane or guide dog. Not a medical device.`,
+        risk: top.urgency,
+        top,
+        action: "hold",
+        lateral_m: 0,
+        ambiguous_bearing: true,
+        simulated: true,
+        synthetic_only: true,
+        detector_executed: false,
+      };
+    }
+    const side = top.bearing_deg < -8 ? "right" : "left";
     const stepM = top.distance_m < 1.2 ? 0.4 : 0.5;
     const name = top.class.replace(/_/g, " ").toUpperCase();
-    const sim = document.getElementById("simMode")?.checked !== false;
-    const prefix = sim ? "SIMULATED RESEARCH CUE: " : "CUE: ";
     return {
-      instruction: `${prefix}${name} ${top.distance_m.toFixed(1)}m ahead (bearing ${top.bearing_deg >= 0 ? "+" : ""}${top.bearing_deg.toFixed(0)}°), step ${side} ${stepM.toFixed(1)}m. Keep your cane. Not a medical device.`,
+      instruction: `SIMULATED RESEARCH CUE: ${name} ${top.distance_m.toFixed(1)}m ahead (bearing ${top.bearing_deg >= 0 ? "+" : ""}${top.bearing_deg.toFixed(0)}°), step ${side} ${stepM.toFixed(1)}m. Keep your cane or guide dog. Not a medical device.`,
       risk: top.urgency,
       top,
-      simulated: sim,
+      action: `step_${side}`,
+      lateral_m: stepM,
+      simulated: true,
+      synthetic_only: true,
+      detector_executed: false,
     };
   }
 
   async function hybridInfer(obs) {
     const mode = vlmMode.value;
     const simOn = document.getElementById("simMode")?.checked !== false;
+    if (!VALID_VLM_MODES.has(mode)) {
+      return {
+        obstacles: [],
+        instruction: "SIMULATED RESEARCH CUE: Invalid simulated cue mode; HOLD and stop and verify. Keep your cane or guide dog. Not a medical device.",
+        risk: "UNKNOWN",
+        action: "hold",
+        lateral_m: 0,
+        mode: "invalid",
+        simulated: true,
+        synthetic_only: true,
+        simulation_mode: simOn,
+        detector_executed: false,
+        provenance: "synthetic_invalid_mode",
+        invalid_mode: true,
+      };
+    }
     if (!simOn) {
       return {
         obstacles: [],
-        instruction: "Simulation off. No live detector connected. Keep your cane. Not a medical device.",
-        risk: "LOW",
+        instruction: "SIMULATED RESEARCH CUE: Simulation is off; no live detector executed and no navigation inference is available. Keep your cane or guide dog. Not a medical device.",
+        risk: "UNKNOWN",
         mode,
-        simulated: false,
+        simulated: true,
+        synthetic_only: true,
+        simulation_mode: false,
+        detector_executed: false,
+        provenance: "synthetic_no_detector",
       };
     }
     const plan = planAvoid(obs);
-    obs.forEach((o) => { o.source = "simulated_" + mode; o.simulated = true; });
-    return { obstacles: obs, ...plan, mode, simulated: true };
+    const safeObstacles = Array.isArray(obs)
+      ? obs.map((record) => safeObstacleRecord(record, mode))
+      : [];
+    return {
+      obstacles: safeObstacles,
+      ...plan,
+      mode,
+      simulated: true,
+      synthetic_only: true,
+      simulation_mode: true,
+      detector_executed: false,
+      provenance: "synthetic_mock",
+    };
   }
 
   function drawHUD(obs, plan) {
@@ -269,7 +614,7 @@
     ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(cx - 26, cy); ctx.lineTo(cx + 26, cy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx, cy - 26); ctx.lineTo(cx, cy + 26); ctx.stroke();
-    obs.forEach((o) => {
+    obs.filter(validPlanningRecord).forEach((o) => {
       const angle = (o.bearing_deg * Math.PI) / 180;
       const norm = Math.min(o.distance_m / 6, 1);
       const oy = cy + (1 - norm) * 0.5 * (h - cy);
@@ -290,10 +635,18 @@
     ctx.fillRect(0, h - 54, w, 54);
     ctx.fillStyle = "rgb(0,255,130)";
     ctx.font = "13px system-ui";
-    ctx.fillText(`GUIDANCE: ${plan.instruction}`, 10, h - 30);
+    ctx.fillText(`SIMULATED CUE: ${plan.instruction}`, 10, h - 30);
     ctx.fillStyle = "rgba(200,200,200,0.9)";
     ctx.font = "11px system-ui";
-    ctx.fillText(`GPS ${gps.lat.toFixed(5)}, ${gps.lon.toFixed(5)} · ${vlmMode.value} · not a medical device`, 10, h - 12);
+    const gpsLabel = gps ? `${gps.lat.toFixed(5)}, ${gps.lon.toFixed(5)}` : "—";
+    ctx.fillText(`GPS ${gpsLabel} · ${vlmMode.value} · not a medical device`, 10, h - 12);
+  }
+
+  function riskBadgeClass(risk) {
+    if (risk === "HIGH") return "badge-high";
+    if (risk === "MEDIUM") return "badge-med";
+    if (risk === "LOW") return "badge-low";
+    return "badge-unknown";
   }
 
   async function tick() {
@@ -305,18 +658,30 @@
     stepCountEl.textContent = String(step);
     const high = result.risk === "HIGH";
     riskEl.textContent = result.risk;
-    riskEl.className = "badge " + (high ? "badge-high" : result.obstacles.length ? "badge-med" : "badge-low");
-    if (high && (step % 10 === 0 || result.instruction !== lastGuidance)) speak(result.instruction);
-    else if (step % 35 === 0) speak(result.instruction);
-    else guidanceEl.textContent = result.instruction;
-    // persist lightweight VLM stream for open-source training
-    try {
-      const key = `eyewalker_vlm_${sessionId}`;
-      const prev = JSON.parse(localStorage.getItem(key) || "[]");
-      prev.push({ t: Date.now(), step, gps: { ...gps }, obstacles: result.obstacles, guidance: result.instruction, mode: vlmMode.value });
-      while (prev.length > 4000) prev.shift();
-      localStorage.setItem(key, JSON.stringify(prev));
-    } catch (_) {}
+    riskEl.className = "badge " + riskBadgeClass(result.risk);
+    renderGuidance(result.instruction);
+    // The visual cue may refresh every 700 ms, but speech and the aria-live
+    // announcer are hard-bounded so changing synthetic distances cannot flood users.
+    if (high || step % 35 === 0) announceCue(result.instruction);
+    // Persist a lightweight local VLM stream. Precise GPS is consent-gated and
+    // is scrubbed from prior entries as soon as consent is revoked.
+    if (localLogEnabled) {
+      try {
+        const prev = readVlmLog();
+        const entry = {
+          t: Date.now(),
+          step,
+          obstacles: result.obstacles,
+          guidance: result.instruction,
+          mode: vlmMode.value,
+        };
+        if (hasRecordingConsent() && gps) entry.gps = { ...gps };
+        else entry.gps_redacted = true;
+        prev.push(entry);
+        while (prev.length > 4000) prev.shift();
+        localStorage.setItem(vlmKey, JSON.stringify(prev));
+      } catch (_) {}
+    }
     step++;
     loopTimer = setTimeout(() => requestAnimationFrame(tick), 700);
   }
@@ -335,16 +700,25 @@
     return "";
   }
 
+  function scheduleObjectUrlRevocation(url) {
+    // Safari may still be resolving the click-triggered download when the
+    // current task ends. Keep the Blob URL alive briefly, then release it.
+    setTimeout(() => URL.revokeObjectURL(url), DOWNLOAD_URL_REVOKE_DELAY_MS);
+  }
+
   function startRecording() {
-    const consent = document.getElementById("recConsent");
-    if (!consent || !consent.checked) {
+    if (!hasRecordingConsent()) {
       log("REC blocked — check consent box first");
       speak("Check the recording consent box first.");
       return false;
     }
+    if (recordingFinalizePromise) {
+      log("REC is still finalizing — wait for the final chunk");
+      return false;
+    }
     if (!stream) {
       log("REC needs camera stream — tap Start first");
-      speak("Start walk first, then REC.");
+      speak("Start the simulated session first, then REC.");
       return false;
     }
     if (!window.MediaRecorder) {
@@ -354,91 +728,175 @@
     }
     recChunks = [];
     const mime = pickMime();
+    mediaRecorder = null;
     try {
       mediaRecorder = mime
         ? new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 2_500_000 })
         : new MediaRecorder(stream);
     } catch (e) {
+      recorderStopObserved = true;
+      recording = false;
+      lastRecordingFinalization = {
+        complete: false,
+        reason: "constructor-error",
+        chunks: 0,
+        error: String(e),
+      };
+      setRecordingUi("off");
       log("MediaRecorder error: " + e.message);
       return false;
     }
+    chunkEl.textContent = "0";
     mediaRecorder.ondataavailable = (ev) => {
       if (ev.data && ev.data.size > 0) {
         recChunks.push(ev.data);
         chunkEl.textContent = String(recChunks.length);
       }
     };
-    mediaRecorder.onerror = (e) => log("REC error " + (e.error || e));
-    mediaRecorder.onstop = () => log(`REC stopped — ${recChunks.length} chunks`);
+    mediaRecorder.onerror = (e) => {
+      log("REC error " + (e.error || e));
+      // A recorder error outside the controlled finalization path is never
+      // evidence that captured media is complete or ready.
+      if (!recordingFinalizePromise) {
+        stopGpsWatch();
+        clearLiveGpsState("— (REC/GPS error)");
+        recording = false;
+        lastRecordingFinalization = {
+          complete: false,
+          reason: "recorder-error",
+          chunks: recChunks.length,
+          error: String(e && (e.error || e.message || e)),
+        };
+        setRecordingUi("incomplete");
+        if (mediaRecorder && mediaRecorder.state !== "inactive") {
+          try { mediaRecorder.stop(); } catch (_) {}
+        }
+        if (mediaRecorder && mediaRecorder.state !== "inactive" && stream) {
+          stream.getTracks().forEach((track) => track.stop());
+          stream = null;
+          running = false;
+          paused = false;
+        }
+      }
+    };
+    mediaRecorder.onstop = () => {
+      recorderStopObserved = true;
+      log(`REC stopped — ${recChunks.length} chunks`);
+      // Only finalizeRecording owns the successful-completion transition.
+      // A spontaneous stop is incomplete because no finalization handshake
+      // confirmed ordering of final dataavailable and stop.
+      if (!recordingFinalizePromise) {
+        stopGpsWatch();
+        clearLiveGpsState("— (REC/GPS stopped)");
+        recording = false;
+        lastRecordingFinalization = {
+          complete: false,
+          reason: "unexpected-stop",
+          chunks: recChunks.length,
+          error: null,
+        };
+        setRecordingUi("incomplete");
+      }
+    };
     // timeslice = flush chunks every 1s so crash still has data
-    mediaRecorder.start(1000);
+    try {
+      mediaRecorder.start(1000);
+    } catch (error) {
+      const failedRecorder = mediaRecorder;
+      failedRecorder.ondataavailable = null;
+      failedRecorder.onerror = null;
+      failedRecorder.onstop = null;
+      if (failedRecorder.state !== "inactive") {
+        try { failedRecorder.stop(); } catch (_) {}
+      }
+      mediaRecorder = null;
+      recorderStopObserved = true;
+      recording = false;
+      lastRecordingFinalization = {
+        complete: false,
+        reason: "start-error",
+        chunks: 0,
+        error: String(error),
+      };
+      setRecordingUi("off");
+      log("REC start error: " + String(error));
+      return false;
+    }
+    recorderStopObserved = false;
+    lastRecordingFinalization = { complete: false, reason: "recording-active", chunks: 0 };
     recording = true;
-    recBtn.classList.add("on");
-    recBadge.classList.add("on");
-    dot.classList.add("rec");
-    recInfo.textContent = "REC on · webm+GPS";
+    setRecordingUi("recording");
+    startGpsIfConsented();
     log("REC started (1s chunks)");
     return true;
   }
 
-  function stopRecording() {
-    if (mediaRecorder && mediaRecorder.state !== "inactive") {
-      try { mediaRecorder.stop(); } catch (_) {}
+  async function toggleRecording() {
+    if (recordingFinalizePromise || recording || (mediaRecorder && mediaRecorder.state !== "inactive")) {
+      const finalization = await finalizeRecording("REC off");
+      log(finalization.complete
+        ? "REC off — final chunk is ready"
+        : `REC off — recording incomplete (${finalization.reason}); partial chunks only`);
+      return false;
     }
-    recording = false;
-    recBtn.classList.remove("on");
-    recBadge.classList.remove("on");
-    dot.classList.remove("rec");
-    recInfo.textContent = recChunks.length ? `REC ready · ${recChunks.length} chunks` : "REC off";
+    return startRecording();
   }
 
   async function saveBundle() {
-    const consent = document.getElementById("recConsent");
-    const consented = !!(consent && consent.checked);
-    // Always finalize active recorder before packaging
-    if (recording || (mediaRecorder && mediaRecorder.state !== "inactive")) {
-      await finalizeRecording();
-      recInfo.textContent = recChunks.length ? `REC ready · ${recChunks.length} chunks` : "REC off";
-    }
+    // Stop, REC-off, revoke, and Save all share this finalization promise.
+    // The final dataavailable event is delivered before the promise resolves.
+    const finalization = await finalizeRecording("Save");
+    const consented = hasRecordingConsent();
     if (recChunks.length && !consented) {
       log("Save of video blocked — consent required");
       speak("Check recording consent before saving video.");
-      return;
+      return { saved: false, reason: "consent-required" };
     }
+    let videoSaved = false;
     if (recChunks.length) {
       const mime = recChunks[0].type || "video/webm";
       const blob = new Blob(recChunks, { type: mime });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = `eyewalker_walk_${sessionId}.${recExt()}`;
+      const completeness = finalization.complete ? "complete" : "PARTIAL_INCOMPLETE";
+      a.download = `eyewalker_${completeness}_${sessionId}.${recExt()}`;
       a.click();
-      URL.revokeObjectURL(a.href);
-      log(`Saved video ${(blob.size / 1e6).toFixed(2)} MB as .${recExt()}`);
+      scheduleObjectUrlRevocation(a.href);
+      log(finalization.complete
+        ? `Saved complete local research video ${(blob.size / 1e6).toFixed(2)} MB as .${recExt()}`
+        : `Saved PARTIAL INCOMPLETE local research video ${(blob.size / 1e6).toFixed(2)} MB as .${recExt()}`);
+      videoSaved = true;
     } else {
       log("No video chunks — REC was off or empty");
     }
-    const vlmKey = `eyewalker_vlm_${sessionId}`;
     const simOn = document.getElementById("simMode")?.checked !== false;
     const payload = {
-      version: "1.1.8",
+      version: "1.1.9",
       sessionId,
       gpsTrail: consented ? gpsTrail : [],
       gps_included: consented,
-      vlm: consented ? JSON.parse(localStorage.getItem(vlmKey) || "[]") : [],
+      vlm: consented ? readVlmLog() : [],
       ground_mode: groundMode.checked,
       vlm_mode: vlmMode.value,
       simulation_mode: simOn,
       recording_consent: consented,
-      safety: "Assistive research prototype. Not medical device. Keep cane/guide dog.",
-      dt9: { research_prototype: true, synthetic_only: simOn, not_medical_device: true },
+      recording_complete: finalization.complete,
+      recording_finalization_reason: finalization.reason,
+      safety: "Simulated research only. Not for navigation. Not a medical device. Keep cane/guide dog.",
+      live_detector_executed: false,
+      provenance: simOn ? "synthetic_mock" : "synthetic_no_detector",
+      dt9: { research_prototype: true, synthetic_only: true, not_medical_device: true },
     };
     const j = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const a2 = document.createElement("a");
     a2.href = URL.createObjectURL(j);
     a2.download = `eyewalker_meta_${sessionId}.json`;
     a2.click();
-    URL.revokeObjectURL(a2.href);
-    speak("Saved walk package. Keep your cane.");
+    scheduleObjectUrlRevocation(a2.href);
+    speak(finalization.complete
+      ? "Saved complete local research package. Keep your cane."
+      : "Saved partial incomplete local research package. Keep your cane.");
+    return { saved: true, videoSaved, recordingComplete: finalization.complete, payload };
   }
 
   async function start() {
@@ -446,7 +904,16 @@
     if (running && paused) {
       paused = false;
       pauseBtn.textContent = "⏸ Pause";
-      statusEl.textContent = "walking — simulated research cues";
+      statusEl.textContent = "simulated session running";
+      if (recording && mediaRecorder && mediaRecorder.state === "paused") {
+        try {
+          mediaRecorder.resume();
+          setRecordingUi("recording");
+          startGpsIfConsented();
+        } catch (e) {
+          log("REC resume error: " + e.message);
+        }
+      }
       speak("Resumed. Keep your cane.");
       tick();
       return;
@@ -461,64 +928,89 @@
       resize();
       running = true;
       paused = false;
-      statusEl.textContent = "walking — simulated research cues";
-      // GPS trail + watch only while recording consent is checked (no silent retention).
+      statusEl.textContent = "simulated session running";
+      // Precise GPS remains off until REC is actively recording, even if the
+      // combined consent control was checked in advance.
       startGpsIfConsented();
-      speak("eyeWalker one one. Simulation cues may play. Keep your cane. Not a medical device.");
+      speak("SIMULATED RESEARCH CUE: Simulation is active; no live detector executes in this build. Keep your cane or guide dog. Not a medical device.");
       // REC is opt-in only (consent checkbox + REC button) — never auto-start
       tick();
     } catch (e) {
+      // getUserMedia may have succeeded before play/setup failed. Never leave a
+      // mislabeled demo state holding live camera tracks or a REC-capable stream.
+      if (stream) {
+        try { stream.getTracks().forEach((track) => track.stop()); } catch (_) {}
+        stream = null;
+      }
+      video.srcObject = null;
       log("camera fail: " + e.message);
       statusEl.textContent = "no camera — demo mode";
       running = true;
       paused = false;
       resize();
-      speak("No camera. Demo mode. Keep your cane.");
+      speak("SIMULATED RESEARCH CUE: No camera is available; demo output remains synthetic and no live detector executes. Keep your cane or guide dog. Not a medical device.");
       tick();
     }
   }
 
   function pauseOrStop() {
-    if (!running) { speak("Not walking. Tap Start."); return; }
+    if (!running) { speak("No simulated session is running. Tap Start."); return; }
     if (!paused) {
       paused = true;
       if (loopTimer) clearTimeout(loopTimer);
       statusEl.textContent = "paused";
       pauseBtn.textContent = "▶ Resume";
       if (recording && mediaRecorder && mediaRecorder.state === "recording") {
-        try { mediaRecorder.pause(); } catch (_) {}
+        try {
+          mediaRecorder.pause();
+          setRecordingUi("paused");
+        } catch (_) {}
       }
+      stopGpsWatch();
+      clearLiveGpsState("— (REC/GPS paused)");
       speak("Paused. Keep your cane.");
     } else {
       // Resume (do not stop — Stop is via starting over after stopSession from long path)
       paused = false;
       pauseBtn.textContent = "⏸ Pause";
-      statusEl.textContent = "walking — research cues";
+      statusEl.textContent = "simulated session running";
       if (recording && mediaRecorder && mediaRecorder.state === "paused") {
-        try { mediaRecorder.resume(); } catch (_) {}
+        try {
+          mediaRecorder.resume();
+          setRecordingUi("recording");
+          startGpsIfConsented();
+        } catch (_) {}
       }
       speak("Resumed. Keep your cane.");
       tick();
     }
   }
 
-  function stopSession() {
+  async function stopSession() {
     running = false;
     paused = false;
     if (loopTimer) clearTimeout(loopTimer);
-    stopRecording();
-    statusEl.textContent = "stopped — tap Save";
+    statusEl.textContent = "stopping — finalizing REC";
     pauseBtn.textContent = "⏸ Pause";
-    if (stream) { stream.getTracks().forEach((t) => t.stop()); stream = null; }
     stopGpsWatch();
-    speak("Stopped. Tap Save for open source package. Keep your cane.");
+    clearLiveGpsState("— (stopped)");
+    let finalization = lastRecordingFinalization;
+    try {
+      finalization = await finalizeRecording("Stop");
+    } finally {
+      if (stream) { stream.getTracks().forEach((t) => t.stop()); stream = null; }
+      statusEl.textContent = finalization.complete
+        ? "stopped — tap Save"
+        : "stopped — REC incomplete; partial media only";
+    }
+    speak(finalization.complete
+      ? "Stopped. Tap Save for a local research package. Keep your cane."
+      : "Stopped. Recording is incomplete. Partial media only. Keep your cane.");
+    return finalization;
   }
 
-  startBtn.addEventListener("click", start);
-  recBtn.addEventListener("click", () => {
-    if (recording) stopRecording();
-    else startRecording();
-  });
+  startBtn.addEventListener("click", () => start().catch((e) => log(String(e))));
+  recBtn.addEventListener("click", () => toggleRecording().catch((e) => log(String(e))));
   pauseBtn.addEventListener("click", pauseOrStop);
   saveBtn.addEventListener("click", () => { saveBundle().catch((e) => log(String(e))); });
   repeatBtn.addEventListener("click", () => speak(lastGuidance || "No guidance yet."));
@@ -535,10 +1027,10 @@
   if (simModeEl && simBanner) {
     simModeEl.addEventListener("change", () => {
       simBanner.style.display = simModeEl.checked ? "block" : "none";
-      if (!simModeEl.checked) speak("Simulation off. No live detector. Keep your cane.");
+      if (!simModeEl.checked) speak("SIMULATED RESEARCH CUE: Simulation is off; no live detector executed and no navigation inference is available. Keep your cane or guide dog. Not a medical device.");
     });
   }
-  
+
   function recExt() {
     const mime = (mediaRecorder && mediaRecorder.mimeType) || (recChunks[0] && recChunks[0].type) || "video/webm";
     if (mime.includes("mp4")) return "mp4";
@@ -546,21 +1038,88 @@
     return "webm";
   }
 
-  function finalizeRecording() {
-    return new Promise((resolve) => {
-      if (!mediaRecorder || mediaRecorder.state === "inactive") {
-        resolve();
-        return;
-      }
-      const done = () => { mediaRecorder.removeEventListener("stop", done); resolve(); };
-      mediaRecorder.addEventListener("stop", done);
-      try { mediaRecorder.requestData(); } catch (_) {}
-      try { mediaRecorder.stop(); } catch (_) { resolve(); }
+  function finalizeRecording(reason = "REC off") {
+    if (recordingFinalizePromise) return recordingFinalizePromise;
+
+    // Precise location collection ends as soon as REC finalization begins,
+    // rather than waiting for a recorder event or timeout.
+    stopGpsWatch();
+    clearLiveGpsState("— (REC off)");
+
+    const recorder = mediaRecorder;
+    if (!recorder || (recorder.state === "inactive" && recorderStopObserved)) {
       recording = false;
-      recBtn.classList.remove("on");
-      recBadge.classList.remove("on");
-      dot.classList.remove("rec");
+      const state = lastRecordingFinalization.complete === false && lastRecordingFinalization.reason !== "recording-active"
+        ? "incomplete"
+        : recChunks.length ? "ready" : "off";
+      setRecordingUi(state);
+      return Promise.resolve(lastRecordingFinalization);
+    }
+
+    recording = true;
+    setRecordingUi("finalizing");
+    log(`Finalizing REC (${reason}) — waiting for final chunk`);
+
+    let resolvePending;
+    let settled = false;
+    let timeoutId = null;
+    const pending = new Promise((resolve) => {
+      resolvePending = resolve;
     });
+    recordingFinalizePromise = pending;
+
+    const cleanup = () => {
+      recorder.removeEventListener("stop", finish);
+      recorder.removeEventListener("error", onError);
+      if (timeoutId !== null) clearTimeout(timeoutId);
+    };
+    const settle = (complete, finalReason, error = null) => {
+      if (settled) return;
+      settled = true;
+      recorderStopObserved = true;
+      cleanup();
+      if (!complete && recorder.state !== "inactive") {
+        try { recorder.stop(); } catch (_) {}
+      }
+      // If a failed recorder ignores stop(), end its source tracks before any
+      // privacy control can release the recorder reference.
+      if (!complete && recorder.state !== "inactive" && stream) {
+        stream.getTracks().forEach((track) => track.stop());
+        stream = null;
+        running = false;
+        paused = false;
+      }
+      recording = false;
+      lastRecordingFinalization = {
+        complete,
+        reason: finalReason,
+        chunks: recChunks.length,
+        error: error ? String(error) : null,
+      };
+      if (recordingFinalizePromise === pending) recordingFinalizePromise = null;
+      setRecordingUi(complete ? (recChunks.length ? "ready" : "off") : "incomplete");
+      if (!complete) {
+        log(`REC INCOMPLETE (${finalReason}) — final media was not confirmed; partial chunks only`);
+      }
+      resolvePending(lastRecordingFinalization);
+    };
+    const finish = () => settle(true, reason);
+    const onError = (event) => settle(false, "recorder-error", event && (event.error || event.message || event));
+
+    recorder.addEventListener("stop", finish);
+    recorder.addEventListener("error", onError);
+    timeoutId = setTimeout(() => settle(false, "finalization-timeout"), REC_FINALIZE_TIMEOUT_MS);
+    if (recorder.state === "inactive") {
+      // stop() already ran and its dataavailable/stop events are queued.
+      return pending;
+    }
+    try { recorder.requestData(); } catch (_) {}
+    try {
+      recorder.stop();
+    } catch (error) {
+      if (recorder.state !== "inactive") settle(false, "stop-error", error);
+    }
+    return pending;
   }
 
   function stopGpsWatch() {
@@ -571,65 +1130,201 @@
   }
 
   function startGpsIfConsented() {
-    const consent = document.getElementById("recConsent");
-    if (!consent || !consent.checked) {
+    const collectionAllowed = (
+      hasRecordingConsent()
+      && running
+      && !paused
+      && recording
+      && mediaRecorder
+      && mediaRecorder.state === "recording"
+    );
+    if (!collectionAllowed) {
       stopGpsWatch();
-      gpsPtsEl.textContent = "0 (consent off)";
-      gpsEl.textContent = "— (consent off)";
+      clearLiveGpsState(hasRecordingConsent() ? "— (REC/GPS off)" : "— (consent off)");
       return;
     }
     if (!("geolocation" in navigator) || watchId != null) return;
     watchId = navigator.geolocation.watchPosition(
       (p) => {
-        gps.lat = p.coords.latitude;
-        gps.lon = p.coords.longitude;
+        if (
+          !running
+          || paused
+          || !recording
+          || !hasRecordingConsent()
+          || !mediaRecorder
+          || mediaRecorder.state !== "recording"
+        ) return;
+        gps = { lat: p.coords.latitude, lon: p.coords.longitude };
         gpsEl.textContent = `${gps.lat.toFixed(5)},${gps.lon.toFixed(5)}`;
-        if (running && document.getElementById("recConsent")?.checked) {
-          gpsTrail.push({
-            t: Date.now(),
-            lat: gps.lat,
-            lon: gps.lon,
-            acc: p.coords.accuracy,
-            heading: p.coords.heading,
-            speed: p.coords.speed,
-          });
-          gpsPtsEl.textContent = String(gpsTrail.length);
-        }
+        gpsTrail.push({
+          t: Date.now(),
+          lat: gps.lat,
+          lon: gps.lon,
+          acc: p.coords.accuracy,
+          heading: p.coords.heading,
+          speed: p.coords.speed,
+        });
+        gpsPtsEl.textContent = String(gpsTrail.length);
       },
       (err) => log("GPS " + err.message),
       { enableHighAccuracy: true, maximumAge: 1000 }
     );
   }
 
-  // Consent revocation stops capture, GPS trail, and GPS watch
-  const recConsentEl = document.getElementById("recConsent");
-  if (recConsentEl) {
-    recConsentEl.addEventListener("change", () => {
-      if (!recConsentEl.checked) {
-        stopGpsWatch();
-        gpsTrail = [];
-        gpsPtsEl.textContent = "0 (consent off)";
-        gpsEl.textContent = "— (consent off)";
-        if (recording || (mediaRecorder && mediaRecorder.state !== "inactive")) {
-          finalizeRecording().then(() => {
-            log("REC stopped — consent revoked; GPS trail cleared");
-            speak("Recording stopped. Consent off.");
-          });
-        } else {
-          log("Consent off — GPS trail cleared, no watch");
-        }
-      } else if (running) {
-        startGpsIfConsented();
-        log("Consent on — GPS trail enabled while walking");
+  async function applyConsentChange(consented) {
+    if (!consented) {
+      // Stop location collection and remove live/persisted precise coordinates
+      // before waiting for the recorder's final asynchronous events.
+      stopGpsWatch();
+      gpsTrail = [];
+      gpsPtsEl.textContent = "0 (consent off)";
+      clearLiveGpsState("— (consent off)");
+      const scrub = redactAllRetainedGps();
+      const finalization = await finalizeRecording("consent revoked");
+      if (!scrub.safe || scrub.iterationFailed) {
+        localLogEnabled = false;
+        const message = "PRIVACY WARNING — unable to confirm every retained session log was scrubbed. New local retention, recording, and location collection are off; clear this site's browser data now.";
+        setPrivacyStatus(message, true);
+        log(message);
+        speak("Privacy warning. Clear this site's browser data now.");
+      } else if (scrub.failures.length) {
+        localLogEnabled = false;
+        const message = `Privacy warning — ${scrub.removedKeys} retained log(s) could not be rewritten and were removed fail-closed.`;
+        setPrivacyStatus(message, true);
+        log(message);
+        speak("Consent off. Location cleared. A retained log was removed for privacy.");
+      } else {
+        const message = `Consent off — GPS cleared across ${scrub.rewrittenKeys} retained log(s); ${scrub.redactedEntries} entries redacted.`;
+        setPrivacyStatus(message, false);
+        log(message);
+        speak("Recording stopped. Consent off. Location cleared.");
       }
+      if (!finalization.complete) {
+        const message = `REC incomplete (${finalization.reason}); privacy cleanup completed but final media is partial.`;
+        log(message);
+      }
+      return { scrub, finalization };
+    }
+    if (running && hasRecordingConsent()) {
+      log("Consent on — precise GPS remains off until REC is actively recording");
+    }
+    return { consented: true };
+  }
+
+  async function clearRetainedSessionData() {
+    // Clear is also a privacy stop: no new local log, GPS, or recording can
+    // continue after the user requests deletion in this page lifetime.
+    recConsentEl.checked = false;
+    localLogEnabled = false;
+    stopGpsWatch();
+    gpsTrail = [];
+    gpsPtsEl.textContent = "0 (cleared)";
+    clearLiveGpsState("— (cleared)");
+    const cleared = clearAllRetainedVlmData();
+    const recorderToClear = mediaRecorder;
+    const finalization = await finalizeRecording("retained data cleared");
+    if (recorderToClear) {
+      recorderToClear.ondataavailable = null;
+      recorderToClear.onerror = null;
+      recorderToClear.onstop = null;
+    }
+    recChunks = [];
+    mediaRecorder = null;
+    recording = false;
+    recorderStopObserved = true;
+    chunkEl.textContent = "0";
+    setRecordingUi("off");
+    if (cleared.safe && !cleared.failures.length) {
+      const message = `Retained session data cleared (${cleared.removedKeys} local log(s)); recording and location collection are off.`;
+      setPrivacyStatus(message, false);
+      log(message);
+      speak("Retained session data cleared. Recording and location are off.");
+    } else {
+      const message = "PRIVACY WARNING — browser storage did not confirm complete deletion. New local retention, recording, and location are off; clear this site's browser data now.";
+      setPrivacyStatus(message, true);
+      log(message);
+      speak("Privacy warning. Clear this site's browser data now.");
+    }
+    if (!finalization.complete) log(`REC incomplete (${finalization.reason}); final media is partial.`);
+    return { cleared, finalization };
+  }
+
+  function queueConsentChange(consented) {
+    const next = consentTransitionPromise
+      .catch(() => {})
+      .then(() => applyConsentChange(consented));
+    consentTransitionPromise = next;
+    return next;
+  }
+
+  // Consent changes are serialized so a rapid off/on cannot bypass revocation cleanup.
+  if (recConsentEl) {
+    recConsentEl.addEventListener("change", () => queueConsentChange(recConsentEl.checked).catch((e) => log(String(e))));
+  }
+  if (clearDataBtn) {
+    clearDataBtn.addEventListener("click", () => clearRetainedSessionData().catch((error) => {
+      const message = "PRIVACY WARNING — retained data clear failed; clear this site's browser data now.";
+      setPrivacyStatus(message, true);
+      log(message + " " + String(error));
+    }));
+  }
+  if (stopBtn) stopBtn.addEventListener("click", () => stopSession().catch((e) => log(String(e))));
+
+  if (window.__EYEWALKER_TEST__) {
+    window.__eyeWalkerTest = Object.freeze({
+      start,
+      pauseOrStop,
+      startRecording,
+      toggleRecording,
+      finalizeRecording,
+      stopSession,
+      saveBundle,
+      tick,
+      planAvoid,
+      hybridInfer,
+      announceCue,
+      riskBadgeClass,
+      clearRetainedSessionData,
+      setConsent(consented) {
+        recConsentEl.checked = consented;
+        return queueConsentChange(consented);
+      },
+      getRecorder: () => mediaRecorder,
+      getVlmLog: (key) => readVlmLog(key),
+      getAnnouncementState: () => ({
+        count: cueAnnouncementCount,
+        lastAt: lastCueAnnouncementAt,
+        last: lastCueAnnouncement,
+        minMs: CUE_ANNOUNCEMENT_MIN_MS,
+      }),
+      getConstants: () => ({
+        cueAnnouncementMinMs: CUE_ANNOUNCEMENT_MIN_MS,
+        recorderFinalizeTimeoutMs: REC_FINALIZE_TIMEOUT_MS,
+        downloadUrlRevokeDelayMs: DOWNLOAD_URL_REVOKE_DELAY_MS,
+      }),
+      getState: () => ({
+        running,
+        paused,
+        recording,
+        recorderState: mediaRecorder ? mediaRecorder.state : "none",
+        hasStream: !!stream,
+        finalizing: !!recordingFinalizePromise,
+        recUiState,
+        chunks: recChunks.length,
+        gps: gps ? { ...gps } : null,
+        gpsTrail: gpsTrail.map((point) => ({ ...point })),
+        watchId,
+        localLogEnabled,
+        lastRecordingFinalization: { ...lastRecordingFinalization },
+      }),
     });
   }
-  if (stopBtn) stopBtn.addEventListener("click", () => stopSession());
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./service-worker.js").catch(() => {});
   }
-  log("v1.1.8 ready — SIM cues default; REC+GPS require consent; pause resumes");
+  setRecordingUi("off");
+  log("v1.1.9 ready — SIM cues default; REC+GPS require consent; final chunks awaited");
 })();
 </script>
 </body>

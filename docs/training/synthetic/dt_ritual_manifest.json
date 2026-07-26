@@ -1,5 +1,7 @@
 {
-  "version": "v1.1.0",
+  "generator_id": "eyewalker.synthetic.rebuild.v1",
+  "software_version": "1.1.9",
+  "dataset_schema_version": "1.1.0",
   "n_rows": 312,
   "n_frames": 26,
   "conditions": [
@@ -12,6 +14,130 @@
   "synthetic_only": true,
   "research_prototype": true,
   "not_medical_device": true,
-  "path_policy": "repo-relative only",
-  "left_right_convention": "step away from obstacle bearing (neg=left obstacle\u2192step right)"
+  "path_policy": "resolved repo-relative existing sources only",
+  "source_fixture_contract": {
+    "generator_id": "eyewalker.synthetic.frames.v1",
+    "count": 26,
+    "media_type": "image/png",
+    "width": 640,
+    "height": 480,
+    "metadata_free": true,
+    "png_chunks": [
+      "IHDR",
+      "PLTE",
+      "IDAT",
+      "IEND"
+    ],
+    "ownership": "exact deterministic generator pixels and PNG structure",
+    "watermark": "SIMULATED RESEARCH FIXTURE \u2014 NOT A DETECTION"
+  },
+  "source_frames": [
+    {
+      "path": "docs/training/frames/fixture_0001.png",
+      "sha256": "0ed5eb66d5d7cff8c44015ae4f31c92221ac9c373cc51f1a4f2100d283656227"
+    },
+    {
+      "path": "docs/training/frames/fixture_0002.png",
+      "sha256": "7effbd0e7192592e4e9b2c2ec8a7a9b68127215c08d636fe1950082428a13e40"
+    },
+    {
+      "path": "docs/training/frames/fixture_0003.png",
+      "sha256": "ac8304eb6ec90f6b45105f8052f38dff3c792e996e4d416491d330291a3aa19f"
+    },
+    {
+      "path": "docs/training/frames/fixture_0004.png",
+      "sha256": "1c64ac2174f372d34006e456d8bbecf4517d949798254a33bcbc5b0ca1bdf983"
+    },
+    {
+      "path": "docs/training/frames/fixture_0005.png",
+      "sha256": "4fe9abb4a9e0da88168155cf31b650225415dbb6be90914ad749e3d36d2ec320"
+    },
+    {
+      "path": "docs/training/frames/fixture_0006.png",
+      "sha256": "56f611e62df2d71eae53d22aaf524db4f9c0240af8ec315321a6ddb25f292992"
+    },
+    {
+      "path": "docs/training/frames/fixture_0007.png",
+      "sha256": "02cd4caca51107d4d8b4af94a26156157399bb19d446f9255e57c3328b70509c"
+    },
+    {
+      "path": "docs/training/frames/fixture_0008.png",
+      "sha256": "d9066e128130ad3c78cb3741ddfcd01891050d42a49e98c44061359f900bf85b"
+    },
+    {
+      "path": "docs/training/frames/fixture_0009.png",
+      "sha256": "a5ef2eac2ae7d2ad50adf10075c9e2bb1a49951e1150701ce05df4170e9fb5e1"
+    },
+    {
+      "path": "docs/training/frames/fixture_0010.png",
+      "sha256": "d2a905e8a7e1d4233401c28b17c4d6ceb8b647d81ea6e04fc2b797355d831e99"
+    },
+    {
+      "path": "docs/training/frames/fixture_0011.png",
+      "sha256": "61caf5448c9d96add08335c438ea5920d889ba1b614d36451379d0dbb84b0304"
+    },
+    {
+      "path": "docs/training/frames/fixture_0012.png",
+      "sha256": "62418c0ae464a33d678b01d30d2ce5ea1e32bbd9e4a5523955e21d5d7f604e62"
+    },
+    {
+      "path": "docs/training/frames/fixture_0013.png",
+      "sha256": "a31718da3b717e6b517cd44e780805508fe8ad9cc0bb74e5fb55643b10216e51"
+    },
+    {
+      "path": "docs/training/frames/fixture_0014.png",
+      "sha256": "426db7333708130b4a0896868d853773b0840a93e5635ca4ca0f085a52ad4236"
+    },
+    {
+      "path": "docs/training/frames/fixture_0015.png",
+      "sha256": "1f25eeaf6517035e16017ea5b7fba4ac442f7b20fb7a81aff8dd49712821585d"
+    },
+    {
+      "path": "docs/training/frames/fixture_0016.png",
+      "sha256": "fb4334807c2b757ced6278c41320070c4516b304309115aaeace89de120a1e66"
+    },
+    {
+      "path": "docs/training/frames/fixture_0017.png",
+      "sha256": "04fab7b4dc69c6b3373869e1e38c57461154975e4c375b5c77a18b004d5b8da4"
+    },
+    {
+      "path": "docs/training/frames/fixture_0018.png",
+      "sha256": "b52ce35a8b34bc49519e12d735aa9f1fb0bfd86bcd49c42ef5e81bbc2e1b8c6e"
+    },
+    {
+      "path": "docs/training/frames/fixture_0019.png",
+      "sha256": "3492cf0d818b991be6fa6cb088bb28c3f52bcede3eec6330a4becf5f82c1345f"
+    },
+    {
+      "path": "docs/training/frames/fixture_0020.png",
+      "sha256": "a834fa2a10e4f75d6eb508e9ed1e53258d27e266fb2a0108e1b240b94411b8de"
+    },
+    {
+      "path": "docs/training/frames/fixture_0021.png",
+      "sha256": "0597dd77718c9cb59291fec8d1d4c47c092147f78a90b7f6cc13b342a48a5e2b"
+    },
+    {
+      "path": "docs/training/frames/fixture_0022.png",
+      "sha256": "ab3273966ed221c514fb37b7f8b2ee06bd8410eef0c0d1b199eabb6a5c4e9731"
+    },
+    {
+      "path": "docs/training/frames/fixture_0023.png",
+      "sha256": "d4b44d769f62f014dc39263d2dc26947a9a33d81499b02fa0c6232dac2b0527b"
+    },
+    {
+      "path": "docs/training/frames/fixture_0024.png",
+      "sha256": "ea0c2e5504ffcf8890e748a6143a166b6446915f26d9fe1d7318cadac2afd22f"
+    },
+    {
+      "path": "docs/training/frames/fixture_0025.png",
+      "sha256": "d8a319f9d277d8d30a8a02d4d7338b7cc58ffdc7f47d6ecca12c0d0346f22194"
+    },
+    {
+      "path": "docs/training/frames/fixture_0026.png",
+      "sha256": "963084e3e09e8602a20ed69d3f136a6d1f9595a508d2f8099f9071375eb3336f"
+    }
+  ],
+  "aggregate_sha256": "113c78978d4cbeccb52b96389a37c647a21a1fc4c874fb7e2f38cf443194e6d2",
+  "safety_cue_contract": "SIMULATED RESEARCH CUE: ... Keep your cane or guide dog. Not a medical device.",
+  "left_right_convention": "bearing < -8 degrees: step right; bearing > +8 degrees: step left; bearing in [-8, +8] degrees: HOLD and stop-and-verify"
 }

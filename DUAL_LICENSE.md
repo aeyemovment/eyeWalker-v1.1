@@ -1,78 +1,79 @@
-# eyeWalker v1.0 — Dual License for Meta Submission
+# eyeWalker v1.1.9 — license scope
 
-**From NeuroAgent AI — for rare neurologic diseases affecting vision and all other neurologic and ophthalmologic causes**
+This document is authoritative for assigning repository paths to a license.
+`LICENSE` and `LICENSE-MIT` are authoritative for the terms of their respective
+licenses. This path assignment is not legal advice and makes no claim about any
+platform submission or distribution requirement.
 
-## Summary
+## Fail-closed path scope
 
-| Layer | License | What it allows | For Meta |
-|-------|---------|----------------|----------|
-| **Core `eyewalker/` + root + docs** | PolyForm Noncommercial 1.0.0 | Personal, research, education, non-profit, accessibility use ✅ / Selling, SaaS for money ❌ (needs commercial license) | Protects mission, prevents commercialization without consent |
-| **Mobile wrapper + PWA `mobile/`, `docs/pwa.html`, `docs/index.html`** | MIT | Anyone can use, modify, distribute, including Meta platforms | Enables Meta open-source portal distribution, Quest/Ray-Ban store, Llama Stack tool |
+Every repository path is covered by PolyForm Noncommercial 1.0.0 unless it is
+explicitly included in the MIT allowlist below. A missing, renamed, generated,
+or newly added path does not inherit the MIT license by proximity.
 
-See `LICENSE` (PolyForm) and `LICENSE-MIT` (if present) for full texts. If `LICENSE-MIT` missing, MIT text below applies to `mobile/` and PWA.
+The complete currently implemented mobile wrapper and static PWA shell use the
+MIT license in `LICENSE-MIT` only for these exact files:
 
-## PolyForm Noncommercial 1.0.0 — Core
+- `LICENSE-MIT`
+- `DUAL_LICENSE.md`
+- `mobile/App.tsx`
+- `mobile/README.md`
+- `mobile/app.json`
+- `mobile/package.json`
+- `mobile/LICENSE-MIT.txt`
+- `mobile/src/components/CameraView.tsx`
+- `mobile/src/components/MapView.tsx`
+- `mobile/src/components/ObstacleHUD.tsx`
+- `mobile/src/hooks/useLocation.ts`
+- `mobile/src/hooks/useObstacleDetection.ts`
+- `mobile/src/safety.ts`
+- `mobile/src/utils/avoidance.ts`
+- `docs/index.html`
+- `docs/pwa.html`
+- `docs/service-worker.js`
+- `docs/manifest.json`
+- `docs/LICENSE-MIT.txt`
+- `docs/icons/icon-192.png`
+- `docs/icons/icon-512.png`
+- `docs/icons/apple-touch-icon.png`
 
-- **File:** `LICENSE`
-- **Applies to:** `eyewalker/`, `examples/`, `scripts/`, `docs/*.md` (except PWA), root `README.md`, `ARCHITECTURE.md`, `SAFETY.md`
-- **Allowed:** Personal use, research, education, non-profits, hobby, accessibility testing, modifying, forking, sharing (keep LICENSE + notices)
-- **Not allowed without commercial license:** Selling eyeWalker or derivatives, SaaS/hosted service for money, using in a commercial product
-- **Commercial license:** Open an issue with `commercial-license` tag → `info@neuroagent.ai` / `kemar@neuroagent.ai`
+All other paths, including other or newly added files under `mobile/`,
+`eyewalker/**`, `examples/**`, `scripts/**`,
+`hf-space-final/**`, `meta_submission/**`, `docs/training/**`, other
+documentation, and `docs/neuroagent_eye_logo.png`, remain in the default
+PolyForm scope.
 
-## MIT — Mobile & PWA (Meta distribution)
+PolyForm Noncommercial is not an OSI-approved open-source license. Public
+source availability must not be described as making every repository path
+OSI-open-source.
 
-Applies to `mobile/*` and `docs/pwa.html`, `mobile/src/*`, and any `*_pwa.html` / `index.html` for GitHub Pages.
+## Canonical license files and marks
 
-```
-MIT License
+- `LICENSE` — PolyForm Noncommercial 1.0.0 for the default scope.
+- `LICENSE-MIT` — MIT terms for only the exact allowlisted paths above. The
+  identical `docs/LICENSE-MIT.txt` and `mobile/LICENSE-MIT.txt` copies keep
+  that notice with the two distributable surfaces.
 
-Copyright (c) 2026 NeuroAgent AI — eyeWalker v1.0
+Neither license grants trademark rights in the NeuroAgent AI or eyeWalker
+names, logos, or other source-identifying marks. This trademark reservation
+does not remove the copyright permissions granted for the allowlisted files.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+If this path assignment and a canonical license term appear to conflict,
+obtain legal review before distribution rather than inferring rights.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## Safety is independent of license
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+Licensing does not validate the software for mobility, medical, clinical,
+diagnostic, production, or regulatory use.
 
-## Why Dual?
-
-Meta open-source portal requires permissive license for mobile distribution. But core VLM obstacle avoidance represents years of harbor walk R&D and lived experience of NMOSD, MOGAD, LHON, IIH, CVI, etc. — we protect it from pure commercial capture while keeping accessibility open.
-
-- **For Meta reviewers:** Mobile PWA is MIT — you can distribute on Quest, Ray-Ban, Instagram accessibility tools.
-- **For community:** Core stays open for 2.2B WHO burden, noncommercial.
-- **For commercial partners:** Contact for separate license — we want to fund accessibility, not extraction.
-
-## Safety — Critical (applies to both licenses)
-
-⚠️ **This is assistive, not replacement for cane/guide dog. Always keep traditional mobility aid. This is alpha. It is a research prototype for users and developers to improve upon.**
-
-- Always use cane, guide dog, or trusted human guide alongside eyeWalker
-- Expect errors, false positives, missed obstacles
-- Test in safe, familiar areas first (Baltimore Harbor 3.66mi loop) before new areas
-- Report missed obstacles → GitHub Issues → we iterate
+- Current movement outputs are simulated research cues, not live detections.
+- Keep your cane or guide dog. Not a medical device.
+- Do not use the current demo as a navigation or mobility aid.
+- Expect synthetic records, false positives, false negatives, and incomplete
+  interfaces.
 
 ## Attribution
 
-Built in Baltimore (Fells Point, Frederick Douglass-Isaac Myers Maritime Park, Harbor Point, 3.66mi) — for the world. For rare neuro diseases: NMOSD, MOGAD, LHON, OPA1, Wolfram, IIH, CVI, PCA — and all glaucoma, diabetic retinopathy, AMD, RP, hemianopia, TBI.
+Copyright (c) 2026 NeuroAgent AI / Kemar Green.
 
-WHO: 2.2B with vision impairment, 1B preventable, 2/3 in low-income without glasses, $411B productivity loss.
-
-- GitHub: https://github.com/aeyemovment/eyeWalker
-- PWA: https://aeyemovment.github.io/eyeWalker/
-- HF Space: https://huggingface.co/spaces/NeuroAgentAI/eyeWalker-v1
-- WHO: https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment
-
-**Built by NeuroAgent AI — from patients, for patients.**
+Repository: https://github.com/aeyemovment/eyeWalker-v1.1

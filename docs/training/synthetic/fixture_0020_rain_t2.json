@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0020.png",
+  "source_sha256": "a834fa2a10e4f75d6eb508e9ed1e53258d27e266fb2a0108e1b240b94411b8de",
+  "condition": "rain",
+  "twin_id": 2,
+  "modulators": {
+    "lighting": "rain",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "crack",
+      "distance_m": 0.75,
+      "bearing_deg": -4.9,
+      "urgency": "MEDIUM",
+      "source": "dt_rain_t2",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: CRACK 0.75m ahead (bearing -4.9\u00b0), centered or ambiguous bearing; HOLD and stop and verify. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "a834fa2a10e4f75d6eb508e9ed1e53258d27e266fb2a0108e1b240b94411b8de"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

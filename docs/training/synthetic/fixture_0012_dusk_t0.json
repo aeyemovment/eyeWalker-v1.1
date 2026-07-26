@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0012.png",
+  "source_sha256": "62418c0ae464a33d678b01d30d2ce5ea1e32bbd9e4a5523955e21d5d7f604e62",
+  "condition": "dusk",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "dusk",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "pier_edge",
+      "distance_m": 2.96,
+      "bearing_deg": 12.4,
+      "urgency": "HIGH",
+      "source": "dt_dusk_t0",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: PIER EDGE 2.96m ahead (bearing +12.4\u00b0), step left. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "62418c0ae464a33d678b01d30d2ce5ea1e32bbd9e4a5523955e21d5d7f604e62"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

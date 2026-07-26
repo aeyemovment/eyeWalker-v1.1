@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0023.png",
+  "source_sha256": "d4b44d769f62f014dc39263d2dc26947a9a33d81499b02fa0c6232dac2b0527b",
+  "condition": "dusk",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "dusk",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "bike",
+      "distance_m": 2.19,
+      "bearing_deg": -14.1,
+      "urgency": "MEDIUM",
+      "source": "dt_dusk_t0",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: BIKE 2.19m ahead (bearing -14.1\u00b0), step right. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "d4b44d769f62f014dc39263d2dc26947a9a33d81499b02fa0c6232dac2b0527b"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0008.png",
+  "source_sha256": "d9066e128130ad3c78cb3741ddfcd01891050d42a49e98c44061359f900bf85b",
+  "condition": "night",
+  "twin_id": 1,
+  "modulators": {
+    "lighting": "night",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "manhole",
+      "distance_m": 1.17,
+      "bearing_deg": -20.8,
+      "urgency": "HIGH",
+      "source": "dt_night_t1",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: MANHOLE 1.17m ahead (bearing -20.8\u00b0), step right. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "d9066e128130ad3c78cb3741ddfcd01891050d42a49e98c44061359f900bf85b"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

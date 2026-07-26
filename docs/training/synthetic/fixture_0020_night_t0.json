@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0020.png",
+  "source_sha256": "a834fa2a10e4f75d6eb508e9ed1e53258d27e266fb2a0108e1b240b94411b8de",
+  "condition": "night",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "night",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "bench",
+      "distance_m": 0.79,
+      "bearing_deg": -28.6,
+      "urgency": "LOW",
+      "source": "dt_night_t0",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: BENCH 0.79m ahead (bearing -28.6\u00b0), step right. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "a834fa2a10e4f75d6eb508e9ed1e53258d27e266fb2a0108e1b240b94411b8de"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

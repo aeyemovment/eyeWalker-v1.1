@@ -1,276 +1,69 @@
-# Meta Submission Checklist — eyeWalker v1.0
+# Meta / Hugging Face evaluation checklist — eyeWalker v1.1.9
 
-**Updated:** 2026-07-25T11:18Z · **Pages LIVE** · 2026-07-25T04:29Z  
-**Repo target:** https://github.com/aeyemovment/eyeWalker  
-**Version:** v1.0.0 (no egi-baby tags)
+**Artifact status:** draft-only packaging for a simulated accessibility research interface.
+**Repository:** https://github.com/aeyemovment/eyeWalker-v1.1
+**Safety:** not for navigation; not a medical device; keep a cane or guide dog.
 
+This file does not authorize or prove an email, portal submission, pull request, deployment, publication, approval, or merge. The current executable Gradio and mobile surfaces generate deterministic mock records; they do not execute a live image model, depth pipeline, map-fusion pipeline, or spatial-audio renderer.
 
-**Agentic Meta path (2026-07-25):** OGX PR #6346 opened; provider repo live; opensource.fb.com not agentically submittable.
+## Historical external handles — verify before reuse
 
-**Goal:** Post eyeWalker on Meta's open-source platforms. Three entry points: HF Space, Llama Stack tool PR, opensource.fb.com Accessibility.
+Records dated 2026-07-25 referenced these external surfaces:
 
----
+- OGX documentation PR ogx-ai/ogx#6346.
+- Provider repository aeyemovment/ogx-provider-eyewalker.
+- Hugging Face Space NeuroAgentAI/eyeWalker, described as a static/free-tier surface.
+- An older Pages path under aeyemovment.github.io/eyeWalker/.
 
-## Local prep status (Grok finish pass 2026-07-25)
+Those are routing handles, not current-state proof in this v1.1.9 code review. Confirm the live revision, displayed claims, and provider behavior independently before citing them. Do not infer that Meta accepted or featured the project.
 
-- [x] v1.0 versioning (`pyproject.toml` 1.0.0, badges v1.0)
-- [x] egi-baby tags removed from public copy
-- [x] Dual license: `LICENSE` (PolyForm) + `LICENSE-MIT` (mobile/PWA)
-- [x] Safety wording + research prototype / not medical device
-- [x] NeuroAgent AI origin: rare neuro diseases affecting vision + all neuro/ophtho causes
-- [x] Demo GIF + logo + GitHub banner in `docs/`
-- [x] GitHub Pages workflow `.github/workflows/deploy-pwa.yml`
-- [x] Meta pack in `meta_submission/` (app.py, README_HF.md, llama_stack_tool.json, requirements.txt)
-- [x] Junk Meta-AI duplicate files cleaned (`*_1.py`, README_2..5, etc.)
-- [x] GitHub remote `aeyemovment/eyeWalker` created + pushed
-- [x] GitHub Pages enabled (legacy /docs → https://aeyemovment.github.io/eyeWalker/)
-- [x] HF Space live (static free tier): https://huggingface.co/spaces/NeuroAgentAI/eyeWalker · https://neuroagentai-eyewalker.static.hf.space/ · Gradio source under Space meta_submission/ (runtime needs HF PRO)
-- [x] OGX/Llama Stack external provider shipped + PR: https://github.com/ogx-ai/ogx/pull/6346 (provider: https://github.com/aeyemovment/ogx-provider-eyewalker). Note: meta-llama/llama-stack redirects to ogx-ai/ogx.
-- [x] Meta Open Source outreach executed: email opensource@fb.com + public packet issue #1 + OGX PR #6346 + provider repo (opensource.fb.com has no third-party list form). See META_OSS_OUTREACH_EXECUTED.md.
+## Current local artifact checks
 
----
+- [ ] Release candidate has one immutable commit SHA and VERSION, package metadata, PWA payload, service-worker cache, and generated manifests all equal 1.1.9.
+- [ ] hf-space-final/app.py and meta_submission/app.py visibly say SIMULATED RESEARCH DEMO and not for navigation.
+- [ ] Mock JSON says simulated: true, names deterministic_mock_no_model_executed, and lists no executed models.
+- [ ] Every simulated movement cue starts SIMULATED RESEARCH CUE: and ends Keep your cane or guide dog. Not a medical device.
+- [ ] meta_submission/llama_stack_tool.json validates as JSON and describes only the implemented mock contract.
+- [ ] NemoClaw YAML remains an unloaded, unvalidated, unenforced policy sketch; Omniverse remains disabled/unavailable.
+- [ ] Public-tree, privacy, synthetic-provenance, PWA-lifecycle, and left/right tests pass at the same SHA.
 
-## ✅ Pre-Submission (local files)
- (You, Local)
+## Human-gated external evaluation
 
-- [x] eyeWalker v1.0 pushed to `github.com/aeyemovment/eyeWalker`
-- [x] Dual license in place: `LICENSE` (PolyForm Noncommercial) + `LICENSE-MIT` (mobile)
-- [x] `DUAL_LICENSE.md` explains why
-- [x] Safety wording exact everywhere: "This is assistive, not replacement for cane/guide dog. Always keep traditional mobility aid. This is alpha. It is a research prototype for users and developers to improve upon."
-- [x] Demo GIF in `docs/demo.gif` (Baltimore Harbor 3.66mi)
-- [x] NeuroAgent logo in `docs/neuroagent_eye_logo.png`
-- [x] `README.md` includes WHO burden (2.2B), origin (harbor walks), from NeuroAgent AI
-- [x] `SAFETY.md` exists
-- [x] `docs/ARCHITECTURE.md` documented
-- [x] GitHub Pages workflow deploying PWA to `https://aeyemovment.github.io/eyeWalker/`
-- [x] NemoClaw harness documented in `docs/` and safety
+Before any future submission or update, a human operator must:
 
----
+1. Review the exact immutable release revision and its licenses.
+2. Verify the current contribution route and schema in official platform documentation.
+3. Use claim-bounded copy: deterministic simulated interface now; perception, depth, VIO, map fusion, wearable integration, and audio rendering are proposed research components.
+4. Test the public artifact after deployment and record the URL plus immutable revision or content digest.
+5. Record any actual request, PR, email, or portal confirmation ID. A draft filename or local checklist is not a receipt.
 
-## 🚀 Submission Path 1: Hugging Face Space
+## Safe draft description
 
-**Timeline**: ~10 min setup, live immediately
+> eyeWalker v1.1.9 is a public-source simulated accessibility-interface research project. Its current public demo produces deterministic, clearly labeled simulated obstacle records and locally derived cue text for stationary or controlled interface evaluation. It does not analyze image pixels with a live model and must not be used for navigation. Proposed future work may evaluate validated perception and accessible presentation components. It is not a medical device and is not a replacement for a cane, guide dog, orientation-and-mobility training, or a trusted human guide.
 
-### Step 1: Create HF Space
-```bash
-# Go to huggingface.co → New Space
-# Fill:
-Name: eyeWalker
-Visibility: Public
-License: OpenRAIL-M (covers dual license mention)
-SDK: Gradio
-```
+## Prohibited current claims
 
-### Step 2: Upload Files
-From `meta_submission/`:
-```bash
-# Copy to HF Space repo:
-1. README.md ← copy from meta_submission/README_HF.md
-2. app.py ← copy from meta_submission/app.py
-3. docs/demo.gif ← upload demo gif
-4. requirements.txt ← create with gradio, pillow, numpy
-```
+Do not describe the present artifact as:
 
-### Step 3: requirements.txt
-```
-gradio>=4.0.0
-pillow>=10.0.0
-numpy>=1.24.0
-```
+- real-time obstacle detection or safe-path navigation;
+- a working Muse Spark, Qwen, SAM, Depth Anything, VIO, OSM, Esri, Ray-Ban, or phone-sensor pipeline;
+- measured at a stated latency, accuracy, reaction window, or geographic scale;
+- producing binaural/spatial audio;
+- secured by NemoClaw or guaranteed to prevent data egress;
+- submitted, accepted, merged, deployed, live, approved, or featured without a current external receipt.
 
-### Step 4: Verify Live
-- Visit `huggingface.co/spaces/aeyemovment/eyeWalker`
-- Click "Run" → upload demo frame → see HUD + guidance
-- Share button on HF space
+## Licensing and safety review
 
----
+- Core scope: PolyForm Noncommercial 1.0.0; confirm the exact covered paths in DUAL_LICENSE.md.
+- MIT applies only to the exact paths enumerated in `DUAL_LICENSE.md`.
+- PolyForm Noncommercial is not an OSI-approved open-source license; do not claim that it is.
+- Always retain the visible research-prototype, simulation, mobility-aid, and not-medical-device wording.
 
-## 🚀 Submission Path 2: Meta's Llama Stack
+## Release evidence to attach before handoff
 
-**Timeline**: PR → ~5-7 days review
-
-### Step 1: Fork `meta-llama/llama-stack`
-```bash
-# GitHub → meta-llama/llama-stack → Fork
-# Clone your fork locally
-git clone https://github.com/YOUR_GITHUB/llama-stack.git
-cd llama-stack
-```
-
-### Step 2: Add Tool Definition
-From `meta_submission/llama_stack_tool.json`, create:
-```
-llama_stack/apis/inference/tools/eyewalker/
-├── manifest.json (copy from llama_stack_tool.json)
-├── README.md (copy from meta_submission/README_HF.md)
-└── IMPLEMENTATION.md (architecture + code pointers to github.com/aeyemovment/eyeWalker)
-```
-
-### Step 3: Update Llama Stack Registry
-```bash
-# Edit: llama_stack/tools/registry.json
-# Add entry:
-{
-  "name": "eyeWalker",
-  "description": "Real-time VLM obstacle detection + spatial audio for visually impaired navigation",
-  "category": "perception.navigation",
-  "author": "NeuroAgent AI",
-  "license": "PolyForm Noncommercial + MIT",
-  "url": "https://github.com/aeyemovment/eyeWalker",
-  "tags": ["accessibility", "vision-impairment", "rare-disease", "neuro-ophthalmology"]
-}
-```
-
-### Step 4: Create PR
-```bash
-git add llama_stack/apis/inference/tools/eyewalker/
-git commit -m "feat: add eyeWalker perception tool for accessible navigation
-
-For visually impaired using Muse Spark 1.1 VLM + spatial audio.
-From NeuroAgent AI for rare neurologic diseases affecting vision.
-Safety: assistive, not replacement. Alpha research prototype.
-
-Ref: https://github.com/aeyemovment/eyeWalker
-Co-authored-by: NeuroAgent AI <info@neuroagent.ai>"
-
-git push origin add-eyewalker
-```
-
-Go to GitHub → Create PR → `meta-llama/llama-stack`
-- **Title**: `feat: add eyeWalker perception tool — accessible navigation for visually impaired`
-- **Description**:
-  ```
-  This PR adds eyeWalker, a real-time VLM-based navigation tool for people with vision impairment.
-  
-  Input: RGB + GPS + IMU from Ray-Ban or smartphone
-  Output: Obstacle detection (trash bin, bench, pier edge, people) + spatial audio guidance
-  
-  Example: "Trash bin 2.1m ahead, center. Step left half meter."
-  
-  Built by NeuroAgent AI for patients with rare neurologic diseases affecting vision (NMOSD, MOGAD, LHON, CVI) + all neurologic/ophthalmologic causes.
-  
-  ⚠️ Safety: assistive, not replacement for cane/guide dog. Alpha research prototype.
-  
-  Links:
-  - GitHub: https://github.com/aeyemovment/eyeWalker
-  - HF Space: https://huggingface.co/spaces/aeyemovment/eyeWalker
-  - One-tap PWA: https://aeyemovment.github.io/eyeWalker/
-  - WHO burden: https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment (2.2B with vision impairment)
-  
-  Dual license: PolyForm Noncommercial (core, mission protection) + MIT (mobile, Llama Stack distribution)
-  ```
-
-### Step 5: Wait for Review
-- ~1-3 days: Llama Stack maintainers respond
-- Address feedback (usually minor: docs, tags, metadata)
-- Merge → your tool appears in `meta-llama/llama-stack/tools`
-
----
-
-## 🚀 Submission Path 3: Meta Open Source Portal
-
-**Timeline**: ~2 weeks review
-
-### Step 1: Prepare Submission
-Gather:
-- `README.md` (full, with demos + WHO stats)
-- `SAFETY.md` (exact safety wording + accessibility note)
-- `LICENSE` + `LICENSE-MIT` (dual license explanation)
-- `docs/ARCHITECTURE.md` (technical deep-dive)
-- Social preview image (1280×640, harbor map + logo)
-- `docs/neuroagent_eye_logo.png`
-- `docs/demo.gif`
-
-### Step 2: Go to opensource.fb.com
-```
-1. Log in with Meta account (may need approval)
-2. Submit → Project
-3. Fill:
-   - Repository: https://github.com/aeyemovment/eyeWalker
-   - Category: Accessibility (or Healthcare/Research if available)
-   - License: Dual (PolyForm Noncommercial + MIT)
-   - Description: (use from README.md intro)
-   - Impact: "2.2B with vision impairment globally; builds on Meta Ray-Ban initiative"
-   - Safety: (exact wording from SAFETY.md)
-```
-
-### Step 3: Meta Review
-- ~1-2 weeks for first pass
-- They verify:
-  - Code quality ✅ (eyeWalker well-structured)
-  - License compatibility ✅ (PolyForm + MIT both OSI-approved)
-  - Safety & ethics ✅ (explicit disclaimers everywhere)
-  - Community readiness ✅ (docs + tests)
-
-### Step 4: Approval + Feature
-If approved:
-- Featured on `opensource.fb.com` Accessibility section
-- Shared in Meta AI newsletter
-- Potential Meta Newsroom mention (if high impact)
-
----
-
-## 📊 Summary — All 3 Paths
-
-| Path | Timeline | Audience | Effort |
-|------|----------|----------|--------|
-| **HF Space** | 10 min, live now | ML community | Low (upload 3 files) |
-| **Llama Stack** | 5-7 days | LLM/tool developers | Medium (add JSON + PR) |
-| **Meta Portal** | 1-2 weeks | Public + Meta org | Medium (form + review) |
-
-**Recommended**: Start HF + Llama Stack in parallel; Meta Portal after one of them is live.
-
----
-
-## 🎯 Talking Points for All Reviews
-
-**Why eyeWalker matters:**
-- Addresses **2.2B people with vision impairment** (WHO global burden)
-- **First real-time VLM navigation** for off-street hazards (piers, boardwalks, uneven pavements)
-- **Built by patients** with rare diseases (NMOSD, MOGAD, LHON, CVI, etc.)
-- **Dual-licensed** to protect mission (PolyForm Noncommercial core) while enabling distribution (MIT mobile)
-- **Privacy-first intent** with local-first demos; optional NemoClaw *policy sketch only* (not a tested exfiltration guarantee)
-- **Safety-centered**: explicit disclaimers everywhere, research prototype model
-
-**Why Meta alignment:**
-- Leverages **Meta Ray-Ban** as primary device (glasses as eyes)
-- Demonstrates **LLaMA / Muse Spark** real-world accessibility use case
-- **Open source foundation** for community improvements (city-specific ground truth, new VLM models, etc.)
-
----
-
-## 📝 Final Checks Before Submitting
-
-- [ ] `README.md` has NeuroAgent logo + demo GIF at top
-- [ ] `SAFETY.md` with exact wording visible + linked in README
-- [ ] `DUAL_LICENSE.md` explains why dual license is ethical
-- [ ] All code comments mention NeuroAgent AI + patients
-- [ ] GitHub social preview image uploaded (Settings → General → Social preview)
-- [x] GitHub Pages live from /docs (workflow fixed docs-first; legacy deploy active)
-- [ ] `git log` shows clean v1.0 commit history (no egi baby tags, no stray branches)
-
----
-
-## ❓ FAQ
-
-**Q: Why PolyForm Noncommercial for core?**
-A: Prevents corporate capture — keeps mission pure. Companies can license separately if they want to commercialize.
-
-**Q: Will Meta accept dual license?**
-A: Yes. Llama Stack and HF both support it. Meta prefers MIT for distribution, but PolyForm Noncommercial core is respected for mission-driven projects.
-
-**Q: What if review asks to change license?**
-A: Politely explain: PolyForm protects the mission for blind/low-vision users; MIT mobile wrapper lets Meta distribute. It's a compromise that respects both. Most reviewers understand.
-
-**Q: How long until it's discoverable?**
-A: 
-- HF Space: live immediately, visible in Collections within 24h
-- Llama Stack: ~1 week after merge (next release cycle)
-- Meta Portal: ~2 weeks, featured in newsletter if approved
-
-**Q: What if someone wants to commercialize?**
-A: Direct them to NeuroAgent AI legal (info@neuroagentai.org) to negotiate a separate commercial license.
-
----
-
-**You got this.** 🚀👓🦮
+- Exact commit SHA and clean-tree result.
+- Full test and CI-equivalent command results.
+- Public-tree scrub result.
+- Browser smoke-test result, or an explicit statement that browser runtime was unavailable.
+- Independent reviewer verdict tied to the same SHA.
+- Only after publication: remote branch/tag/release identifiers and live URL checks.

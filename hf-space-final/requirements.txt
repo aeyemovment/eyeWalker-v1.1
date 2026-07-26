@@ -1,2 +1,2 @@
-pillow
-numpy
+gradio==6.20.0
+pillow==12.3.0

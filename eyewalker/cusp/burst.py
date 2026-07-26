@@ -11,13 +11,14 @@ High |ΣΨ|² => high salience / urgency / need for foveation
 This is analog to |ΣΨ|² BURST visualization seen in CUSP prototypes: colorful radial bursts on black canvas.
 
 In eyeWalker: used to re-rank obstacle urgency when efference predicts attention shift.
-Research note: provides CUSP* burst overlay on PWA + remote situational awareness
+Research note: provides a CUSP* burst overlay for on-device accessibility visualization
 
 Bounded: psi amplitude scaled by severity_mod 0.25-3.0, never overrides HIGH safety holes
 """
 
 import math
 import numpy as np
+from numbers import Real
 from typing import List, Dict, Optional
 
 class BurstField:
@@ -30,7 +31,10 @@ class BurstField:
     def compute(self, detections: List[Dict], depth_map=None, efference: Optional[Dict]=None) -> np.ndarray:
         """
         Compute |ΣΨ|² map from detections
-        detections: [{x,y, distance_m, confidence, label}]
+        detections: [{x,y, distance_m, synthetic_visualization_score, label}]
+        ``synthetic_visualization_score`` is an explicit non-probabilistic
+        fixture weight. Missing or invalid weights are rejected; they are never
+        replaced by an invented confidence.
         Returns 2D array field + psi list
         """
         self.field = np.zeros((self.grid_size, self.grid_size), dtype=np.float32)
@@ -43,17 +47,32 @@ class BurstField:
             # map world x,y or image x,y to grid — mock if not present
             cx = int(det.get("x", self.grid_size//2)) % self.grid_size
             cy = int(det.get("y", self.grid_size//2)) % self.grid_size
-            conf = float(det.get("confidence", det.get("conf", 0.5)))
+            raw_score = det.get("synthetic_visualization_score")
+            if (
+                not isinstance(raw_score, Real)
+                or isinstance(raw_score, bool)
+                or not math.isfinite(raw_score)
+                or not 0.0 <= raw_score <= 1.0
+            ):
+                raise ValueError(
+                    "each burst fixture requires synthetic_visualization_score in [0, 1]"
+                )
+            fixture_score = float(raw_score)
             dist = float(det.get("distance_m", det.get("dist_m", 2.0)))
 
-            # psi amplitude = conf * (1/dist) * severity_mod, bounded
-            psi_amp = conf * (1.0 / max(0.5, dist)) * severity_mod
+            # Abstract fixture amplitude; not a probability or detector confidence.
+            psi_amp = fixture_score * (1.0 / max(0.5, dist)) * severity_mod
             psi_amp = max(0.0, min(3.0, psi_amp))
 
             # build radial burst kernel
             self._add_burst(cx, cy, psi_amp, radius = int(8 * psi_amp))
 
-            self.psi_amplitudes.append({"psi": psi_amp, "pos": (cx,cy), "label": det.get("label","")})
+            self.psi_amplitudes.append({
+                "psi": psi_amp,
+                "pos": (cx, cy),
+                "label": det.get("label", ""),
+                "synthetic_visualization_score": fixture_score,
+            })
 
         # |ΣΨ|² = sum |psi|² (cross terms ignored for PoC, would capture grouping)
         psi2 = np.sum(self.field ** 2)  # scalar summary, but we keep full field

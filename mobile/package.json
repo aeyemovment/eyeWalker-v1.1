@@ -1,31 +1,22 @@
-
 {
   "name": "eyewalker-mobile",
-  "version": "0.1.0",
-  "description": "eyeWalker smartphone version - world vision for the impaired",
-  "main": "App.tsx",
+  "version": "1.1.9",
+  "private": true,
+  "license": "MIT",
+  "description": "Deterministic simulated accessibility-interface research demo; no live detector or navigation capability",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "build:android": "eas build --platform android",
-    "build:ios": "eas build --platform ios"
+    "ios": "expo start --ios"
   },
   "dependencies": {
-    "expo": "~51.0.0",
-    "expo-camera": "~15.0.0",
-    "expo-location": "~17.0.0",
-    "expo-sensors": "~13.0.0",
-    "expo-speech": "~12.0.0",
-    "expo-av": "~14.0.0",
+    "expo": "~51.0.39",
     "react": "18.2.0",
-    "react-native": "0.74.0",
-    "react-native-maps": "1.14.0",
-    "react-native-svg": "15.0.0"
+    "react-native": "0.74.5"
   },
   "devDependencies": {
-    "@types/react": "~18.2.0",
-    "typescript": "~5.3.0"
+    "@types/react": "~18.2.79",
+    "typescript": "~5.3.3"
   }
 }

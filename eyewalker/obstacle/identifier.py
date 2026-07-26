@@ -14,7 +14,7 @@ class Obstacle:
     type: ObstacleType
     distance_m: float
     bearing_deg: float  # 0=center, negative=left
-    confidence: float
+    confidence: float | None
     is_moving: bool = False
     velocity_ms: float = 0.0
     risk: str = "LOW"

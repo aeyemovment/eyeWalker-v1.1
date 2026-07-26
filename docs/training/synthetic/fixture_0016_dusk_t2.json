@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0016.png",
+  "source_sha256": "fb4334807c2b757ced6278c41320070c4516b304309115aaeace89de120a1e66",
+  "condition": "dusk",
+  "twin_id": 2,
+  "modulators": {
+    "lighting": "dusk",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "bench",
+      "distance_m": 1.33,
+      "bearing_deg": -2.2,
+      "urgency": "LOW",
+      "source": "dt_dusk_t2",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: BENCH 1.33m ahead (bearing -2.2\u00b0), centered or ambiguous bearing; HOLD and stop and verify. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "fb4334807c2b757ced6278c41320070c4516b304309115aaeace89de120a1e66"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

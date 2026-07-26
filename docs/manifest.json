@@ -1,7 +1,7 @@
 {
-  "name": "eyeWalker v1.1 — NeuroAgent AI",
+  "name": "eyeWalker v1.1.9 — Simulated Research Interface",
   "short_name": "eyeWalker",
-  "description": "Assistive navigation research prototype for visual impairment. Not a medical device. Keep cane/guide dog.",
+  "description": "Deterministic simulated accessibility research interface. No live detector. Not for navigation. Keep cane or guide dog. Not a medical device.",
   "start_url": "./pwa.html",
   "scope": "./",
   "display": "standalone",

@@ -1,6 +1,6 @@
 
-def assess_risk(obstacle, user_speed_ms=1.3, reaction_s=0.8):
-    """From harbor walk: 20'07 pace = 1.3 m/s"""
+def assess_risk(obstacle, user_speed_ms=1.3):
+    """Assign a deterministic fixture-risk label from mock geometry."""
     ttc = obstacle.distance_m / max(user_speed_ms, 0.1)
     if obstacle.is_moving:
         ttc = obstacle.distance_m / max(user_speed_ms + obstacle.velocity_ms, 0.1)
@@ -12,5 +12,5 @@ def assess_risk(obstacle, user_speed_ms=1.3, reaction_s=0.8):
     if ttc < 2.0:
         return "HIGH"
     if ttc < 4.0:
-        return "MED"
+        return "MEDIUM"
     return "LOW"

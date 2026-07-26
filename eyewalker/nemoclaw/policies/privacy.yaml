@@ -1,24 +1,10 @@
-
 name: eyewalker-privacy
-description: Ensure location and camera data privacy for impaired users
-rules:
-  - resource: filesystem
-    allow:
-      - /sandbox/eyeWalker/**
-      - /data/**
-    deny:
-      - /etc/shadow
-      - /home/*/.ssh
-
-  - resource: network
-    require_approval:
-      - "*.google.com"
-      - "*.facebook.com"
-    deny:
-      - "*tracker*"
-
-  - resource: inference
-    policy: |
-      # Never send raw GPS + RGB together to cloud without explicit consent
-      if input.contains("gps") and input.contains("rgb") and not consent.cloud_upload:
-        route = "local"
+status: illustrative_unvalidated_yaml
+loaded_by_eyewalker: false
+enforcement_implemented: false
+description: >
+  Documentation-only intent. This is not executable policy and does not claim
+  filesystem, network, inference-routing, or data-egress enforcement.
+intent:
+  prefer_local_processing: true
+  require_explicit_consent_before_future_remote_processing: true

@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0012.png",
+  "source_sha256": "62418c0ae464a33d678b01d30d2ce5ea1e32bbd9e4a5523955e21d5d7f604e62",
+  "condition": "rain",
+  "twin_id": 2,
+  "modulators": {
+    "lighting": "rain",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "bike",
+      "distance_m": 0.89,
+      "bearing_deg": -1.5,
+      "urgency": "MEDIUM",
+      "source": "dt_rain_t2",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: BIKE 0.89m ahead (bearing -1.5\u00b0), centered or ambiguous bearing; HOLD and stop and verify. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "62418c0ae464a33d678b01d30d2ce5ea1e32bbd9e4a5523955e21d5d7f604e62"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

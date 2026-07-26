@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# eyeWalker — SAFE local git helper (medical OSS)
+# eyeWalker — safe, help-only local git status helper
 # Does NOT auto-stage, force-tag, or publish.
 # Explicit paths only after human review.
 set -euo pipefail

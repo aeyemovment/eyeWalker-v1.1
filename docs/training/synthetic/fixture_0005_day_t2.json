@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0005.png",
+  "source_sha256": "4fe9abb4a9e0da88168155cf31b650225415dbb6be90914ad749e3d36d2ec320",
+  "condition": "day",
+  "twin_id": 2,
+  "modulators": {
+    "lighting": "day",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "shadow_trap",
+      "distance_m": 1.25,
+      "bearing_deg": -2.6,
+      "urgency": "MEDIUM",
+      "source": "dt_day_t2",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: SHADOW TRAP 1.25m ahead (bearing -2.6\u00b0), centered or ambiguous bearing; HOLD and stop and verify. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "4fe9abb4a9e0da88168155cf31b650225415dbb6be90914ad749e3d36d2ec320"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

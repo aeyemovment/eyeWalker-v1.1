@@ -1,93 +1,95 @@
-"""
-Pavement / ground-level camera modality — low, near-ground for curbs, potholes, tactile paving
-v1.1 multi-camera for assistive navigation research: the most safety-critical for low-vision mobility
-
-DT#9 synthetic research prototype. synthetic_only=true, research_prototype=true.
-Safety: assistive not replacement. Always cane/guide dog. Alpha research prototype, not medical device.
-"""
+"""Deterministic pavement-interface fixtures; no frame analysis is performed."""
 
 from dataclasses import dataclass
-from typing import Optional, Dict, List
+from typing import Any, Dict, List, Optional
+
 
 @dataclass
 class PavementFrame:
-    rgb: any
+    rgb: Any
     timestamp: float = 0.0
-    mount: str = "cane_tip"  # cane_tip | shoe_toe | chest_low | wheelchair_front
-    height_cm: float = 15.0  # 5-40cm typical
-    pitch_deg: float = -35.0  # looking down-forward
-    imu: Optional[any] = None
+    mount: str = "cane_tip"
+    height_cm: float = 15.0
+    pitch_deg: float = -35.0
+    imu: Optional[Any] = None
+
 
 class PavementPerception:
-    """
-    Pavement camera — purpose-built for ground hazards:
-    - curb up/down, uneven pavers, puddle depth, tactile paving, pier edge drop (sub-cm precision goal)
-    - For Baltimore Harbor: 51ft gain over 3.66mi => slope + curb critical
-    - For austere research (optional): off-road / debris / trip hazards in austere / disaster response
-    - Optional: evidence of sidewalk block, ADA compliance checks (optional mode)
-    """
-    GROUND_LABELS = [
-        "curb_up", "curb_down", "curb_cut_ramp", "tactile_paving",
-        "uneven_pavers", "pothole", "puddle", "grate_gap",
-        "pier_edge_drop", "paint_line", "sidewalk_closed",
-        "cable_on_ground", "ice_patch", "sand_gravel"
-    ]
+    """Return explicit synthetic records for interface and pipeline tests."""
 
-    def __init__(self, mount="cane_tip", depth_model="depth_anything_v2_tiny"):
+    def __init__(self, mount="cane_tip", depth_model="unloaded"):
         self.mount = mount
-        self.depth_model = depth_model
-        self.min_range_m = 0.15
-        self.max_range_m = 4.0
-        self.fov_ground_m = 1.8  # width at 1m ahead
+        self.configured_depth_model = depth_model
 
-    def ingest(self, frame: PavementFrame) -> Dict:
-        """
-        Returns ground profile + hazards within 0.15-4m
-        In prod: high-freq (60fps) + structured light / ToF + learned ground seg (SAM + SegFormer ground)
-        """
-        if not frame:
-            return {"ground_profile": None, "hazards": [], "source": "pavement", "synthetic_only": True}
-
-        hazards = self._detect_ground(frame)
-        profile = self._profile_slope(frame)
+    def ingest(self, frame: PavementFrame | None) -> Dict:
+        if frame is None:
+            return {
+                "ground_profile": None,
+                "hazards": [],
+                "source": "pavement_fixture_stub",
+                "input_provenance": "none",
+                "fixture_generated": False,
+                "rgb_analyzed": False,
+                "detection_applied": False,
+                "models_executed": [],
+                "not_for_navigation": True,
+            }
 
         return {
-            "ground_profile": profile,
-            "hazards": hazards,
+            "ground_profile": self._fixture_profile(),
+            "hazards": self._fixture_hazards(),
             "mount": frame.mount,
-            "height_cm": frame.height_cm,
-            "range_m": (self.min_range_m, self.max_range_m),
-            "source": "pavement",
-            "safety_critical": True,
-            
-            
-            "synthetic_only": True,
+            "height_cm_metadata": frame.height_cm,
+            "source": "pavement_fixture_stub",
+            "input_provenance": "caller_supplied_unknown",
+            "fixture_generated": True,
+            "rgb_analyzed": False,
+            "detection_applied": False,
+            "depth_applied": False,
+            "models_executed": [],
+            "not_for_navigation": True,
+            "research_prototype": True,
         }
 
-    def _detect_ground(self, frame: PavementFrame) -> List[Dict]:
-        # Stub with realistic harbor examples
+    def _fixture_hazards(self) -> List[Dict]:
         return [
-            {"label": "curb_up", "dist_m": 0.9, "height_cm_est": 12, "conf": 0.92, "urgency": "high", "action": "prepare_step_up"},
-            {"label": "tactile_paving", "dist_m": 1.4, "conf": 0.88, "note": "signalized crossing ahead"},
+            {
+                "label": "curb_up",
+                "distance_m": 0.9,
+                "urgency": "high",
+                "source": "deterministic_fixture",
+                "simulated": True,
+                "model_executed": False,
+            },
+            {
+                "label": "tactile_paving",
+                "distance_m": 1.4,
+                "urgency": "low",
+                "source": "deterministic_fixture",
+                "simulated": True,
+                "model_executed": False,
+            },
         ]
 
-    def _profile_slope(self, frame: PavementFrame) -> Dict:
-        # Synthetic slope from Harbor 51ft gain
+    def _fixture_profile(self) -> Dict:
         return {
             "slope_deg": 1.8,
             "cross_slope_deg": 0.5,
-            "terrain_class": "concrete_pier_with_wood_planks",
+            "terrain_class": "abstract_test_surface",
             "walkable_width_m": 1.2,
-            "confidence": 0.91,
+            "confidence": None,
+            "source": "deterministic_fixture",
+            "simulated": True,
+            "model_executed": False,
         }
 
     def to_costmap(self, pavement_scene):
-        """
-        Convert to planner add: ultra-close cost (<2m) overrides other modalities
-        """
+        """Report the unimplemented planner conversion without a priority claim."""
         return {
-            "costmap": "pavement_close_range",
-            "priority": "highest_within_2m",
-            "override_risk": ["pier_edge_drop", "curb_down_unmarked"],
-            "source": "pavement"
+            "costmap": None,
+            "conversion_applied": False,
+            "planner_priority_assigned": False,
+            "source": "pavement_fixture_stub",
+            "simulated": True,
+            "not_for_navigation": True,
         }

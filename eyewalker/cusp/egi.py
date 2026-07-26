@@ -57,7 +57,10 @@ class EGIEngine:
             "integrator_state": self.integrator,
             "okn_phase": self.okn_phase,
             "corollary_discharge": pred_gaze_vel - retinal_slip,
-            "confidence": 0.88,
+            # This deterministic equation has no calibrated probabilistic
+            # confidence and must not fabricate one.
+            "confidence": None,
+            "confidence_status": "not_calibrated",
             "timestamp": now,
             "source": "focimeg_wm_egi",
             "core_invariant": {"leak_tau": self.leak_tau, "gain": self.gain},

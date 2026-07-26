@@ -1,0 +1,34 @@
+{
+  "source_frame": "docs/training/frames/fixture_0009.png",
+  "source_sha256": "a5ef2eac2ae7d2ad50adf10075c9e2bb1a49951e1150701ce05df4170e9fb5e1",
+  "condition": "night",
+  "twin_id": 0,
+  "modulators": {
+    "lighting": "night",
+    "bound": [
+      0.25,
+      3.0
+    ]
+  },
+  "obstacles": [
+    {
+      "class": "trash_bin",
+      "distance_m": 2.45,
+      "bearing_deg": -9.6,
+      "urgency": "MEDIUM",
+      "source": "dt_night_t0",
+      "simulated": true
+    }
+  ],
+  "guidance": "SIMULATED RESEARCH CUE: TRASH BIN 2.45m ahead (bearing -9.6\u00b0), step right. Keep your cane or guide dog. Not a medical device.",
+  "provenance": {
+    "generator_id": "eyewalker.synthetic.rebuild.v1",
+    "source_sha256": "a5ef2eac2ae7d2ad50adf10075c9e2bb1a49951e1150701ce05df4170e9fb5e1"
+  },
+  "dt9": {
+    "synthetic_only": true,
+    "research_prototype": true,
+    "not_medical_device": true,
+    "ritual": "all_at_once_v1.1"
+  }
+}

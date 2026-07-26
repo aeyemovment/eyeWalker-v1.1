@@ -1,12 +1,17 @@
 {
-  "pretty_name": "eyeWalker Baltimore Harbor Ground v1.1",
-  "version": "v1.1.0-ground",
-  "task": "assistive_ground_obstacle_navigation",
+  "pretty_name": "eyeWalker deterministic synthetic interface fixtures",
+  "software_version": "1.1.9",
+  "dataset_schema_version": "1.1.0",
+  "task": "pipeline_and_interface_regression_testing",
   "language": [
     "en"
   ],
-  "license": "PolyForm-Noncommercial-1.0.0 / MIT mobile",
-  "source": "harbor walks + optional 30min phone video + DT synthetic",
-  "annotations": "DT ritual all-at-once (day/dusk/night/rain)",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "source": "26 programmatically generated abstract PNG fixtures; no captured walk media",
+  "annotations": "312 deterministic simulated records across day, dusk, night, and rain test conditions",
+  "image_model_executed": false,
+  "ground_truth_validated": false,
+  "suitable_for_navigation": false,
+  "suitable_for_clinical_use": false,
   "not_medical_device": true
 }

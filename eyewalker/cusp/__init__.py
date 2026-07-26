@@ -1,5 +1,5 @@
 """
-Optional research overlays for eyeWalker (EGI / salience) — medical OSS v1.1.
+Optional unvalidated research overlays for eyeWalker (EGI / salience) v1.1.
 
 Research prototype only. Not a medical device.
 No personal identifiers, no dual-use program hooks in this public package.

@@ -2,4 +2,4 @@
 
 Same as repository root [SAFETY.md](../SAFETY.md).
 
-**Assistive research prototype only. Not a medical device. Keep cane / guide dog.**
+**Simulated accessibility-interface research only. Not for navigation. Not a medical device. Keep cane / guide dog.**

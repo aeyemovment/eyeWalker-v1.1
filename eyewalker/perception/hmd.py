@@ -1,7 +1,7 @@
 """
-HMD / smart glasses modality — egocentric primary for assistive navigation research.
+HMD / smart-glasses caller-buffer interface for accessibility research.
 
-eyeWalker v1.1 medical open source (NeuroAgent AI).
+eyeWalker v1.1 public research source (NeuroAgent AI).
 Devices (research targets): phone, Ray-Ban Meta–class, Quest-class, HoloLens-class.
 Not a medical device. Assistive only — keep cane / guide dog.
 """
@@ -44,10 +44,13 @@ class HMDPerception:
             "privacy": {
                 "face_blur_requested": True,
                 "face_blur_applied": False,
-                "local_first": True,
-                "note": "Redaction flags are requests only until CV blur is implemented.",
+                "prefer_local_processing": True,
+                "local_processing_enforced": False,
+                "note": "Policy and redaction requests only; no processing-location or CV-blur enforcement is implemented here.",
             },
-            "synthetic_only": True,
+            "input_provenance": "caller_supplied_unknown",
+            "models_executed": [],
+            "synthetic_status": "unknown",
             "research_prototype": True,
         }
 
@@ -63,6 +66,8 @@ class HMDPerception:
                 "plate_blur_applied": False,
                 "note": "Redaction flags are requests only until CV blur is implemented.",
             },
-            "synthetic_only": True,
+            "input_provenance": "caller_supplied_unknown",
+            "models_executed": [],
+            "synthetic_status": "unknown",
             "research_prototype": True,
         }

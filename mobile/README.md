@@ -1,67 +1,53 @@
+# eyeWalker Mobile UI Mock v1.1.9
 
-# eyeWalker Mobile — Smartphone Release v0.1.0
+This directory contains a deterministic **SIMULATED RESEARCH** interface mock for accessibility-development discussion. It is not a navigation app and it does not execute a camera, GPS sensor, map provider, obstacle detector, VLM, depth model, or text-to-speech engine.
 
-This is the smartphone version of eyeWalker — no Ray-Bans needed to start. Your phone is the eyes.
+> **SIMULATED RESEARCH CUE:** Interface mock only; pause and verify. Keep your cane or guide dog. Not a medical device.
 
-## What's in this release
+## Current implementation truth
 
-- Live camera view with VLM mock detection (trash bin, bench, pier edge, person+dog)
-- Ground truth map: OSM piers/marina + Esri satellite (<3yr)
-- Obstacle HUD with risk assessment and real-time avoidance guidance
-- Spatial audio guidance (mock TTS → will use expo-speech)
-- Split view: camera + map
-- Optional NemoClaw *policy docs* only (not a tested security product; no “secured / never leaves” claim)
+| Surface | What executes now |
+|---|---|
+| Camera panel | Static React Native mock layout; no camera capture |
+| Map panel | Synthetic shapes and fixed mock coordinates; no OSM, Esri, or device GPS |
+| Obstacle labels | Deterministic in-memory fixtures with provenance `deterministic_mock_no_model_executed`; no model confidence is computed |
+| Guidance | Locally formatted simulated text that steps away from the fixture bearing |
+| Audio button | Writes the already labeled mock cue to the debug console; no TTS playback |
+| NemoClaw / remote models | Not integrated, loaded, tested, or enforced here |
 
-## Run it
+No empty fixture state is called “path clear.” The interface instead says that no mock obstacle was generated and tells the viewer to pause and verify.
+
+## Development preview
 
 ```bash
 cd mobile
 npm install
 npx expo start
-
-# Then:
-# - Press w for web
-# - Scan QR with Expo Go on iOS/Android for phone
-# - For native build:
-#   eas build --platform android
-#   eas build --platform ios
 ```
 
-## How it works on phone
+`package.json` contains only the Expo/React Native runtime needed to render this mock. It intentionally includes no camera, location, sensor, map, audio, or speech package, and `app.json` requests no camera or location permission.
 
-1. Phone camera replaces Ray-Ban camera (30fps → 0.66Hz photo for battery)
-2. GPS + IMU from expo-location + expo-sensors gives 6DoF (same as glasses)
-3. On-device VLM: Qwen2-VL 7B via Ollama for privacy, or Muse Spark 1.1 cloud for accuracy
-4. Audio guidance via expo-speech with bearing: "trash bin 2.1m ahead, step left"
+This repository does not claim a signed Android/iOS build or app-store submission. Before native testing, install dependencies and run `npx expo install --check`; review any requested dependency change rather than assuming this source-only mock is a validated binary. Web and EAS build scripts are intentionally omitted because their required packages and release configuration are not included.
 
-## Baltimore Harbor Demo
+Use this preview only to inspect layout, visible safety wording, mock provenance, and left/right cue formatting. Do not use it while walking or for any real-world navigation decision.
 
-The default location is mocked to your 3.66mi Fells Point loop. Walk simulation moves you along the yellow route, triggers obstacles at:
-- 0.8mi: trash bin
-- 1.2mi: pier edge
-- 2.1mi: person + dog 1.2m/s
-- 2.8mi: bench blocking
+## Safety invariant
 
-Guidance: "Obstacle: trash bin 2.1m ahead, step left 0.5m"
+Every generated cue begins with `SIMULATED RESEARCH CUE:` and ends with the exact sentence:
 
-## Next: Ray-Ban upgrade
+`Keep your cane or guide dog. Not a medical device.`
 
-Once mobile is validated, swap CameraView from expo-camera to Ray-Ban BLE stream — same interface.
+For a fixture to the left (negative bearing), the formatter says step right. For a fixture to the right (positive bearing), it says step left. A centered fixture produces a HOLD cue unless two finite, nonnegative mock free-space scores differ by a meaningful margin.
+
+## Future work is not current capability
+
+Real camera capture, location permission, map data, perception models, privacy review, accessible TTS, sensor validation, and field safety testing would each require separate implementation and evidence. None is claimed by this mock.
 
 ## License
 
-PolyForm Noncommercial 1.0.0 — open for all except commercial use.
-
-
-
-## Safety
-
-**This is assistive, not replacement for cane/guide dog. Always keep traditional mobility aid. This is alpha. It is a research prototype for users and developers to improve upon.**
-
-- eyeWalker is designed to *assist* navigation, not replace primary mobility aids
-- Always use your cane, guide dog, or trusted human guide alongside eyeWalker
-- This is alpha research software — expect errors, false positives, missed obstacles
-- Built to be improved by the community: users, visually impaired testers, and developers
-- Test in safe, familiar areas first (like the Baltimore Harbor loop) before new areas
-- Your feedback makes it safer for everyone
-
+Only the exact individual mobile and static-PWA files enumerated in
+[`../DUAL_LICENSE.md`](../DUAL_LICENSE.md) are licensed under the MIT terms in
+[`LICENSE-MIT.txt`](LICENSE-MIT.txt), an identical local copy of
+[`../LICENSE-MIT`](../LICENSE-MIT). New, renamed, or generated files default to
+the repository's PolyForm Noncommercial scope unless that authoritative exact
+allowlist is deliberately updated.

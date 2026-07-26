@@ -54,11 +54,14 @@ class OmniverseBridge:
         }
 
     def connect_nemoclaw(self) -> Dict[str, Any]:
-        """Declare pairing with NemoClaw local-first harness (policy only)."""
+        """Report that no NemoClaw/Omniverse integration is implemented."""
         return {
-            "nemoclaw": "optional_local_harness",
-            "omniverse": "optional_synthetic_sim",
-            "pairing": "research_docs_only",
-            "egress": "local_first",
+            "nemoclaw": "unimplemented_policy_sketch",
+            "omniverse": "unavailable_stub",
+            "pairing": "not_implemented",
+            "integration_implemented": False,
+            "egress_enforced": False,
+            "policy_loaded": False,
+            "schema_validated": False,
             "synthetic_only": True,
         }

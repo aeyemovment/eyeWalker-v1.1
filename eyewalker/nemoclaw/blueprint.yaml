@@ -1,46 +1,19 @@
-name: eyewalker
-version: 1.1.0
+name: eyewalker-policy-sketch
+version: 1.1.9
+status: illustrative_unvalidated_yaml
+loaded_by_eyewalker: false
+enforcement_implemented: false
 description: >
-  eyeWalker v1.1 — assistive navigation research prototype (NeuroAgent AI).
-  Local-first privacy. Not a medical device.
+  Documentation-only privacy intent for a simulated accessibility-interface research
+  prototype. This file is not a deployable sandbox blueprint, has not been
+  validated against a NemoClaw schema, and provides no security boundary.
 
-sandbox:
-  base_image: ghcr.io/nvidia/openshell-community/sandboxes/openclaw:0.2.0
-  writable:
-    - /sandbox
-    - /tmp
-    - /data
-    - /home/eyeWalker
-  env:
-    EYEWALKER_MODE: assistive
-    EYEWALKER_PRIVACY: local-first
+privacy_intent:
+  prefer_local_processing: true
+  require_explicit_consent_before_future_remote_processing: true
+  implementation_note: Application code must implement and test these controls.
 
-network:
-  egress:
-    allow:
-      - api.maptiler.com
-      - server.arcgisonline.com
-      - "*.openstreetmap.org"
-      - overpass-api.de
-      - api.openai.com
-      - integrate.api.nvidia.com
-      - 127.0.0.1:8780  # optional local research loopback only
-    deny:
-      - "*"
-  policy: |
-    Prefer map tiles + inference. Location and camera data stay local-first
-    unless the user explicitly enables a consented cloud path.
-
-inference:
-  provider: nvidia
-  model: nvidia/nemotron-3-super-120b-a12b
-  fallback:
-    - ollama/qwen2-vl:7b
-    - ollama/llava:13b
-  privacy_router:
-    local_first: true
-    route_sensitive: local
-
-policies:
-  - name: pypi
-    type: preset
+external_integration:
+  installed_by_this_repository: false
+  tested_by_this_repository: false
+  runtime_wiring_present: false
