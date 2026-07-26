@@ -12,7 +12,7 @@
 **Target repo:** https://github.com/meta-llama/llama-stack  
 **Source tool JSON:** `meta_submission/llama_stack_tool.json`  
 **Upstream project:** https://github.com/aeyemovment/eyeWalker  
-**Author:** NeuroAgent AI · contact: info@neuroagent.ai / kemar@hazyeyesai.com  
+**Author:** NeuroAgent AI · contact: info@neuroagent.ai / info@neuroagentai.org  
 
 ---
 

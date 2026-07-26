@@ -1,37 +1,34 @@
 # Privacy — eyeWalker v1.1
 
-**From NeuroAgent AI.** Research prototype. Not a medical device.
+**Research prototype.** Not a medical device. Local-first posture preferred.
 
-## Local-first (NemoClaw posture)
+## Local-first (NemoClaw *optional* posture)
 
-eyeWalker is designed **local-first**:
+- Prefer processing on-device or on a machine you control.
+- Optional NemoClaw docs describe a **policy harness sketch**, not a certified security product and not a guarantee that data “never leaves.”
+- Omniverse adapter is an optional **synthetic sim stub** (disabled by default).
 
-| Data | Default behavior |
-|------|------------------|
-| **Camera RGB** | Processed **on-device** in the browser PWA for demo/mock HUD. Not uploaded by the default static PWA. |
-| **GPS / location** | Read in-browser for on-screen coordinates only when you Start Walking and grant permission. Not uploaded by default. |
-| **Microphone** | Not required for the default one-tap walk demo (speech is **output** via Web Speech API). |
-| **Account login** | Not required for the public static PWA. |
+## Recording (PWA)
 
-## Consent for any future remote path
+| Behavior | Rule |
+|----------|------|
+| Consent | REC and Save of recorded media require an **checked consent** box |
+| Auto-record | **Off** — Start walk does **not** start REC |
+| Revoke consent | Unchecking consent **stops** active REC |
+| Pause | Pauses cue loop; resumes capture if REC was paused |
+| Stop | Explicit **Stop** ends walk, stops REC, releases camera |
+| Save | Finalizes active REC (stop + flush) before download; uses correct MIME/extension |
+| GPS trail | Collected only while walking **and** only stored in export if consent checked; otherwise GPS points are not written into the save package |
+| localStorage | Short VLM/sim cue log may be stored locally for the session; clearable by browser; not a cloud upload |
 
-If a future build enables a **remote VLM / cloud endpoint**:
+## What we do not claim
 
-1. It must be **opt-in** (explicit user action).  
-2. Users must be told what leaves the device (e.g. frames, coarse GPS).  
-3. No silent background upload of GPS + RGB.  
-4. Users can revoke permission via browser site settings.
-
-The OGX provider package may call an optional `endpoint_url`; if unset, it stays in **research mock** mode with no network inference.
-
-## Third parties
-
-- GitHub Pages / Hugging Face host **static files** you request by opening the site.  
-- Browser vendors handle permission prompts for camera/location.  
-- We do not sell personal navigation data.
+- No real-time face/plate blur unless a blur pipeline is actually applied (flags may say *requested* not *applied*).
+- No GenCrypt / PQC product.
+- No sale of personal navigation data.
 
 ## Contact
 
 Privacy questions: `info@neuroagentai.org`
 
-See also: `SAFETY.md`, `eyewalker/nemoclaw/` in this repository.
+See also: `SAFETY.md`, `eyewalker/nemoclaw/README.md`, `eyewalker/omniverse/`.

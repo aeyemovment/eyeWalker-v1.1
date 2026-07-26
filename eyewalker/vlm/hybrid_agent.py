@@ -102,7 +102,7 @@ class HybridVLMAgent:
                     distance_m=dist,
                     bearing_deg=bear,
                     urgency=urg,
-                    source="spark",
+                    source="simulated_spark",
                     confidence=0.55 + (int(seed[i + 8], 16) % 30) / 100.0,
                 )
             )
@@ -155,7 +155,7 @@ class HybridVLMAgent:
                             distance_m=float(item.get("distance_m", 2.0)),
                             bearing_deg=float(item.get("bearing_deg", 0)),
                             urgency=str(item.get("urgency", "MEDIUM")),
-                            source="hybrid",
+                            source="simulated_hybrid",
                             confidence=0.75,
                         )
                     )
@@ -167,14 +167,24 @@ class HybridVLMAgent:
             return obstacles, f"{g} (grok offline: {type(e).__name__})"
 
     def _local_guidance(self, obstacles: list[Obstacle]) -> str:
+        """Step AWAY from obstacle bearing: neg=left obstacle → step right."""
         if not obstacles:
-            return "Path clear. Walk straight. Keep your cane."
+            return (
+                "SIMULATED RESEARCH CUE: path clear. Walk straight. "
+                "Keep your cane. Not a medical device."
+            )
         top = sorted(obstacles, key=lambda o: (0 if o.urgency == "HIGH" else 1, o.distance_m))[0]
-        side = "left" if top.bearing_deg < -8 else ("right" if top.bearing_deg > 8 else "side-step")
+        if top.bearing_deg < -8:
+            side = "right"
+        elif top.bearing_deg > 8:
+            side = "left"
+        else:
+            side = "side-step"
         step = 0.4 if top.distance_m < 1.2 else 0.5
         return (
-            f"{top.class_name.replace('_', ' ').upper()} {top.distance_m:.1f}m ahead, "
-            f"step {side} {step:.1f}m. Keep your cane."
+            f"SIMULATED RESEARCH CUE: {top.class_name.replace('_', ' ').upper()} "
+            f"{top.distance_m:.1f}m ahead (bearing {top.bearing_deg:+.0f}°), "
+            f"step {side} {step:.1f}m. Keep your cane. Not a medical device."
         )
 
     def infer(

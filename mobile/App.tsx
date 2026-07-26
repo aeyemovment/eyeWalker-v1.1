@@ -54,7 +54,7 @@ export default function App() {
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.footerText}>Mission: world vision for the impaired • Noncommercial • NemoClaw secured</Text>
+        <Text style={styles.footerText}>Mission: world vision for the impaired • Noncommercial • NemoClaw optional (local-first docs only)</Text>
       </View>
     </SafeAreaView>
   );

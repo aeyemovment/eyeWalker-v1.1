@@ -269,7 +269,7 @@ A:
 - Meta Portal: ~2 weeks, featured in newsletter if approved
 
 **Q: What if someone wants to commercialize?**
-A: Direct them to NeuroAgent AI legal (info@hazyeyesai.com) to negotiate a separate commercial license.
+A: Direct them to NeuroAgent AI legal (info@neuroagentai.org) to negotiate a separate commercial license.
 
 ---
 

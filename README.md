@@ -4,7 +4,7 @@
 
 [![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm%20Noncommercial-blue)](LICENSE)
 [![License: MIT Mobile](https://img.shields.io/badge/License-MIT%20Mobile-green)](LICENSE-MIT)
-[![Version](https://img.shields.io/badge/version-v1.1.0-blue)](https://github.com/aeyemovment/eyeWalker-v1.1)
+[![Version](https://img.shields.io/badge/version-v1.1.2-blue)](https://github.com/aeyemovment/eyeWalker-v1.1)
 [![Research prototype](https://img.shields.io/badge/status-research%20prototype-yellow)](SAFETY.md)
 [![Built by](https://img.shields.io/badge/Built%20by-NeuroAgent%20AI-blueviolet)](#about-neuroagent-ai)
 [![PWA](https://img.shields.io/badge/PWA-live-success)](https://aeyemovment.github.io/eyeWalker-v1.1/pwa.html)
@@ -116,4 +116,4 @@ Local-first demos preferred. Do not upload bystander-identifying video without c
 
 ---
 
-© 2026 NeuroAgent AI · eyeWalker **v1.1.0** · Research prototype — not a medical device.
+© 2026 NeuroAgent AI · eyeWalker **v1.1.2** · Research prototype — not a medical device.

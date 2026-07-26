@@ -1,3 +1,13 @@
+# eyeWalker v1.1.2 (Codex re-HOLD fixes)
+
+- Remove root `pwa.html` duplicate; canonical is `docs/pwa.html` only
+- Fix `hybrid_agent` left/right (step away) + SIMULATED labels
+- Remove review-pass unsafe scripts from public tree
+- Honest bodycam redaction fields (`requested`/`not_applied`)
+- REC: consent revocable, Stop bound, finalize before Save, MIME extension, GPS trail requires consent
+- NemoClaw/Omniverse claims de-hyped to optional/stub
+- Stronger CI; immutable tag **v1.1.2** (do not move v1.1.1)
+
 # eyeWalker v1.1 — medical open source (2026-07-26)
 
 ## v1.1.1 (Codex HOLD gates)

@@ -45,4 +45,4 @@ git clone https://github.com/aeyemovment/eyeWalker-v1.1.git
 ## Copyright
 
 © 2026 NeuroAgent AI / Kemar Green.  
-eyeWalker **v1.1.0** — assistive navigation research prototype (**not a medical device**).
+eyeWalker **v1.1.2** — assistive navigation research prototype (**not a medical device**).

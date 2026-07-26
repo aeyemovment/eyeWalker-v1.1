@@ -1,33 +1,20 @@
-# NemoClaw + Omniverse (optional research)
+# NemoClaw (optional) + Omniverse (optional)
 
-**eyeWalker v1.1 medical OSS** — NeuroAgent AI.
+**eyeWalker v1.1.2 medical OSS** — NeuroAgent AI.
 
-## What this is
+## Honesty
 
-| Piece | Role |
-|-------|------|
-| **NemoClaw** | Optional **local-first** agent harness / sandbox policy (egress allowlist, sensitive routes stay local). See `blueprint.yaml`. |
-| **Omniverse** | Optional **synthetic simulation** adapter (`eyewalker/omniverse/`) for offline research scenes — **not** required for the PWA. |
+| Component | Status |
+|-----------|--------|
+| NemoClaw | **Optional** local-first *policy docs* + `blueprint.yaml` sketch. **Not** a tested NVIDIA-managed integration. **Do not** claim “NemoClaw secured” or “data never leaves.” |
+| Omniverse | **Optional stub** in `eyewalker/omniverse/` — disabled by default; returns `available: false` until you install Omniverse/Isaac yourself. |
 
-Neither is a medical device stack. Neither claims production crypto or classified capability.
+Full NVIDIA NemoClaw lifecycle (CLI, OpenShell, versioned blueprints) is **out of scope** of this repo until implemented and tested against current NVIDIA docs.
 
-## Honest limits
+## PWA
 
-- Blueprint is **policy documentation** + optional tooling — not a warranty of security.  
-- Omniverse bridge is a **stub** until you install NVIDIA Omniverse/Isaac separately.  
-- Default PWA runs **without** Omniverse.  
+The browser PWA runs **without** NemoClaw or Omniverse.
 
-## Quickstart (optional)
+## Privacy intent
 
-```bash
-# NemoClaw — only if you use NVIDIA's harness (external install)
-# follow current NVIDIA docs; do not curl | bash in production CI without review
-
-# Omniverse stub status
-python -c "from eyewalker.omniverse import OmniverseBridge; print(OmniverseBridge().status())"
-```
-
-## Privacy
-
-Local-first: do not pair raw GPS + RGB for cloud egress without explicit user consent.  
-See root `PRIVACY.md` and `SAFETY.md`.
+Local-first *policy*: do not upload raw GPS+RGB without explicit user consent. Policy intent ≠ cryptographic guarantee.

@@ -88,6 +88,7 @@
       </div>
       <div class="row">
         <button id="pauseBtn" type="button">⏸ Pause</button>
+        <button id="stopBtn" type="button" style="background:#450a0a;color:#fecaca">■ Stop</button>
         <button id="saveBtn" type="button">⬇ Save</button>
         <button id="repeatBtn" type="button">🔊 Repeat</button>
       </div>
@@ -138,6 +139,7 @@
   const recBtn = document.getElementById("recBtn");
   const startBtn = document.getElementById("startBtn");
   const pauseBtn = document.getElementById("pauseBtn");
+  const stopBtn = document.getElementById("stopBtn");
   const saveBtn = document.getElementById("saveBtn");
   const repeatBtn = document.getElementById("repeatBtn");
   const guidanceEl = document.getElementById("guidanceEl");
@@ -208,7 +210,7 @@
         distance_m: 0.7 + ((stepN * 3 + i * 7) % 25) / 10,
         bearing_deg: -30 + ((stepN * 5 + i * 11) % 60),
         urgency: c.urgency,
-        source: "spark",
+        source: "simulated_spark",
         confidence: 0.6,
       });
     }
@@ -390,37 +392,43 @@
     recInfo.textContent = recChunks.length ? `REC ready · ${recChunks.length} chunks` : "REC off";
   }
 
-  function saveBundle() {
+  async function saveBundle() {
     const consent = document.getElementById("recConsent");
-    if ((!consent || !consent.checked) && recChunks.length) {
-      log("Save blocked — consent required for recorded media");
-      speak("Check recording consent before save.");
+    const consented = !!(consent && consent.checked);
+    // Always finalize active recorder before packaging
+    if (recording || (mediaRecorder && mediaRecorder.state !== "inactive")) {
+      await finalizeRecording();
+      recInfo.textContent = recChunks.length ? `REC ready · ${recChunks.length} chunks` : "REC off";
+    }
+    if (recChunks.length && !consented) {
+      log("Save of video blocked — consent required");
+      speak("Check recording consent before saving video.");
       return;
     }
-    // Save video
     if (recChunks.length) {
-      const blob = new Blob(recChunks, { type: recChunks[0].type || "video/webm" });
+      const mime = recChunks[0].type || "video/webm";
+      const blob = new Blob(recChunks, { type: mime });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = `eyewalker_walk_${sessionId}.webm`;
+      a.download = `eyewalker_walk_${sessionId}.${recExt()}`;
       a.click();
       URL.revokeObjectURL(a.href);
-      log(`Saved video ${(blob.size / 1e6).toFixed(2)} MB`);
+      log(`Saved video ${(blob.size / 1e6).toFixed(2)} MB as .${recExt()}`);
     } else {
-      log("No video chunks — was REC on?");
+      log("No video chunks — REC was off or empty");
     }
-    // Save GPS + VLM json
     const vlmKey = `eyewalker_vlm_${sessionId}`;
     const simOn = document.getElementById("simMode")?.checked !== false;
     const payload = {
-      version: "v1.1.0",
+      version: "1.1.2",
       sessionId,
-      gpsTrail,
-      vlm: JSON.parse(localStorage.getItem(vlmKey) || "[]"),
+      gpsTrail: consented ? gpsTrail : [],
+      gps_included: consented,
+      vlm: consented ? JSON.parse(localStorage.getItem(vlmKey) || "[]") : [],
       ground_mode: groundMode.checked,
       vlm_mode: vlmMode.value,
       simulation_mode: simOn,
-      recording_consent: !!(document.getElementById("recConsent")?.checked),
+      recording_consent: consented,
       safety: "Assistive research prototype. Not medical device. Keep cane/guide dog.",
       dt9: { research_prototype: true, synthetic_only: simOn, not_medical_device: true },
     };
@@ -438,7 +446,7 @@
     if (running && paused) {
       paused = false;
       pauseBtn.textContent = "⏸ Pause";
-      statusEl.textContent = "walking — research/sim cues";
+      statusEl.textContent = "walking — simulated research cues";
       speak("Resumed. Keep your cane.");
       tick();
       return;
@@ -453,7 +461,7 @@
       resize();
       running = true;
       paused = false;
-      statusEl.textContent = "walking — research/sim cues";
+      statusEl.textContent = "walking — simulated research cues";
       if ("geolocation" in navigator) {
         watchId = navigator.geolocation.watchPosition(
           (p) => {
@@ -461,15 +469,20 @@
             gps.lon = p.coords.longitude;
             gpsEl.textContent = `${gps.lat.toFixed(5)},${gps.lon.toFixed(5)}`;
             if (running) {
-              gpsTrail.push({
-                t: Date.now(),
-                lat: gps.lat,
-                lon: gps.lon,
-                acc: p.coords.accuracy,
-                heading: p.coords.heading,
-                speed: p.coords.speed,
-              });
-              gpsPtsEl.textContent = String(gpsTrail.length);
+              const c = document.getElementById("recConsent");
+              if (c && c.checked) {
+                gpsTrail.push({
+                  t: Date.now(),
+                  lat: gps.lat,
+                  lon: gps.lon,
+                  acc: p.coords.accuracy,
+                  heading: p.coords.heading,
+                  speed: p.coords.speed,
+                });
+                gpsPtsEl.textContent = String(gpsTrail.length);
+              } else {
+                gpsPtsEl.textContent = "0 (consent off)";
+              }
             }
           },
           (err) => log("GPS " + err.message),
@@ -532,7 +545,7 @@
     else startRecording();
   });
   pauseBtn.addEventListener("click", pauseOrStop);
-  saveBtn.addEventListener("click", saveBundle);
+  saveBtn.addEventListener("click", () => { saveBundle().catch((e) => log(String(e))); });
   repeatBtn.addEventListener("click", () => speak(lastGuidance || "No guidance yet."));
   window.addEventListener("resize", resize);
   window.addEventListener("load", resize);
@@ -550,10 +563,49 @@
       if (!simModeEl.checked) speak("Simulation off. No live detector. Keep your cane.");
     });
   }
+  
+  function recExt() {
+    const mime = (mediaRecorder && mediaRecorder.mimeType) || (recChunks[0] && recChunks[0].type) || "video/webm";
+    if (mime.includes("mp4")) return "mp4";
+    if (mime.includes("webm")) return "webm";
+    return "webm";
+  }
+
+  function finalizeRecording() {
+    return new Promise((resolve) => {
+      if (!mediaRecorder || mediaRecorder.state === "inactive") {
+        resolve();
+        return;
+      }
+      const done = () => { mediaRecorder.removeEventListener("stop", done); resolve(); };
+      mediaRecorder.addEventListener("stop", done);
+      try { mediaRecorder.requestData(); } catch (_) {}
+      try { mediaRecorder.stop(); } catch (_) { resolve(); }
+      recording = false;
+      recBtn.classList.remove("on");
+      recBadge.classList.remove("on");
+      dot.classList.remove("rec");
+    });
+  }
+
+  // Consent revocation stops capture
+  const recConsentEl = document.getElementById("recConsent");
+  if (recConsentEl) {
+    recConsentEl.addEventListener("change", () => {
+      if (!recConsentEl.checked && recording) {
+        finalizeRecording().then(() => {
+          log("REC stopped — consent revoked");
+          speak("Recording stopped. Consent off.");
+        });
+      }
+    });
+  }
+  if (stopBtn) stopBtn.addEventListener("click", () => stopSession());
+
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./service-worker.js").catch(() => {});
   }
-  log("v1.1.0 ready — SIM cues default; REC requires consent; pause resumes");
+  log("v1.1.2 ready — SIM cues default; REC requires consent; pause resumes");
 })();
 </script>
 </body>

@@ -14,23 +14,49 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install package (minimal)
+      - name: Install
         run: |
           python -m pip install -U pip
-          pip install -e . --no-deps || pip install -e .
           pip install numpy pytest
+          pip install -e . --no-deps || true
       - name: Unit tests
-        run: pytest -q
-      - name: Rebuild synthetic dataset
+        run: PYTHONPATH=. pytest -q
+      - name: Rebuild synthetic
         run: python scripts/v11/rebuild_synthetic_dataset.py
-      - name: Check no absolute home paths in synthetic
+      - name: Version surfaces aligned to 1.1.2
         run: |
-          if grep -R "/Users/" docs/training/synthetic 2>/dev/null; then
-            echo "Absolute /Users paths found in synthetic data" >&2
-            exit 1
-          fi
-          if grep -R "HazyEyes R\|WESCAM\|Foxtrot\|3477022360" eyewalker docs/pwa.html README.md SAFETY.md 2>/dev/null; then
-            echo "Disallowed dual-use/personal strings found" >&2
-            exit 1
-          fi
-          echo "OK"
+          grep -q '1.1.2' VERSION
+          grep -q 'version = "1.1.2"' pyproject.toml
+          grep -q 'eyewalker-v1.1.2' docs/service-worker.js
+          grep -q '1.1.2' docs/pwa.html
+      - name: No root pwa.html duplicate
+        run: test ! -f pwa.html
+      - name: No unsafe ship scripts
+        run: |
+          if grep -R "git add -A" scripts/ 2>/dev/null; then exit 1; fi
+          if grep -R "git push origin .* -f" scripts/ 2>/dev/null; then exit 1; fi
+          if find . -name 'Listen-to-me-rant-3.repo.sh' | grep .; then exit 1; fi
+      - name: No absolute home paths in synthetic
+        run: |
+          ! grep -R "/Users/" docs/training/synthetic
+      - name: No dual-use / personal / fake-secured claims in core surfaces
+        run: |
+          ! grep -R "HazyEyes R\|WESCAM\|Foxtrot\|3477022360\|hazyeyesai.com\|NemoClaw secured\|GenCrypt_mock" \
+            eyewalker docs/pwa.html README.md SAFETY.md PRIVACY.md scripts mobile/App.tsx 2>/dev/null
+      - name: hybrid L/R step-away unit logic smoke
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          from eyewalker.vlm.hybrid_agent import HybridVLMAgent, HybridConfig, Obstacle
+          from eyewalker.planner.avoidance import AvoidancePlanner
+          class O:
+            def __init__(self,b):
+              self.label='x'; self.distance_m=1.0; self.bearing_deg=b
+          assert AvoidancePlanner().plan(None,O(-20),None,None)['action']=='step_right'
+          assert AvoidancePlanner().plan(None,O(20),None,None)['action']=='step_left'
+          a=HybridVLMAgent(HybridConfig(mode='mock'))
+          g=a._local_guidance([Obstacle('bin',1.0,-20,'HIGH','simulated_mock')])
+          assert 'step right' in g
+          g2=a._local_guidance([Obstacle('bin',1.0,20,'HIGH','simulated_mock')])
+          assert 'step left' in g2
+          print('L/R OK')
+          PY

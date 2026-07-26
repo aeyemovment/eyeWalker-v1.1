@@ -317,7 +317,7 @@ with gr.Blocks(title="eyeWalker v1.0 — World Vision for Impaired", theme=gr.th
         # 👓 eyeWalker v1.0 — Real-time World Vision for the Visually Impaired
         <span class="who-badge">WHO: 2.2B with vision impairment</span> <span class="from-badge">Built by NeuroAgent AI — for rare neuro diseases affecting vision</span>
 
-        **One-tap PWA for the world.** Real-time VLM obstacle avoidance: *"Trash bin 2.1m ahead, step left 0.5m"* + spatial audio + NemoClaw secured.
+        **One-tap PWA for the world.** Real-time VLM obstacle avoidance: *"Trash bin 2.1m ahead, step left 0.5m"* + spatial audio + NemoClaw optional (local-first docs only).
 
         **Origin:** Inspired by daily post-lunch harbor walks — 3.66mi loop around Baltimore's Fells Point, Frederick Douglass-Isaac Myers Maritime Park, Harbor Point where car maps fail. **Mission:** One day provide full world vision for the impaired.
 
@@ -369,7 +369,7 @@ with gr.Blocks(title="eyeWalker v1.0 — World Vision for Impaired", theme=gr.th
 
             **Ground Truth Problem:** Google/OSM car-mode snaps to Boston St and breaks — 70% of harbor off-street. Solution: OSM Overpass custom filter + Esri World Imagery + vector tile cache for offline.
 
-            **NemoClaw Harness:** Local-first, allowlist only: *.openstreetmap.org, overpass-api.de, server.arcgisonline.com, integrate.api.nvidia.com. No cloud logs/telemetry. Raw GPS+RGB never leaves sandbox without consent.
+            **NemoClaw Harness:** Local-first, allowlist only: *.openstreetmap.org, overpass-api.de, server.arcgisonline.com, integrate.api.nvidia.com. No cloud logs/telemetry. Raw GPS+RGB should not leave device without explicit user consent (policy intent; not a guarantee).
 
             **Why From NeuroAgent AI:**
             - Rare neuro: NMOSD, MOGAD, optic neuritis, autoimmune encephalitis visual, LHON, OPA1, Wolfram, mitochondrial optic neuropathies, IIH, optic nerve hypoplasia, CVI, PCA
