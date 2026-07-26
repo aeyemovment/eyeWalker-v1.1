@@ -2,28 +2,23 @@ REVIEW ORDER — eyeWalker v1.1 medical OSS (2026-07-26)
 =====================================================
 Package: /Users/lesharicotsverts/eyeWalker-v1.1-oss/review_pass_2026-07-26/
 
-1) CODEX
-   paste:  messages/01_CODEX.md
-   save:   outbox/01_codex_response.md
+AFTER CODEX HOLD (current path):
+0) GROK fixes five gates + NemoClaw/Omniverse  [DONE → release v1.1.1]
+1b) CODEX RE-REVIEW
+    paste:  messages/01b_CODEX_REREVIEW.md
+    save:   outbox/01b_codex_rereview.md
+    → only continue if SHIP or SHIP_WITH_FIXES
 
-2) FABLE 5
-   paste:  messages/02_FABLE5.md  (+ paste Codex summary into the bracket)
+2) FABLE 5   (NOT before 1b SHIP)
+   paste:  messages/02_FABLE5.md
    save:   outbox/02_fable5_response.md
 
 3) SPARK MUSE
-   paste:  messages/03_SPARK_MUSE.md  (+ Codex + Fable5 summaries)
-   save:   outbox/03_spark_muse_response.md
-
 4) GEMMA
-   paste:  messages/04_GEMMA.md  (+ all prior summaries)
-   save:   outbox/04_gemma_response.md
+5) LEGAL final → POST only on GO
 
-5) LEGAL (final before post)
-   paste:  messages/05_LEGAL_FINAL.md  (+ all prior, esp. Gemma redlines)
-   save:   outbox/05_legal_response.md
+Do NOT pass to Fable while Codex is HOLD.
 
-POST only if legal = GO or GO_WITH_REDLINES (redlines applied)
-   use:    checklists/POST_CHECKLIST.md
+Script: context/Listen-to-me-rant-3.sh (safe — no auto-publish)
+Release: https://github.com/aeyemovment/eyeWalker-v1.1/releases/tag/v1.1.1
 
-Script context: context/Listen-to-me-rant-3.sh
-Facts:          context/FACTS_SHEET.md
