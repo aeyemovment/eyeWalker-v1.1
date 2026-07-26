@@ -30,7 +30,7 @@ If eyeWalker **missed** a real hazard (false negative) or gave **wrong** guidanc
 
 ```bash
 git clone https://github.com/aeyemovment/eyeWalker-v1.1.git
-cd eyeWalker
+cd eyeWalker-v1.1
 # PWA lives in docs/ — served via GitHub Pages from /docs
 # Open docs/pwa.html locally or use: python3 -m http.server -d docs 8080
 ```
