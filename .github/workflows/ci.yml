@@ -41,8 +41,10 @@ jobs:
           ! grep -R "/Users/" docs/training/synthetic
       - name: No dual-use / personal / fake-secured claims in core surfaces
         run: |
-          ! grep -R "HazyEyes R\|WESCAM\|Foxtrot\|3477022360\|hazyeyesai.com\|NemoClaw secured\|GenCrypt_mock" \
-            eyewalker docs/pwa.html README.md SAFETY.md PRIVACY.md scripts mobile/App.tsx 2>/dev/null
+          ! grep -RE "HazyEyes R|WESCAM|Foxtrot|3477022360|hazyeyesai\\.com|NemoClaw secured|GenCrypt_mock" \
+            eyewalker docs/pwa.html README.md SAFETY.md PRIVACY.md scripts mobile/App.tsx 2>/dev/null \
+            || { echo "banned string found"; exit 1; }
+          # allow honesty docs that forbid security marketing without the banned phrase
       - name: hybrid L/R step-away unit logic smoke
         run: |
           PYTHONPATH=. python - <<'PY'

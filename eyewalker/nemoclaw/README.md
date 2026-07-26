@@ -6,7 +6,7 @@
 
 | Component | Status |
 |-----------|--------|
-| NemoClaw | **Optional** local-first *policy docs* + `blueprint.yaml` sketch. **Not** a tested NVIDIA-managed integration. **Do not** claim “NemoClaw secured” or “data never leaves.” |
+| NemoClaw | **Optional** local-first *policy docs* + `blueprint.yaml` sketch. **Not** a tested NVIDIA-managed integration. Do **not** market it as a security product or data-exfiltration guarantee. |
 | Omniverse | **Optional stub** in `eyewalker/omniverse/` — disabled by default; returns `available: false` until you install Omniverse/Isaac yourself. |
 
 Full NVIDIA NemoClaw lifecycle (CLI, OpenShell, versioned blueprints) is **out of scope** of this repo until implemented and tested against current NVIDIA docs.
