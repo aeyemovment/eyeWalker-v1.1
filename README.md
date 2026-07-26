@@ -41,6 +41,22 @@
 
 ---
 
+## Inspiration
+
+eyeWalker comes from a simple mandate: **help people with vision loss explore accessibility interfaces** without pretending software can replace a cane, guide dog, or clinician.
+
+The long-range research story is **multimodal** — phone, glasses-class wearables, and (where lawful and consented) elevated *concept* views as future interface experiments. The **open v1.1 build is narrower**: a **simulated** browser PWA research demo, not a live aerial or surveillance product.
+
+![Multimodal assistive research concept (GIF)](docs/inspiration/multimodal_concept.gif)
+
+| Multimodal concept (drone · phone · glasses) | Flag + drone motif | Clean drone avatar |
+|:--:|:--:|:--:|
+| ![multimodal](docs/inspiration/multimodal_drone_phone_glasses.jpg) | ![flag drone](docs/inspiration/concept_flag_drone.jpg) | ![drone](docs/inspiration/concept_drone_avatar.jpg) |
+
+**Concept art only** — not a medical device UI, not an operational dual-use system, not a privacy or national-security product claim. Full write-up: **[docs/INSPIRATION.md](docs/INSPIRATION.md)**.
+
+---
+
 ## What’s in v1.1 (2026-07-26)
 
 See [docs/CHANGELOG_v1.1.md](docs/CHANGELOG_v1.1.md).
