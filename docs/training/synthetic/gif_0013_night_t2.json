@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0013.jpg",
+  "source_frame": "docs/training/frames/gif_0013.jpg",
   "condition": "night",
   "twin_id": 2,
   "modulators": {
@@ -11,18 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "manhole",
-      "distance_m": 1.1,
-      "bearing_deg": -15,
-      "urgency": "HIGH",
-      "source": "dt_night_t2"
+      "class": "bike",
+      "distance_m": 1.78,
+      "bearing_deg": 3.1,
+      "urgency": "MEDIUM",
+      "source": "dt_night_t2",
+      "simulated": true
     }
   ],
-  "guidance": "MANHOLE 1.1m ahead \u2014 DT night. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: BIKE 1.78m ahead (bearing +3\u00b0), step side-step. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

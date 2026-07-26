@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0007.jpg",
+  "source_frame": "docs/training/frames/gif_0007.jpg",
   "condition": "dusk",
   "twin_id": 0,
   "modulators": {
@@ -11,25 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "wet_reflect",
-      "distance_m": 1.7,
-      "bearing_deg": -30,
+      "class": "bike",
+      "distance_m": 1.68,
+      "bearing_deg": -25.4,
       "urgency": "MEDIUM",
-      "source": "dt_dusk_t0"
-    },
-    {
-      "class": "curb",
-      "distance_m": 0.5,
-      "bearing_deg": -22,
-      "urgency": "MEDIUM",
-      "source": "dt_dusk_t0"
+      "source": "dt_dusk_t0",
+      "simulated": true
     }
   ],
-  "guidance": "WET REFLECT 1.7m ahead \u2014 DT dusk. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: BIKE 1.68m ahead (bearing -25\u00b0), step right. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

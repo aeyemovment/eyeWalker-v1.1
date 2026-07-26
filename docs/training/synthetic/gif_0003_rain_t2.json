@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0003.jpg",
+  "source_frame": "docs/training/frames/gif_0003.jpg",
   "condition": "rain",
   "twin_id": 2,
   "modulators": {
@@ -11,25 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "crack",
-      "distance_m": 1.4,
-      "bearing_deg": -18,
+      "class": "trash_bin",
+      "distance_m": 3.08,
+      "bearing_deg": 22.0,
       "urgency": "MEDIUM",
-      "source": "dt_rain_t2"
-    },
-    {
-      "class": "manhole",
-      "distance_m": 1.7,
-      "bearing_deg": -19,
-      "urgency": "HIGH",
-      "source": "dt_rain_t2"
+      "source": "dt_rain_t2",
+      "simulated": true
     }
   ],
-  "guidance": "CRACK 1.4m ahead \u2014 DT rain. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: TRASH_BIN 3.08m ahead (bearing +22\u00b0), step left. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

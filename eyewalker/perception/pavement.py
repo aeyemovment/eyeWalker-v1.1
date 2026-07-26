@@ -59,8 +59,8 @@ class PavementPerception:
             "range_m": (self.min_range_m, self.max_range_m),
             "source": "pavement",
             "safety_critical": True,
-            "for_bpd": {"ada_check": "optional", "no_pii": True},
-            "for_eris": {"off_road_class": profile.get("terrain_class", "unknown")},
+            
+            
             "synthetic_only": True,
         }
 

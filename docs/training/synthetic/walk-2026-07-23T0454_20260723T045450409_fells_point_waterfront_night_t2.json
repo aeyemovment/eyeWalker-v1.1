@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/raw/walk-2026-07-23T0454_20260723T045450409_fells_point_waterfront.jpg",
+  "source_frame": "docs/training/frames/walk-2026-07-23T0454_20260723T045450409_fells_point_waterfront.jpg",
   "condition": "night",
   "twin_id": 2,
   "modulators": {
@@ -11,18 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "crack",
-      "distance_m": 2.0,
-      "bearing_deg": -28,
-      "urgency": "MEDIUM",
-      "source": "dt_night_t2"
+      "class": "manhole",
+      "distance_m": 1.15,
+      "bearing_deg": 1.5,
+      "urgency": "HIGH",
+      "source": "dt_night_t2",
+      "simulated": true
     }
   ],
-  "guidance": "CRACK 2.0m ahead \u2014 DT night. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: MANHOLE 1.15m ahead (bearing +1\u00b0), step side-step. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

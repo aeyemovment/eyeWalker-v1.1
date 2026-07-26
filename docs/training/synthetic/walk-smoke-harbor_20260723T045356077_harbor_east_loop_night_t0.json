@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/raw/walk-smoke-harbor_20260723T045356077_harbor_east_loop.jpg",
+  "source_frame": "docs/training/frames/walk-smoke-harbor_20260723T045356077_harbor_east_loop.jpg",
   "condition": "night",
   "twin_id": 0,
   "modulators": {
@@ -11,18 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "crack",
-      "distance_m": 0.8,
-      "bearing_deg": -23,
-      "urgency": "MEDIUM",
-      "source": "dt_night_t0"
+      "class": "pier_edge",
+      "distance_m": 3.17,
+      "bearing_deg": 19.6,
+      "urgency": "HIGH",
+      "source": "dt_night_t0",
+      "simulated": true
     }
   ],
-  "guidance": "CRACK 0.8m ahead \u2014 DT night. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: PIER_EDGE 3.17m ahead (bearing +20\u00b0), step left. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

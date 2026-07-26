@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>eyeWalker v1.1.0-ground — One-Tap Walk · NeuroAgent AI</title>
+<title>eyeWalker v1.1 — Assistive research · NeuroAgent AI</title>
 <meta name="description" content="Assistive navigation research prototype with REC + hybrid VLM. From NeuroAgent AI. Not a medical device.">
 <meta name="theme-color" content="#0a0f1a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -55,15 +55,18 @@
 </style>
 </head>
 <body>
-<div class="safety">
-  ⚠️ Assistive only — not replacement for cane/guide dog. Always keep traditional mobility aid.
-  This is alpha / research prototype. <strong>Not a medical device.</strong>
-  v1.1.0-ground: REC saves WebM + GPS. Hybrid VLM = Grok <> Muse Spark (experiment).
+<div class="safety" role="alert">
+  ⚠️ Assistive only — not a replacement for cane/guide dog. Always keep your traditional mobility aid.
+  <strong>Not a medical device.</strong> On-device cues are <strong>SIMULATED RESEARCH</strong> unless a real detector is connected.
+  Recording requires explicit consent below. Local-first; you control Save.
+</div>
+<div id="simBanner" style="background:#7c2d12;color:#ffedd5;padding:8px 12px;text-align:center;font-weight:800;font-size:12px;">
+  SIMULATION MODE ON — obstacle cues are generated for research, not live scene understanding.
 </div>
 <header class="app">
   <div>
     <h1>eyeWalker v1.1 👓🦮</h1>
-    <div class="sub">NeuroAgent AI · harbor walks · ground mode · open-source</div>
+    <div class="sub">NeuroAgent AI · medical assistive OSS · research prototype</div>
   </div>
   <div class="status-pill">
     <span class="dot" id="dot"></span>
@@ -89,15 +92,21 @@
         <button id="repeatBtn" type="button">🔊 Repeat</button>
       </div>
       <div class="row">
-        <label class="toggle"><input type="checkbox" id="groundMode" checked> Ground mode (manhole/shadow/crack)</label>
+        <label class="toggle"><input type="checkbox" id="simMode" checked> Simulated cues (research)</label>
       </div>
       <div class="row">
-        <label class="toggle">VLM
+        <label class="toggle"><input type="checkbox" id="groundMode" checked> Ground hazard taxonomy (sim)</label>
+      </div>
+      <div class="row">
+        <label class="toggle"><input type="checkbox" id="recConsent"> I consent to local recording for research (REC/Save)</label>
+      </div>
+      <div class="row">
+        <label class="toggle">Cue source
           <select id="vlmMode">
-            <option value="hybrid" selected>hybrid Grok<>Spark</option>
-            <option value="spark_only">Muse Spark only</option>
-            <option value="grok_only">Grok only (needs key)</option>
-            <option value="mock">mock offline</option>
+            <option value="mock" selected>simulated offline</option>
+            <option value="hybrid">hybrid experiment labels</option>
+            <option value="spark_only">Spark-style labels (sim)</option>
+            <option value="grok_only">Grok-style labels (sim; no auto cloud)</option>
           </select>
         </label>
       </div>
@@ -207,32 +216,45 @@
   }
 
   function planAvoid(obs) {
-    if (!obs.length) return { instruction: "Path clear. Walk straight. Keep your cane.", risk: "LOW" };
+    if (!obs.length) {
+      return {
+        instruction: "SIMULATED: path clear cue. Walk straight. Keep your cane. Not a medical device.",
+        risk: "LOW",
+        simulated: true,
+      };
+    }
     const top = [...obs].sort((a, b) => (a.urgency === "HIGH" ? 0 : 1) - (b.urgency === "HIGH" ? 0 : 1) || a.distance_m - b.distance_m)[0];
-    const side = top.bearing_deg < -8 ? "left" : top.bearing_deg > 8 ? "right" : "side-step";
+    // Convention: bearing < 0 = obstacle to user's LEFT → step RIGHT (away). bearing > 0 → step LEFT.
+    let side = "side-step";
+    if (top.bearing_deg < -8) side = "right";
+    else if (top.bearing_deg > 8) side = "left";
     const stepM = top.distance_m < 1.2 ? 0.4 : 0.5;
     const name = top.class.replace(/_/g, " ").toUpperCase();
+    const sim = document.getElementById("simMode")?.checked !== false;
+    const prefix = sim ? "SIMULATED RESEARCH CUE: " : "CUE: ";
     return {
-      instruction: `${name} ${top.distance_m.toFixed(1)}m ahead, step ${side} ${stepM.toFixed(1)}m. Keep your cane.`,
+      instruction: `${prefix}${name} ${top.distance_m.toFixed(1)}m ahead (bearing ${top.bearing_deg >= 0 ? "+" : ""}${top.bearing_deg.toFixed(0)}°), step ${side} ${stepM.toFixed(1)}m. Keep your cane. Not a medical device.`,
       risk: top.urgency,
       top,
+      simulated: sim,
     };
   }
 
   async function hybridInfer(obs) {
     const mode = vlmMode.value;
-    // Optional: POST frame to local hybrid API if present
-    // fetch("http://127.0.0.1:8791/api/eyewalker-vlm", ...)
-    if (mode === "mock" || mode === "spark_only" || mode === "hybrid" || mode === "grok_only") {
-      // Client-side hybrid experiment: Spark proposes; "Grok" layer = NL guidance polish
-      const plan = planAvoid(obs);
-      if (mode === "hybrid" || mode === "grok_only") {
-        plan.instruction = plan.instruction.replace("Keep your cane.", "Keep your cane. Hybrid VLM.");
-        obs.forEach((o) => (o.source = mode === "grok_only" ? "grok" : "hybrid"));
-      }
-      return { obstacles: obs, ...plan, mode };
+    const simOn = document.getElementById("simMode")?.checked !== false;
+    if (!simOn) {
+      return {
+        obstacles: [],
+        instruction: "Simulation off. No live detector connected. Keep your cane. Not a medical device.",
+        risk: "LOW",
+        mode,
+        simulated: false,
+      };
     }
-    return { obstacles: obs, ...planAvoid(obs), mode };
+    const plan = planAvoid(obs);
+    obs.forEach((o) => { o.source = "simulated_" + mode; o.simulated = true; });
+    return { obstacles: obs, ...plan, mode, simulated: true };
   }
 
   function drawHUD(obs, plan) {
@@ -312,6 +334,12 @@
   }
 
   function startRecording() {
+    const consent = document.getElementById("recConsent");
+    if (!consent || !consent.checked) {
+      log("REC blocked — check consent box first");
+      speak("Check the recording consent box first.");
+      return false;
+    }
     if (!stream) {
       log("REC needs camera stream — tap Start first");
       speak("Start walk first, then REC.");
@@ -363,6 +391,12 @@
   }
 
   function saveBundle() {
+    const consent = document.getElementById("recConsent");
+    if ((!consent || !consent.checked) && recChunks.length) {
+      log("Save blocked — consent required for recorded media");
+      speak("Check recording consent before save.");
+      return;
+    }
     // Save video
     if (recChunks.length) {
       const blob = new Blob(recChunks, { type: recChunks[0].type || "video/webm" });
@@ -377,15 +411,18 @@
     }
     // Save GPS + VLM json
     const vlmKey = `eyewalker_vlm_${sessionId}`;
+    const simOn = document.getElementById("simMode")?.checked !== false;
     const payload = {
-      version: "v1.1.0-ground",
+      version: "v1.1.0",
       sessionId,
       gpsTrail,
       vlm: JSON.parse(localStorage.getItem(vlmKey) || "[]"),
       ground_mode: groundMode.checked,
       vlm_mode: vlmMode.value,
+      simulation_mode: simOn,
+      recording_consent: !!(document.getElementById("recConsent")?.checked),
       safety: "Assistive research prototype. Not medical device. Keep cane/guide dog.",
-      dt9: { research_prototype: true, synthetic_only: false, not_medical_device: true },
+      dt9: { research_prototype: true, synthetic_only: simOn, not_medical_device: true },
     };
     const j = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const a2 = document.createElement("a");
@@ -401,7 +438,7 @@
     if (running && paused) {
       paused = false;
       pauseBtn.textContent = "⏸ Pause";
-      statusEl.textContent = "walking — VLM live";
+      statusEl.textContent = "walking — research/sim cues";
       speak("Resumed. Keep your cane.");
       tick();
       return;
@@ -416,7 +453,7 @@
       resize();
       running = true;
       paused = false;
-      statusEl.textContent = "walking — VLM live";
+      statusEl.textContent = "walking — research/sim cues";
       if ("geolocation" in navigator) {
         watchId = navigator.geolocation.watchPosition(
           (p) => {
@@ -439,9 +476,8 @@
           { enableHighAccuracy: true, maximumAge: 1000 }
         );
       }
-      speak("eyeWalker one one ground. Walk straight. I will warn manhole, shadow, crack. Keep your cane.");
-      // Auto-REC on start for open-source data collection
-      startRecording();
+      speak("eyeWalker one one. Simulation cues may play. Keep your cane. Not a medical device.");
+      // REC is opt-in only (consent checkbox + REC button) — never auto-start
       tick();
     } catch (e) {
       log("camera fail: " + e.message);
@@ -466,7 +502,15 @@
       }
       speak("Paused. Keep your cane.");
     } else {
-      stopSession();
+      // Resume (do not stop — Stop is via starting over after stopSession from long path)
+      paused = false;
+      pauseBtn.textContent = "⏸ Pause";
+      statusEl.textContent = "walking — research cues";
+      if (recording && mediaRecorder && mediaRecorder.state === "paused") {
+        try { mediaRecorder.resume(); } catch (_) {}
+      }
+      speak("Resumed. Keep your cane.");
+      tick();
     }
   }
 
@@ -498,10 +542,18 @@
       try { mediaRecorder.requestData(); } catch (_) {}
     }
   });
+  const simModeEl = document.getElementById("simMode");
+  const simBanner = document.getElementById("simBanner");
+  if (simModeEl && simBanner) {
+    simModeEl.addEventListener("change", () => {
+      simBanner.style.display = simModeEl.checked ? "block" : "none";
+      if (!simModeEl.checked) speak("Simulation off. No live detector. Keep your cane.");
+    });
+  }
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./service-worker.js").catch(() => {});
   }
-  log("v1.1.0-ground ready — REC fixed (MediaRecorder + GPS trail)");
+  log("v1.1.0 ready — SIM cues default; REC requires consent; pause resumes");
 })();
 </script>
 </body>

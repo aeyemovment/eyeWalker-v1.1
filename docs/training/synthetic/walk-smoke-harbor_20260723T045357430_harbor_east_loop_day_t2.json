@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/raw/walk-smoke-harbor_20260723T045357430_harbor_east_loop.jpg",
+  "source_frame": "docs/training/frames/walk-smoke-harbor_20260723T045357430_harbor_east_loop.jpg",
   "condition": "day",
   "twin_id": 2,
   "modulators": {
@@ -11,18 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "wet_reflect",
-      "distance_m": 0.6,
-      "bearing_deg": -26,
+      "class": "crack",
+      "distance_m": 2.93,
+      "bearing_deg": -22.1,
       "urgency": "MEDIUM",
-      "source": "dt_day_t2"
+      "source": "dt_day_t2",
+      "simulated": true
     }
   ],
-  "guidance": "WET REFLECT 0.6m ahead \u2014 DT day. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: CRACK 2.93m ahead (bearing -22\u00b0), step right. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

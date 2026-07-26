@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0015.jpg",
+  "source_frame": "docs/training/frames/gif_0015.jpg",
   "condition": "night",
   "twin_id": 2,
   "modulators": {
@@ -11,18 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "shadow_trap",
-      "distance_m": 1.9,
-      "bearing_deg": -15,
-      "urgency": "MEDIUM",
-      "source": "dt_night_t2"
+      "class": "manhole",
+      "distance_m": 1.77,
+      "bearing_deg": 21.6,
+      "urgency": "HIGH",
+      "source": "dt_night_t2",
+      "simulated": true
     }
   ],
-  "guidance": "SHADOW TRAP 1.9m ahead \u2014 DT night. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: MANHOLE 1.77m ahead (bearing +22\u00b0), step left. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

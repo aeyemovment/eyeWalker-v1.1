@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/raw/walk-smoke-harbor_20260723T045356077_harbor_east_loop.jpg",
+  "source_frame": "docs/training/frames/walk-smoke-harbor_20260723T045356077_harbor_east_loop.jpg",
   "condition": "dusk",
   "twin_id": 1,
   "modulators": {
@@ -12,31 +12,18 @@
   "obstacles": [
     {
       "class": "manhole",
-      "distance_m": 0.9,
-      "bearing_deg": -17,
+      "distance_m": 2.31,
+      "bearing_deg": 21.8,
       "urgency": "HIGH",
-      "source": "dt_dusk_t1"
-    },
-    {
-      "class": "manhole",
-      "distance_m": 1.8,
-      "bearing_deg": -16,
-      "urgency": "HIGH",
-      "source": "dt_dusk_t1"
-    },
-    {
-      "class": "manhole",
-      "distance_m": 1.9,
-      "bearing_deg": -21,
-      "urgency": "HIGH",
-      "source": "dt_dusk_t1"
+      "source": "dt_dusk_t1",
+      "simulated": true
     }
   ],
-  "guidance": "MANHOLE 0.9m ahead \u2014 DT dusk. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: MANHOLE 2.31m ahead (bearing +22\u00b0), step left. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0008.jpg",
+  "source_frame": "docs/training/frames/gif_0008.jpg",
   "condition": "night",
   "twin_id": 1,
   "modulators": {
@@ -11,25 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "wet_reflect",
-      "distance_m": 1.8,
-      "bearing_deg": -24,
-      "urgency": "MEDIUM",
-      "source": "dt_night_t1"
-    },
-    {
-      "class": "wet_reflect",
-      "distance_m": 1.1,
-      "bearing_deg": -30,
-      "urgency": "MEDIUM",
-      "source": "dt_night_t1"
+      "class": "manhole",
+      "distance_m": 1.63,
+      "bearing_deg": 17.8,
+      "urgency": "HIGH",
+      "source": "dt_night_t1",
+      "simulated": true
     }
   ],
-  "guidance": "WET REFLECT 1.8m ahead \u2014 DT night. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: MANHOLE 1.63m ahead (bearing +18\u00b0), step left. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

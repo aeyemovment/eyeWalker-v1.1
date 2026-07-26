@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0007.jpg",
+  "source_frame": "docs/training/frames/gif_0007.jpg",
   "condition": "rain",
   "twin_id": 1,
   "modulators": {
@@ -11,18 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "curb",
-      "distance_m": 1.1,
-      "bearing_deg": -29,
-      "urgency": "MEDIUM",
-      "source": "dt_rain_t1"
+      "class": "pier_edge",
+      "distance_m": 2.15,
+      "bearing_deg": 12.2,
+      "urgency": "HIGH",
+      "source": "dt_rain_t1",
+      "simulated": true
     }
   ],
-  "guidance": "CURB 1.1m ahead \u2014 DT rain. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: PIER_EDGE 2.15m ahead (bearing +12\u00b0), step left. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

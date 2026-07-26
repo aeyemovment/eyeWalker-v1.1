@@ -1,3 +1,15 @@
+# eyeWalker v1.1 — medical open source (2026-07-26)
+
+## v1.1.1 (Codex HOLD gates)
+
+- Simulated cues explicitly labeled; simulation can be toggled off  
+- Left/right: step **away** from obstacle bearing (PWA + planner tests)  
+- Scrub dual-use / personal / fake-crypto presentation from public medical tree  
+- Safe local prep script (no `git add -A`, no force tags, no auto-publish)  
+- REC requires consent; pause resumes; save respects consent  
+- Synthetic dataset rebuilt (no absolute home paths) + GitHub Actions CI  
+- Optional NemoClaw + Omniverse research stubs (honest, non-warranty)
+
 # eyeWalker v1.1.0 — medical open source (2026-07-26)
 
 ## Positioning

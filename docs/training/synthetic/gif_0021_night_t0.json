@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0021.jpg",
+  "source_frame": "docs/training/frames/gif_0021.jpg",
   "condition": "night",
   "twin_id": 0,
   "modulators": {
@@ -11,18 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "shadow_trap",
-      "distance_m": 0.9,
-      "bearing_deg": -18,
+      "class": "trash_bin",
+      "distance_m": 1.24,
+      "bearing_deg": -11.4,
       "urgency": "MEDIUM",
-      "source": "dt_night_t0"
+      "source": "dt_night_t0",
+      "simulated": true
     }
   ],
-  "guidance": "SHADOW TRAP 0.9m ahead \u2014 DT night. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: TRASH_BIN 1.24m ahead (bearing -11\u00b0), step right. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

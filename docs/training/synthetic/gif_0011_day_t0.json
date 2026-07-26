@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0011.jpg",
+  "source_frame": "docs/training/frames/gif_0011.jpg",
   "condition": "day",
   "twin_id": 0,
   "modulators": {
@@ -11,32 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "curb",
-      "distance_m": 1.2,
-      "bearing_deg": -27,
+      "class": "crack",
+      "distance_m": 2.91,
+      "bearing_deg": -23.5,
       "urgency": "MEDIUM",
-      "source": "dt_day_t0"
-    },
-    {
-      "class": "curb",
-      "distance_m": 0.8,
-      "bearing_deg": -16,
-      "urgency": "MEDIUM",
-      "source": "dt_day_t0"
-    },
-    {
-      "class": "manhole",
-      "distance_m": 1.9,
-      "bearing_deg": -24,
-      "urgency": "HIGH",
-      "source": "dt_day_t0"
+      "source": "dt_day_t0",
+      "simulated": true
     }
   ],
-  "guidance": "CURB 1.2m ahead \u2014 DT day. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: CRACK 2.91m ahead (bearing -24\u00b0), step right. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }

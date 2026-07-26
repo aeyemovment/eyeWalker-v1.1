@@ -46,11 +46,13 @@
 
 See [docs/CHANGELOG_v1.1.md](docs/CHANGELOG_v1.1.md).
 
-- **PWA walk mode** with camera + optional **REC** (MediaRecorder) for open training data  
-- **Ground-priority** cues (curb / crack / manhole-class hazards — research labels)  
-- Hybrid VLM path hooks (mock / local / optional cloud — privacy first)  
-- Safety banner and assistive-only claims preserved  
+- **PWA walk mode** with camera; **simulated research cues** labeled by default (not silent “live AI”)  
+- **REC** only with **explicit consent** (no auto-record); pause/resume; Save exports local package  
+- **Left/right guidance** steps *away* from obstacle bearing (regression-tested)  
+- Optional **NemoClaw** local-first harness docs + **Omniverse** synthetic-sim stub (not required for PWA)  
+- Synthetic DT labels under `docs/training/synthetic/` (rebuild script; repo-relative paths)  
 - Dual license: PolyForm NC core + MIT mobile/PWA  
+- CI: unit tests + synthetic rebuild check
 
 ---
 

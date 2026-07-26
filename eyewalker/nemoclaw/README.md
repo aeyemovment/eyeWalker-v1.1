@@ -1,33 +1,33 @@
+# NemoClaw + Omniverse (optional research)
 
-# NemoClaw Harness for eyeWalker
+**eyeWalker v1.1 medical OSS** — NeuroAgent AI.
 
-NVIDIA NemoClaw is a secure agent harness — it sandboxes OpenClaw agents with policy-enforced network, filesystem, and inference routing.
+## What this is
 
-Why we include it:
-- **Privacy**: Ray-Ban GPS + camera are sensitive. NemoClaw enforces local-first routing — inference happens on-device via Ollama/Qwen2-VL unless you opt into cloud Nemotron.
-- **Safety**: Egress allowlist — only map tiles (Esri, MapTiler, OSM) and inference endpoints. No trackers.
-- **Reproducibility**: Blueprint is versioned and digest-verified.
+| Piece | Role |
+|-------|------|
+| **NemoClaw** | Optional **local-first** agent harness / sandbox policy (egress allowlist, sensitive routes stay local). See `blueprint.yaml`. |
+| **Omniverse** | Optional **synthetic simulation** adapter (`eyewalker/omniverse/`) for offline research scenes — **not** required for the PWA. |
 
-## Install
+Neither is a medical device stack. Neither claims production crypto or classified capability.
+
+## Honest limits
+
+- Blueprint is **policy documentation** + optional tooling — not a warranty of security.  
+- Omniverse bridge is a **stub** until you install NVIDIA Omniverse/Isaac separately.  
+- Default PWA runs **without** Omniverse.  
+
+## Quickstart (optional)
 
 ```bash
-curl -fsSL https://nvidia.com/nemoclaw.sh | bash
-nemoclaw onboard
-nemoclaw eyewalker connect
-openclaw tui
+# NemoClaw — only if you use NVIDIA's harness (external install)
+# follow current NVIDIA docs; do not curl | bash in production CI without review
+
+# Omniverse stub status
+python -c "from eyewalker.omniverse import OmniverseBridge; print(OmniverseBridge().status())"
 ```
 
-## Policies
-- `privacy.yaml` — blocks raw location+video exfiltration
-- Presets `pypi`, `npm` for dependencies
+## Privacy
 
-## Use with eyeWalker
-
-Inside sandbox:
-```bash
-cd /sandbox/eyeWalker
-pip install -e .
-python examples/harbor_walk.py --mode secure
-```
-
-See https://docs.nvidia.com/nemoclaw/
+Local-first: do not pair raw GPS + RGB for cloud egress without explicit user consent.  
+See root `PRIVACY.md` and `SAFETY.md`.

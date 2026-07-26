@@ -1,5 +1,5 @@
 {
-  "source_frame": "/Users/lesharicotsverts/eyeWalker/docs/training/frames/gif_0006.jpg",
+  "source_frame": "docs/training/frames/gif_0006.jpg",
   "condition": "day",
   "twin_id": 2,
   "modulators": {
@@ -11,18 +11,19 @@
   },
   "obstacles": [
     {
-      "class": "shadow_trap",
-      "distance_m": 1.9,
-      "bearing_deg": -16,
-      "urgency": "MEDIUM",
-      "source": "dt_day_t2"
+      "class": "pier_edge",
+      "distance_m": 2.47,
+      "bearing_deg": -17.0,
+      "urgency": "HIGH",
+      "source": "dt_day_t2",
+      "simulated": true
     }
   ],
-  "guidance": "SHADOW TRAP 1.9m ahead \u2014 DT day. Keep your cane.",
+  "guidance": "SIMULATED RESEARCH CUE: PIER_EDGE 2.47m ahead (bearing -17\u00b0), step right. Keep your cane. Not a medical device.",
   "dt9": {
     "synthetic_only": true,
     "research_prototype": true,
     "not_medical_device": true,
-    "ritual": "all_at_once"
+    "ritual": "all_at_once_v1.1"
   }
 }
