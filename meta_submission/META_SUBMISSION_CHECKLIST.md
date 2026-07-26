@@ -229,7 +229,7 @@ If approved:
 - **First real-time VLM navigation** for off-street hazards (piers, boardwalks, uneven pavements)
 - **Built by patients** with rare diseases (NMOSD, MOGAD, LHON, CVI, etc.)
 - **Dual-licensed** to protect mission (PolyForm Noncommercial core) while enabling distribution (MIT mobile)
-- **Privacy-first** with NemoClaw harness (no GPS+RGB exfiltration)
+- **Privacy-first intent** with local-first demos; optional NemoClaw *policy sketch only* (not a tested exfiltration guarantee)
 - **Safety-centered**: explicit disclaimers everywhere, research prototype model
 
 **Why Meta alignment:**

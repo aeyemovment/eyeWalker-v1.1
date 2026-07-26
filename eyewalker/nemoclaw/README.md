@@ -1,6 +1,6 @@
 # NemoClaw (optional) + Omniverse (optional)
 
-**eyeWalker v1.1.2 medical OSS** — NeuroAgent AI.
+**eyeWalker v1.1.8 medical OSS** — NeuroAgent AI.
 
 ## Honesty
 

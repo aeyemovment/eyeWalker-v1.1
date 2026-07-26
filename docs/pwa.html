@@ -420,7 +420,7 @@
     const vlmKey = `eyewalker_vlm_${sessionId}`;
     const simOn = document.getElementById("simMode")?.checked !== false;
     const payload = {
-      version: "1.1.7",
+      version: "1.1.8",
       sessionId,
       gpsTrail: consented ? gpsTrail : [],
       gps_included: consented,
@@ -462,33 +462,8 @@
       running = true;
       paused = false;
       statusEl.textContent = "walking — simulated research cues";
-      if ("geolocation" in navigator) {
-        watchId = navigator.geolocation.watchPosition(
-          (p) => {
-            gps.lat = p.coords.latitude;
-            gps.lon = p.coords.longitude;
-            gpsEl.textContent = `${gps.lat.toFixed(5)},${gps.lon.toFixed(5)}`;
-            if (running) {
-              const c = document.getElementById("recConsent");
-              if (c && c.checked) {
-                gpsTrail.push({
-                  t: Date.now(),
-                  lat: gps.lat,
-                  lon: gps.lon,
-                  acc: p.coords.accuracy,
-                  heading: p.coords.heading,
-                  speed: p.coords.speed,
-                });
-                gpsPtsEl.textContent = String(gpsTrail.length);
-              } else {
-                gpsPtsEl.textContent = "0 (consent off)";
-              }
-            }
-          },
-          (err) => log("GPS " + err.message),
-          { enableHighAccuracy: true, maximumAge: 1000 }
-        );
-      }
+      // GPS trail + watch only while recording consent is checked (no silent retention).
+      startGpsIfConsented();
       speak("eyeWalker one one. Simulation cues may play. Keep your cane. Not a medical device.");
       // REC is opt-in only (consent checkbox + REC button) — never auto-start
       tick();
@@ -535,7 +510,7 @@
     statusEl.textContent = "stopped — tap Save";
     pauseBtn.textContent = "⏸ Pause";
     if (stream) { stream.getTracks().forEach((t) => t.stop()); stream = null; }
-    if (watchId) navigator.geolocation.clearWatch(watchId);
+    stopGpsWatch();
     speak("Stopped. Tap Save for open source package. Keep your cane.");
   }
 
@@ -588,15 +563,64 @@
     });
   }
 
-  // Consent revocation stops capture
+  function stopGpsWatch() {
+    if (watchId != null && "geolocation" in navigator) {
+      try { navigator.geolocation.clearWatch(watchId); } catch (_) {}
+    }
+    watchId = null;
+  }
+
+  function startGpsIfConsented() {
+    const consent = document.getElementById("recConsent");
+    if (!consent || !consent.checked) {
+      stopGpsWatch();
+      gpsPtsEl.textContent = "0 (consent off)";
+      gpsEl.textContent = "— (consent off)";
+      return;
+    }
+    if (!("geolocation" in navigator) || watchId != null) return;
+    watchId = navigator.geolocation.watchPosition(
+      (p) => {
+        gps.lat = p.coords.latitude;
+        gps.lon = p.coords.longitude;
+        gpsEl.textContent = `${gps.lat.toFixed(5)},${gps.lon.toFixed(5)}`;
+        if (running && document.getElementById("recConsent")?.checked) {
+          gpsTrail.push({
+            t: Date.now(),
+            lat: gps.lat,
+            lon: gps.lon,
+            acc: p.coords.accuracy,
+            heading: p.coords.heading,
+            speed: p.coords.speed,
+          });
+          gpsPtsEl.textContent = String(gpsTrail.length);
+        }
+      },
+      (err) => log("GPS " + err.message),
+      { enableHighAccuracy: true, maximumAge: 1000 }
+    );
+  }
+
+  // Consent revocation stops capture, GPS trail, and GPS watch
   const recConsentEl = document.getElementById("recConsent");
   if (recConsentEl) {
     recConsentEl.addEventListener("change", () => {
-      if (!recConsentEl.checked && recording) {
-        finalizeRecording().then(() => {
-          log("REC stopped — consent revoked");
-          speak("Recording stopped. Consent off.");
-        });
+      if (!recConsentEl.checked) {
+        stopGpsWatch();
+        gpsTrail = [];
+        gpsPtsEl.textContent = "0 (consent off)";
+        gpsEl.textContent = "— (consent off)";
+        if (recording || (mediaRecorder && mediaRecorder.state !== "inactive")) {
+          finalizeRecording().then(() => {
+            log("REC stopped — consent revoked; GPS trail cleared");
+            speak("Recording stopped. Consent off.");
+          });
+        } else {
+          log("Consent off — GPS trail cleared, no watch");
+        }
+      } else if (running) {
+        startGpsIfConsented();
+        log("Consent on — GPS trail enabled while walking");
       }
     });
   }
@@ -605,7 +629,7 @@
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./service-worker.js").catch(() => {});
   }
-  log("v1.1.7 ready — SIM cues default; REC requires consent; pause resumes");
+  log("v1.1.8 ready — SIM cues default; REC+GPS require consent; pause resumes");
 })();
 </script>
 </body>

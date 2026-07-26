@@ -58,4 +58,4 @@ Those belong outside this open medical tree if pursued at all.
 - https://github.com/aeyemovment/ogx-provider-eyewalker  
 - https://huggingface.co/spaces/NeuroAgentAI/eyeWalker  
 
-© 2026 NeuroAgent AI · eyeWalker v1.1.0
+© 2026 NeuroAgent AI · eyeWalker v1.1.8

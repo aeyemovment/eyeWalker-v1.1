@@ -1,3 +1,13 @@
+# eyeWalker v1.1.8 (Codex second HOLD — six fixes)
+
+- Canonical PWA only at `docs/pwa.html` (no root duplicate); hybrid L/R step-away + SIMULATED labels
+- Remove aerial dual-use perception module; honest multicam/bodycam redaction (`requested` / not applied)
+- Public tree free of review-pass unsafe scripts; `commit_to_git.sh` non-publishing; safe prep script
+- REC: consent revocable (stops capture + clears GPS trail/watch), Stop bound, finalize before Save, MIME ext
+- All version surfaces **1.1.8**; CI covers duplicate-PWA, recorder wiring, privacy scrub, script safety, aerial ban
+- NemoClaw/Omniverse: optional stubs only — no “secured / never leaves” marketing
+- Immutable tag **v1.1.8** (do not move v1.1.1–v1.1.7)
+
 # eyeWalker v1.1.2 (Codex re-HOLD fixes)
 
 - Remove root `pwa.html` duplicate; canonical is `docs/pwa.html` only

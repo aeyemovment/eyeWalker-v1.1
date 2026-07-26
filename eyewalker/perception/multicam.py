@@ -1,12 +1,13 @@
 """
-Multi-camera fusion for eyeWalker v1.1 — optional aerial <> HMD <> body <> pavement.
+Multi-camera fusion for eyeWalker v1.1 — HMD / body / pavement only.
 
 Medical assistive research (NeuroAgent AI). Not a medical device.
+No aerial / drone / elevated surveillance modality in the public medical OSS tree.
 
 Fusion strategy (research):
-- Prefer closest reliable cue: pavement (near) > HMD/body > aerial (context)
+- Prefer closest reliable cue: pavement (near) > HMD/body
 - Optional research overlays (CUSP) must not override safety-critical drop/curb labels
-- Privacy: anonymize by default; local-first
+- Privacy flags are *requests* only unless a real CV pipeline is attached
 """
 
 from typing import Dict, Optional
@@ -15,7 +16,6 @@ from dataclasses import dataclass
 
 @dataclass
 class MultiCamFrameBundle:
-    aerial: Optional[Dict] = None
     hmd: Optional[Dict] = None
     bodycam: Optional[Dict] = None
     pavement: Optional[Dict] = None
@@ -27,7 +27,7 @@ class MultiCamFusion:
     def __init__(self, use_cusp=True, privacy_mode=True):
         self.use_cusp = use_cusp
         self.privacy_mode = privacy_mode
-        self.priorities = ["pavement", "hmd", "bodycam", "aerial"]
+        self.priorities = ["pavement", "hmd", "bodycam"]
 
     def fuse(self, bundle: MultiCamFrameBundle, cusp_ctx: Optional[Dict] = None, osm_graph=None) -> Dict:
         scene = {
@@ -36,7 +36,6 @@ class MultiCamFusion:
             "modalities_present": [
                 k
                 for k, v in {
-                    "aerial": bundle.aerial,
                     "hmd": bundle.hmd,
                     "bodycam": bundle.bodycam,
                     "pavement": bundle.pavement,
@@ -47,7 +46,14 @@ class MultiCamFusion:
             "hazards_fused": [],
             "walkable_fused": None,
             "cusp": cusp_ctx,
-            "privacy": {"anonymized": True, "no_face_id": True, "mode": self.privacy_mode},
+            "privacy": {
+                "face_blur_requested": bool(self.privacy_mode),
+                "face_blur_applied": False,
+                "plate_blur_requested": bool(self.privacy_mode),
+                "plate_blur_applied": False,
+                "mode": self.privacy_mode,
+                "note": "Redaction flags are requests only until CV blur is implemented.",
+            },
             "synthetic_only": True,
             "research_prototype": True,
         }
@@ -63,10 +69,6 @@ class MultiCamFusion:
         if bundle.bodycam:
             scene["layers"]["bodycam"] = bundle.bodycam
 
-        if bundle.aerial:
-            scene["layers"]["aerial"] = bundle.aerial
-            scene["hazards_fused"].extend(bundle.aerial.get("far_hazards", []))
-
         if cusp_ctx and self.use_cusp:
             scene = self._apply_cusp_guidance(scene, cusp_ctx)
 
@@ -74,9 +76,12 @@ class MultiCamFusion:
 
         if self.privacy_mode:
             scene["privacy_enforced"] = {
-                "face_blur": True,
-                "plate_blur": True,
-                "aggregate_only": True,
+                "face_blur_requested": True,
+                "face_blur_applied": False,
+                "plate_blur_requested": True,
+                "plate_blur_applied": False,
+                "aggregate_only_requested": True,
+                "note": "Not a security product; no silent claim of performed blur.",
             }
 
         return scene
@@ -88,7 +93,6 @@ class MultiCamFusion:
                 h["severity"] = "high"
                 h["safety_override"] = True
             elif isinstance(cusp, dict) and "severity_mod" in cusp:
-                # keep advisory only
                 h["research_mod_note"] = "cusp_mod_applied_research_only"
         return scene
 

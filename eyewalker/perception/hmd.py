@@ -41,7 +41,12 @@ class HMDPerception:
             "timestamp": frame.timestamp,
             "gps": frame.gps,
             "pose_6dof": frame.pose_6dof,
-            "privacy": {"face_blur": True, "local_first": True},
+            "privacy": {
+                "face_blur_requested": True,
+                "face_blur_applied": False,
+                "local_first": True,
+                "note": "Redaction flags are requests only until CV blur is implemented.",
+            },
             "synthetic_only": True,
             "research_prototype": True,
         }
@@ -51,7 +56,13 @@ class HMDPerception:
             "modality": "bodycam",
             "device": frame.device,
             "timestamp": frame.timestamp,
-            "privacy": {"face_blur": True, "plate_blur": True},
+            "privacy": {
+                "face_blur_requested": True,
+                "face_blur_applied": False,
+                "plate_blur_requested": True,
+                "plate_blur_applied": False,
+                "note": "Redaction flags are requests only until CV blur is implemented.",
+            },
             "synthetic_only": True,
             "research_prototype": True,
         }

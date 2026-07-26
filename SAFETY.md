@@ -28,4 +28,4 @@ For people with **rare neurologic diseases affecting vision** and **all other ne
 
 ## Version
 
-eyeWalker **v1.1.0** · © 2026 NeuroAgent AI · See `DUAL_LICENSE.md`.
+eyeWalker **v1.1.8** · © 2026 NeuroAgent AI · See `DUAL_LICENSE.md`.

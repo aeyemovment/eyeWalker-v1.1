@@ -18,8 +18,8 @@
 | Pause | Pauses cue loop; resumes capture if REC was paused |
 | Stop | Explicit **Stop** ends walk, stops REC, releases camera |
 | Save | Finalizes active REC (stop + flush) before download; uses correct MIME/extension |
-| GPS trail | Collected only while walking **and** only stored in export if consent checked; otherwise GPS points are not written into the save package |
-| localStorage | Short VLM/sim cue log may be stored locally for the session; clearable by browser; not a cloud upload |
+| GPS trail | **Requires recording consent.** Geolocation watch and trail append only while consent is checked; unchecking consent clears the trail and stops the watch. Export includes GPS only if consent still checked at Save |
+| localStorage | Short VLM/sim cue log may be stored locally for the session; clearable by browser; not a cloud upload. Export of VLM log requires consent |
 
 ## What we do not claim
 

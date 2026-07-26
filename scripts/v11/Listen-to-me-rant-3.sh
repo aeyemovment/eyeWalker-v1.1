@@ -11,7 +11,11 @@ if [[ ! -d "$ROOT" ]]; then
 fi
 cd "$ROOT"
 echo "eyeWalker local prep in: $ROOT"
-echo "1.1.0" > VERSION
+# Do not clobber VERSION — release version is owned by human + CI surfaces.
+if [[ ! -f VERSION ]]; then
+  echo "1.1.8" > VERSION
+fi
+echo "VERSION=$(tr -d '[:space:]' < VERSION)"
 
 mkdir -p docs/training/raw docs/training/frames docs/training/synthetic docs/training/exports
 

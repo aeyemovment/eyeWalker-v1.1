@@ -10,7 +10,7 @@ This is the smartphone version of eyeWalker — no Ray-Bans needed to start. You
 - Obstacle HUD with risk assessment and real-time avoidance guidance
 - Spatial audio guidance (mock TTS → will use expo-speech)
 - Split view: camera + map
-- NemoClaw harness compatible — runs inside secure sandbox
+- Optional NemoClaw *policy docs* only (not a tested security product; no “secured / never leaves” claim)
 
 ## Run it
 
