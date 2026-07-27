@@ -1,6 +1,32 @@
+---
+# DT#9 — machine-readable compliance stamp (prose below remains authoritative for humans)
+title: eyeWalker Inspiration
+artifact_type: documentation
+synthetic_only: true
+research_prototype: true
+not_medical_device: true
+not_for_navigation: true
+not_clinical_diagnostic_regulatory: true
+compliance_ref: "Addendum_5_research_prototype_synthetic_only"
+version: "1.1.9"
+ship_ref: "v1.1.9"
+apple_health_fitness_activity_sync: false
+live_aerial_pipeline_shipped: false
+national_security_isr_product: false
+risk_flags:
+  - research_prototype
+  - simulated_cues_in_open_pwa
+  - concept_art_not_product_ui
+  - no_apple_health_sync
+  - no_live_aerial_in_public_tree
+  - dual_use_marketing_forbidden
+lane: medical_oss_public
+---
+
 # Inspiration — why eyeWalker exists
 
-**Research prototype · not a medical device · not a cane or guide dog replacement.**
+**Research prototype · not a medical device · not a cane or guide dog replacement.**  
+**DT#9:** `synthetic_only=true` · `research_prototype=true` · `compliance_ref=Addendum_5_research_prototype_synthetic_only` · `version=1.1.9`
 
 ## Human problem
 
@@ -19,6 +45,7 @@ The open **v1.1.9** build is intentionally narrower:
 | Browser **PWA** with **simulated** research cues | Multimodal collage (drone + phone + glasses) as **inspiration only** |
 | Consent-gated local REC / GPS trail | No live aerial pipeline shipped in this medical OSS tree |
 | Honest labels · local-first demos | No claim of national-security product, ISR, or dual-use system |
+| **No** Apple Health / Fitness / Activity sync | Concept art does not imply phone workout or rings integration |
 
 ### Concept gallery
 
@@ -45,7 +72,8 @@ Still frames:
 3. **Consent for capture** — REC and precise GPS trail require an explicit checkbox; revoke stops capture.  
 4. **Local-first preference** — demos should not need a cloud brain to open.  
 5. **Open for noncommercial research** — PolyForm Noncommercial core; exact MIT allowlist for mobile/PWA files (see [DUAL_LICENSE.md](../DUAL_LICENSE.md)).  
-6. **No fake security marketing** — optional NemoClaw docs are a policy *sketch*, not a certified product.
+6. **No fake security marketing** — optional NemoClaw docs are a policy *sketch*, not a certified product.  
+7. **No silent health-platform sync** — this research PWA does **not** write to Apple Health, Fitness, or Activity rings.
 
 ## Public vs private lanes
 
