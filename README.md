@@ -26,6 +26,7 @@
 | **OGX provider** | https://github.com/aeyemovment/ogx-provider-eyewalker |
 | **HF Space route (verify deployed revision)** | https://huggingface.co/spaces/NeuroAgentAI/eyeWalker |
 | **Open status** | [OPEN_SOURCE.md](OPEN_SOURCE.md) · [DUAL_LICENSE.md](DUAL_LICENSE.md) |
+| **Release HOLDs** | [docs/RELEASE_HOLDS_v1.1.9.md](docs/RELEASE_HOLDS_v1.1.9.md) (MCP / Jetson roadmap / dual-use product claims) |
 
 ---
 
