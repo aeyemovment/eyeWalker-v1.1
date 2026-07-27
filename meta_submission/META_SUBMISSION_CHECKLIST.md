@@ -29,7 +29,7 @@ Those are routing handles, not current-state proof in this v1.1.9 code review. C
 
 ## Human-gated external evaluation
 
-Before any future submission or update, a human operator must:
+Before any future submission or update, a human maintainer must:
 
 1. Review the exact immutable release revision and its licenses.
 2. Verify the current contribution route and schema in official platform documentation.

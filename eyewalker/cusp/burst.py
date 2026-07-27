@@ -1,7 +1,8 @@
 """
 |ΣΨ|² BURST field — CUSP* · |ΣΨ|² BURST holographic visual prototype
 
-DT#9 synthetic research prototype. synthetic_only=true, bounded 0.25-3.0, core pure/invariant
+synthetic_only=true research prototype; modulators bounded 0.25-3.0; core physics left invariant.
+Not a medical device.
 
 For neuroscientists:
 psi_i = complex salience wavefunction for i-th visual element (obstacle, walkable patch, flow vector)

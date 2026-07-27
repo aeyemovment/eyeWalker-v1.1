@@ -1,6 +1,6 @@
 # Meta source-availability evaluation draft — eyeWalker v1.1.9
 
-**Status:** draft-only operator copy. It is not a portal submission, email receipt, approval, listing, or publication record.
+**Status:** draft-only human prep copy. It is not a portal submission, email receipt, approval, listing, or publication record.
 
 ## Project name
 

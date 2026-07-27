@@ -1,5 +1,5 @@
 ---
-# DT#9 — machine-readable compliance stamp (prose below remains authoritative for humans)
+# Research prototype metadata (documentation only — not a medical device)
 title: eyeWalker Inspiration
 artifact_type: documentation
 synthetic_only: true
@@ -7,9 +7,7 @@ research_prototype: true
 not_medical_device: true
 not_for_navigation: true
 not_clinical_diagnostic_regulatory: true
-compliance_ref: "Addendum_5_research_prototype_synthetic_only"
 version: "1.1.9"
-ship_ref: "v1.1.9"
 apple_health_fitness_activity_sync: false
 live_aerial_pipeline_shipped: false
 national_security_isr_product: false
@@ -20,13 +18,12 @@ risk_flags:
   - no_apple_health_sync
   - no_live_aerial_in_public_tree
   - dual_use_marketing_forbidden
-lane: medical_oss_public
 ---
 
 # Inspiration — why eyeWalker exists
 
 **Research prototype · not a medical device · not a cane or guide dog replacement.**  
-**DT#9:** `synthetic_only=true` · `research_prototype=true` · `compliance_ref=Addendum_5_research_prototype_synthetic_only` · `version=1.1.9`
+Metadata: `synthetic_only=true` · `research_prototype=true` · `version=1.1.9`
 
 ## Human problem
 
@@ -43,7 +40,7 @@ The open **v1.1.9** build is intentionally narrower:
 | Open build today | Concept art / future research |
 |------------------|-------------------------------|
 | Browser **PWA** with **simulated** research cues | Multimodal collage (drone + phone + glasses) as **inspiration only** |
-| Consent-gated local REC / GPS trail | No live aerial pipeline shipped in this medical OSS tree |
+| Consent-gated local REC / GPS trail | No live aerial pipeline shipped in this public research tree |
 | Honest labels · local-first demos | No claim of national-security product, ISR, or dual-use system |
 | **No** Apple Health / Fitness / Activity sync | Concept art does not imply phone workout or rings integration |
 
@@ -75,10 +72,10 @@ Still frames:
 6. **No fake security marketing** — optional NemoClaw docs are a policy *sketch*, not a certified product.  
 7. **No silent health-platform sync** — this research PWA does **not** write to Apple Health, Fitness, or Activity rings.
 
-## Public vs private lanes
+## Scope of this public repository
 
-- **This public medical OSS repo** (`eyeWalker-v1.1`) is for assistive / accessibility **research** and the open PWA.  
-- Separate **private** company workstreams (if any) are not claimed by this README and are not part of the `v1.1.9` ship tag.  
+- **This public research repo** (`eyeWalker-v1.1`) is for assistive / accessibility **research** and the open PWA.  
+- Work outside this repository is not claimed by this document and is not part of the `v1.1.9` release tag.  
 - We do **not** present eyeWalker as a national-security, ISR, or dual-use weapons product.
 
 ## Try the open interface

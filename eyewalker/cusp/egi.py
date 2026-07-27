@@ -1,8 +1,9 @@
 """
 EGI — Efference-Guided Inference: focimeg generative WM + oknEngine + VLM
-Core identity for grokWorldeye v1.1 and eyeWalker CUSP
+Research module for eyeWalker CUSP experiments.
 
-DT#9 synthetic research prototype. synthetic_only=true, research_prototype=true, bounded 0.25-3.0
+synthetic_only=true, research_prototype=true, modulators bounded 0.25-3.0.
+Not a medical device.
 
 For computational neuroscientists:
 - Efference copy = copy of motor command (gaze shift, head turn, step) used to predict sensory consequences
@@ -69,7 +70,7 @@ class EGIEngine:
 
     def compute_severity_modulator(self, efference: Dict, detections: list) -> float:
         """
-        CohortModulator mapping: company brain / pathology -> severity multiplier, bounded 0.25-3.0
+        Research severity multiplier from predicted motion, bounded 0.25-3.0.
         For eyeWalker: if predicted gaze velocity high (turning), boost obstacle salience off-axis
         """
         base = 1.0

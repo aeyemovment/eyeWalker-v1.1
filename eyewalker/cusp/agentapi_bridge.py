@@ -1,7 +1,7 @@
 """
 AgentAPI :8780 loopback policy bridge for CUSP.
 
-DT#9 synthetic research prototype. synthetic_only=true
+synthetic_only=true research prototype. Not a medical device.
 
 No HTTP transport is implemented in this module. A future transport may use:
 - GET /health
