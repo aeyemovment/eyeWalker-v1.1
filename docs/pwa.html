@@ -18,6 +18,10 @@
   html,body{height:100%}
   body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:flex;flex-direction:column;min-height:100dvh}
   .safety{background:#ffcc00;color:#000;padding:10px 12px;text-align:center;font-weight:800;font-size:12px;line-height:1.35}
+  .not-list{background:#1e293b;color:#e2e8f0;padding:10px 12px;font-size:12px;line-height:1.45;border-bottom:1px solid var(--line)}
+  .not-list strong{color:#facc15;display:block;margin-bottom:4px}
+  .not-list ul{margin:0;padding-left:1.2rem}
+  .not-list li{margin:2px 0}
   header.app{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--line)}
   header.app h1{font-size:1rem;line-height:1.15}
   header.app .sub{font-size:.7rem;color:var(--muted);margin-top:2px}
@@ -69,6 +73,14 @@
   Optional <strong>30 Hz fast loop</strong> is a browser HUD/tracker research path (sim).
   Local video recording and precise GPS location/trail retention and export require explicit consent below. Local-first; you control Save.
 </div>
+<div class="not-list" role="note" aria-label="What this build is not">
+  <strong>What it is not</strong>
+  <ul>
+    <li><strong>Not</strong> Jetson / TensorRT / PeopleNet 30 Hz (this is a browser sim dual-loop, not NVIDIA edge TRT)</li>
+    <li><strong>Not</strong> live CV (camera pixels are not used for detection)</li>
+    <li><strong>Not</strong> navigation (not a mobility aid; keep cane / guide dog)</li>
+  </ul>
+</div>
 <div id="simBanner" style="background:#7c2d12;color:#ffedd5;padding:8px 12px;text-align:center;font-weight:800;font-size:12px;">
   SIMULATION MODE ON — obstacle cues are generated for research, not live scene understanding.
 </div>
@@ -109,6 +121,9 @@
       </div>
       <div class="row">
         <label class="toggle"><input type="checkbox" id="fastLoop30" checked> 30 Hz fast loop (sim HUD/tracker)</label>
+      </div>
+      <div class="privacy-status" id="fastLoopNote" style="margin-top:-4px">
+        30 Hz path is <strong>not</strong> Jetson/TensorRT/PeopleNet, <strong>not</strong> live CV, <strong>not</strong> navigation.
       </div>
       <div class="row">
         <label class="toggle"><input type="checkbox" id="recConsent"> I consent to local video recording plus precise GPS location/trail retention and export (REC/Save)</label>
@@ -742,6 +757,15 @@
           fast_loop_hz_target: fastLoop30El?.checked ? 30 : 0,
           slow_cue_hz_measured: measuredSlowHz,
           loops_simulated: true,
+          jetson_trt: false,
+          peoplenet_trt: false,
+          live_cv: false,
+          not_navigation: true,
+          what_it_is_not: [
+            "Not Jetson / TensorRT / PeopleNet 30Hz",
+            "Not live CV",
+            "Not navigation",
+          ],
         };
         if (hasRecordingConsent() && gps) entry.gps = { ...gps };
         else entry.gps_redacted = true;
@@ -951,6 +975,11 @@
       recording_complete: finalization.complete,
       recording_finalization_reason: finalization.reason,
       safety: "Simulated research only. Not for navigation. Not a medical device. Keep cane/guide dog.",
+      what_it_is_not: [
+        "Not Jetson / TensorRT / PeopleNet 30Hz (browser sim dual-loop only)",
+        "Not live CV (camera pixels not used for detection)",
+        "Not navigation (not a mobility aid)",
+      ],
       live_detector_executed: false,
       provenance: simOn ? "synthetic_mock" : "synthetic_no_detector",
       dual_loop: {
@@ -960,7 +989,11 @@
         slow_cue_ms: SLOW_CUE_MS,
         slow_cue_hz_measured: measuredSlowHz,
         loops_simulated: true,
-        note: "30Hz browser dual-loop research path (sim HUD/tracker + slower cues)",
+        jetson_trt: false,
+        peoplenet_trt: false,
+        live_cv: false,
+        not_navigation: true,
+        note: "30Hz browser dual-loop (sim HUD/tracker + slower cues); not Jetson/TensorRT/PeopleNet; not live CV; not navigation",
       },
       dt9: { research_prototype: true, synthetic_only: true, not_medical_device: true },
     };

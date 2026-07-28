@@ -121,6 +121,12 @@ Full policy: [SAFETY.md](SAFETY.md) · [docs/SAFETY.md](docs/SAFETY.md)
 - Do not act on current cue text; use it only for stationary or controlled interface evaluation
 - Report simulated-interface defects: [CONTRIBUTING.md](CONTRIBUTING.md)
 
+### What it is not
+
+- **Not** Jetson / TensorRT / PeopleNet 30 Hz (browser sim dual-loop only; not NVIDIA edge TRT)
+- **Not** live CV (camera pixels are not used for detection)
+- **Not** navigation (not a mobility aid; keep cane / guide dog)
+
 ---
 
 ## License
