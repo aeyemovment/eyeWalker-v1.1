@@ -1,15 +1,11 @@
-# Release HOLDs — eyeWalker (v1.1.9 tag + v1.1.10 tip)
-
-**Tag `v1.1.9`:** eng ship SHA `9f19d54…`  
-**Tip `v1.1.10`:** browser dual-loop 30 Hz sim HUD (not Jetson TRT)
+# Release status — eyeWalker v1.1.10 tip
 
 | Item | Public stance |
 |------|----------------|
-| **MCP package** | **HOLD until real.** No `npx eyewalker-mcp@…` until a package exists and is reviewed. Available today: **OGX remote `tool_runtime`** via [ogx-provider-eyewalker](https://github.com/aeyemovment/ogx-provider-eyewalker). |
-| **30 Hz browser dual-loop (sim)** | **In tip v1.1.10 PWA** — optional checkbox: ~30 Hz **simulated** HUD/tracker redraw + slower semantic cue path (~1.4 Hz). Explicit UI: **What it is not** — not Jetson/TensorRT/PeopleNet, not live CV, not navigation. |
-| **Jetson / TensorRT / PeopleNet 30 Hz edge stack** | **Still roadmap HOLD.** Not claimed as shipped hardware AI. |
-| **Dual-use / aerial surveillance product** | **Not this repo’s product claim.** Inspiration art under `docs/inspiration/` is concept only. |
+| **30 Hz browser dual-loop** | **Shipped** in PWA v1.1.10 — optional ~30 Hz sim HUD/tracker + slower semantic cues. Research/sim path. |
+| **MCP package** | **HOLD until real.** No `npx eyewalker-mcp@…` until published + reviewed. OGX `tool_runtime`: [ogx-provider-eyewalker](https://github.com/aeyemovment/ogx-provider-eyewalker). |
 | **Apple Health / Fitness / Activity** | **Not integrated.** |
 | **NemoClaw “secured / never leaves”** | **Forbidden marketing.** Optional unenforced policy notes only. |
+| **Dual-use / aerial product** | Not this repo’s product claim. Inspiration art under `docs/inspiration/` is concept only. |
 
-When a HOLD is lifted, update this file, the GitHub Release notes, and run claims skim before public statements.
+Core product safety (always): research prototype · not a medical device · keep cane / guide dog · simulated cues unless a real detector is connected.
