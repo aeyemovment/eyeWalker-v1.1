@@ -742,8 +742,6 @@
           fast_loop_hz_target: fastLoop30El?.checked ? 30 : 0,
           slow_cue_hz_measured: measuredSlowHz,
           loops_simulated: true,
-          jetson_trt: false,
-          live_cv: false,
         };
         if (hasRecordingConsent() && gps) entry.gps = { ...gps };
         else entry.gps_redacted = true;
