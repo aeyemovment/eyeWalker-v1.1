@@ -1,3 +1,11 @@
+# eyeWalker v1.1.10 (browser 30 Hz dual-loop research path)
+
+- Optional **30 Hz fast loop** in PWA: simulated HUD/tracker redraw only (checkbox default on)
+- Semantic cues remain on slower path (~700 ms); speech/aria still rate-limited
+- Save meta includes `dual_loop` block: `jetson_trt: false`, `live_cv: false`, measured Hz
+- Explicit disclaimers: not Jetson TRT, not live CV, not navigation, not medical device
+- Jetson/NVIDIA TRT edge stack remains roadmap (HOLD) in `RELEASE_HOLDS_v1.1.9.md`
+
 # eyeWalker v1.1.9 (release-candidate hardening)
 
 - Enforce locally derived step-away guidance after every remote/model response; preserve truthful fallback provenance

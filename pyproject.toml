@@ -1,7 +1,7 @@
 [project]
 name = "eyeWalker"
-version = "1.1.9"
-description = "eyeWalker v1.1.9 — deterministic simulated accessibility-interface research prototype for visual impairment. Not for navigation; not a medical device."
+version = "1.1.10"
+description = "eyeWalker v1.1.10 — deterministic simulated accessibility-interface research prototype with optional 30Hz browser dual-loop. Not for navigation; not a medical device."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "PolyForm Noncommercial 1.0.0" }

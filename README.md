@@ -2,7 +2,7 @@
 
 [![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm%20Noncommercial-blue)](LICENSE)
 [![License: MIT exact allowlist](https://img.shields.io/badge/License-MIT%20exact%20allowlist-green)](DUAL_LICENSE.md)
-[![Version](https://img.shields.io/badge/version-v1.1.9-blue)](https://github.com/aeyemovment/eyeWalker-v1.1)
+[![Version](https://img.shields.io/badge/version-v1.1.10-blue)](https://github.com/aeyemovment/eyeWalker-v1.1)
 [![Research prototype](https://img.shields.io/badge/status-research%20prototype-yellow)](SAFETY.md)
 [![Built by](https://img.shields.io/badge/Built%20by-NeuroAgent%20AI-blueviolet)](#about-neuroagent-ai)
 [![PWA source](https://img.shields.io/badge/PWA-source%20in%20docs-informational)](docs/pwa.html)
@@ -26,7 +26,7 @@
 | **OGX provider** | https://github.com/aeyemovment/ogx-provider-eyewalker |
 | **HF Space route (verify deployed revision)** | https://huggingface.co/spaces/NeuroAgentAI/eyeWalker |
 | **Open status** | [OPEN_SOURCE.md](OPEN_SOURCE.md) · [DUAL_LICENSE.md](DUAL_LICENSE.md) |
-| **Release HOLDs** | [docs/RELEASE_HOLDS_v1.1.9.md](docs/RELEASE_HOLDS_v1.1.9.md) (MCP / Jetson roadmap / dual-use product claims) |
+| **Release HOLDs** | [docs/RELEASE_HOLDS_v1.1.9.md](docs/RELEASE_HOLDS_v1.1.9.md) (MCP / Jetson TRT / dual-use product claims) |
 
 ---
 
@@ -138,4 +138,4 @@ Local-first demos preferred. Do not upload bystander-identifying video without c
 
 ---
 
-© 2026 NeuroAgent AI · eyeWalker **v1.1.9** · Research prototype — not a medical device.
+© 2026 NeuroAgent AI · eyeWalker **v1.1.10** · Research prototype — not a medical device.
